@@ -57,6 +57,10 @@ body
 				width: 100%
 				z-index: 1
 
+body.ishome .registration
+		min-height: inherit
+		height: 10vh
+
 .h1, .h2, .h3, .h4, .h5, .h6
 	line-height: 1.4
 	text-transform: uppercase
@@ -70,18 +74,28 @@ body
 .boxShadow 
   box-shadow: 0 1px 10px 1px rgba(0, 0, 0, .2)
 
-.logo
+.top-line .logo
 	img
 		width: 125px
 		height: auto
 		margin-left: 5%
+		padding-top: 8px
+
+.main-footer .logo
+	img
+		width: 160px
+		height: auto
+		padding-top: 5%
+		
 
 .phone
-	position: absolute
-	right: 85px
-	top: 8px
+	//position: absolute
+	//right: 85px
+	//top: 8px
+	padding-top: 2%
+	text-align: center
 	font-family: firasans, sans-serif
-	font-size: 22px
+	font-size: 28px
 	white-space: nowrap
 	.fa
 		color: #fff
@@ -105,7 +119,7 @@ section, header
 .hamburger
 	right: 0
 	position: absolute
-	top: -2px
+	top: -6px
 	.hamburger-box
 		width: 34px
 
@@ -264,6 +278,69 @@ html.mm-wrapper_opened
 
 
 
+.button
+	display: inline-block
+	border: none
+	color: #fff
+	text-decoration: none
+	background-color: $accent
+	padding: 15px 45px
+	font-size: 15px
+	text-transform: uppercase
+	font-weight: 600
+	letter-spacing: 3px
+	border-radius: 2px
+	text-align: center
+	position: relative
+	outline: none
+	transition: background-color .1s ease
+	cursor: pointer
+	&::after
+		transition: background-color .2s ease
+		position: absolute
+		content: ''
+		height: 4px
+		bottom: 0
+		width: 100%
+		background-color: darken($accent, 50%)
+		opacity: .18
+		border-bottom-left-radius: 2px
+		border-bottom-right-radius: 2px
+		left: 0
+	&:focus, &:hover
+		text-decoration: none
+		color: #fff
+	&:hover
+		background-color: lighten($accent, 5%)
+		&::after
+			opacity: .22
+	&:active
+		background-color: darken($accent, 5%)
+		&::after
+			opacity: .32
+
+.b-search
+	margin: 3.5em auto 2em
+
+.b-sign
+	padding: 8px 28px
+	font-size: 15px
+	background-color: darken(#fff, 5%)
+	color: $accent
+
+	&::after
+		background-color: darken(#fff, 50%)
+	&:focus, &:hover
+		color: $accent
+	&:hover
+		background-color: darken(#fff, 2.5%)
+	&:active
+		background-color: #fff
+		
+
+
+
+
 
 
 
@@ -285,14 +362,18 @@ html.mm-wrapper_opened
 	//float: left
 	//margin: 0 0
 	//width: 30%
-.vehicle-spec 
+.vehicle-spec, .colors 
 	.subdiv
 		margin: 1em 0
 	.container 
 		padding: 1em
 		border-bottom: 1px solid #dcdcdc
-.colors .container
-	padding: 1em
+.make-model
+	.container 
+		padding: 1em
+.top-line
+	.container
+		margin-right: 0
 
 /* Dropy style */
 .dropy
@@ -436,33 +517,32 @@ html.mm-wrapper_opened
 		padding: 1em
 		border-bottom: 1px solid #dcdcdc
 		border-top: 1px solid #dcdcdc
-	.m-multi
-		//margin: 1% 20%
-		.m-multi__item
-			background-size: 60px
-			//flex: 0 1 auto
-			background-color: transparent
-			background-position: center top
-			background-repeat: no-repeat
-			border: 0
-			border-width: 0 0 3px
-			border-color: #fff
-			border-style: solid
-			font-size: .82rem
-			margin-bottom: 1rem
-			margin-right: .3rem
-			padding: 2.125rem 0 .5em
-			text-align: center
-			width: 70px
-			//background: #fff
-			color: #000
-			border-radius: .2em
-			box-sizing: border-box
-			margin: 0 .5rem .5rem 0
-			cursor: pointer
-			transition: all .4s ease
-			&::before
-				transition: all .4s ease
+
+.m-multi__item
+	background-size: 60px
+	//flex: 0 1 auto
+	background-color: transparent
+	background-position: center top
+	background-repeat: no-repeat
+	border: 0
+	border-width: 0 0 3px
+	border-color: #fff
+	border-style: solid
+	font-size: .82rem
+	margin-bottom: 1rem
+	margin-right: .3rem
+	padding: 2.125rem 0 .5em
+	text-align: center
+	width: 70px
+	//background: #fff
+	color: #000
+	border-radius: .2em
+	box-sizing: border-box
+	margin: 0 .5rem .5rem 0
+	cursor: pointer
+	transition: all .4s ease
+	&::before
+		transition: all .4s ease
 
 .bodystyles	._4x4
 	background-image: url(../img/bodystyle/4x4.svg)
@@ -505,6 +585,225 @@ html.mm-wrapper_opened
 	background-image: url(../img/bodystyle/pick-up-active.svg)
 .bodystyles	._saloon:hover, .bodystyles ._saloon.active
 	background-image: url(../img/bodystyle/saloon-active.svg)
+
+
+
+.colors ._beige
+	background-color: #d2b48c
+.colors ._black
+	background-color: #000
+.colors ._blue
+	background-color: #6495ed
+.colors ._green
+	background-color: #228b22
+.colors ._grey
+	background-color: #c0c0c0
+.colors ._orange
+	background-color: #ff8c00
+.colors ._pink
+	background-color: #ffb6c1
+.colors ._purple
+	background-color: #663399
+.colors ._red
+	background-color: #8b0000
+.colors ._silver
+	background: linear-gradient(135deg, #e2e2e2 0, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%)
+
+.colors .m-multi__item.active 
+	border-color: #6D3965
+
+
+
+.colors .m-multi__item
+	position: relative
+	outline: none
+	margin: 0 .5rem .5rem 0
+	width: 49px
+	height: 49px
+	border: 4px solid #fff
+	border-radius: 50%
+	text-indent: -9999px
+	white-space: nowrap
+	overflow: hidden
+
+
+
+
+
+.main-footer
+	background-color: #66676d
+	padding: 2.2% 0
+	margin-top: 25px
+	color: #fff
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  
+
+.form 
+	background: rgba($darkblue,.9)
+	padding: 25px
+	max-width: 600px
+	margin: 2% auto
+	border-radius: $_br
+	box-shadow: 0 4px 10px 4px rgba($darkblue,.3)
+	a
+		text-decoration: none
+		color: $main
+		transition: .5s ease
+		&:hover 
+			color: $main-dark
+
+
+.tab-group 
+	list-style: none
+	padding: 0
+	margin: 0 0 15px 0
+	&:after 
+		content: ""
+		display: table
+		clear: both
+
+	li a 
+		display: block
+		text-decoration: none
+		padding: 10px
+		background: rgba($gray-light,.25)
+		color: $gray-light
+		font-size: 20px
+		float: left
+		width: 50%
+		text-align: center
+		cursor: pointer
+		transition: .3s ease
+		&:hover 
+			background: $main-dark
+			color: $white
+		&:active
+			background-color: darken($main-dark, 5%)
+			&::after
+				opacity: .32
+
+	.active a 
+		background: $main
+		color: $white
+
+.tab-content 
+	> div:last-child 
+		display: none
+	h1 
+		text-align: center
+		font-weight: 900
+		color: $white
+		font-size: 40px
+		margin: 0 0 20px
+
+
+label 
+	position: absolute
+	//transform: translateY(6px)
+	left: 13px
+	color: rgba($white,.5)
+	transition: all .25s ease
+	-webkit-backface-visibility: hidden
+	pointer-events: none
+	font-size: 22px
+	.req 
+		margin: 2px
+		color: $main
+  
+
+
+label.active 
+	transform: translateY(40px)
+	left: 2px
+	font-size: 16px
+	.req 
+		opacity: 0
+  
+
+
+label.highlight 
+	color: $white
+
+
+input, textarea 
+	font-size: 22px
+	display: block
+	width: 100%
+	height: 100%
+	padding: 5px 10px
+	background: none
+	background-image: none
+	border: 1px solid $gray-light
+	color: $white
+	border-radius: 2px
+	transition: border-color .25s ease, box-shadow .25s ease
+	&:focus 
+		outline: 0
+		border-color: $main
+
+textarea 
+	border: 2px solid $gray-light
+	resize: vertical
+
+
+.field-wrap 
+	position: relative
+	margin-bottom: 40px
+
+
+.top-row 
+	&:after 
+		content: ""
+		display: table
+		clear: both
+
+	> div 
+		float: left
+		width: 48%
+		margin-right: 4%
+		&:last-child 
+			margin: 0
+
+
+.r-button 
+	border: 0
+	outline: none
+	border-radius: 2px
+	padding: 5px 0
+	font-size: 25px
+	font-weight: $_bold
+	text-transform: uppercase
+	letter-spacing: .1em
+	background: $main
+	color: $white
+	transition: all.5s ease
+	-webkit-appearance: none
+	&:hover, &:focus 
+		background: $main-dark
+
+
+.button-block 
+	display: block
+	width: 100%
+	&:active
+		outline: none
+		background-color: darken($main-dark, 5%)
+		&::after
+			opacity: .32
+
+
+
 
 
 
