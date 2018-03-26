@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/rest/users")
 public class UserControllerImpl {
     @Autowired
     private UserService userService;
@@ -26,40 +27,37 @@ public class UserControllerImpl {
     private ModelMapper modelMapper;
 
     /**
-     * Processes POST request to '/signUpUser'.
+     * Processes POST request to '/rest/users'.
      * Creates a user by signUpUserDto.
      *
      * @param signUpUserDto signUpUserDto
      *
      * @return result of creating a user (true or false)
      * */
-    @RequestMapping(value = "/signUpUser", method = RequestMethod.POST)
-    public ResponseEntity<?> signUpUser(
-            @RequestBody @Valid SignUpUserDto signUpUserDto) {
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> addUser(@RequestBody @Valid SignUpUserDto signUpUserDto) {
         User user = modelMapper.map(signUpUserDto, User.class);
-
         user.setPassword(encoder.encode(user.getPassword()));
         userService.createUser(user);
-
         return ResponseEntity.ok(true);
     }
 
     /**
-     * Process GET request to '/register' and
-     * check existing of username.
+     * Processes GET request to '/rest/users/valid' and
+     * checks existing of username.
      *
      * @param username username
      *
-     * @return result of check (true or false)
+     * @return true if username doesn't exist or false if it does
      * */
     @RequestMapping(value = "/valid", method = RequestMethod.GET)
     public ResponseEntity<?> isValidUsername(@RequestParam("username") String username) {
-        return ResponseEntity.ok(userService.checkUsername(username));
+        return ResponseEntity.ok(userService.isUsernameFree(username));
     }
 
     /**
-     * Process GET request to '/username' and
-     * return the username of the current user.
+     * Processes GET request to '/rest/users/username' and
+     * returns the username of the current user.
      *
      * @return username
      * */
@@ -88,5 +86,4 @@ public class UserControllerImpl {
             return null;
         }
     }
-
 }

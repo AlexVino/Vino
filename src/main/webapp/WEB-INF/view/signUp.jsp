@@ -52,55 +52,54 @@
         <div id="signup">   
           <h1>SIGN-UP TO A MYGARAGE ACCOUNT</h1>
   
-          <form action="/" method="post">
-  
+          <form>
             <div class="top-row">
               <div class="field-wrap">
-                <label>
+                <label for="firstname">
                   First Name<span class="req">*</span>
                 </label>
-                <input type="text" required autocomplete="off" />
+                <input type="text" id="firstname" required autocomplete="off" />
               </div>
           
               <div class="field-wrap">
-                <label>
+                <label for="lastname">
                   Last Name<span class="req">*</span>
                 </label>
-                <input type="text" required autocomplete="off"/>
+                <input type="text" id="lastname" required autocomplete="off"/>
               </div>
             </div>
 
             <div class="field-wrap">
-              <label>
+              <label for="telephone">
                 Phone number<span class="req">*</span>
               </label>
-              <input type="tel" required autocomplete="off"/>
+              <input type="tel" id="telephone" required autocomplete="off"/>
             </div>
             
             <div class="field-wrap">
-              <label>
+              <label for="new-username">
                 Username<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off"/>
+              <input type="text" id="new-username" required autocomplete="off"/>
             </div>
 
             <div class="top-row">
               <div class="field-wrap">
-                <label>
+                <label for="new-password">
                   Password<span class="req">*</span>
                 </label>
-                <input type="password" required autocomplete="off" />
+                <input type="password" id="new-password" required autocomplete="off" />
               </div>
           
               <div class="field-wrap">
                 <label>
                   Confirm password<span class="req">*</span>
                 </label>
-                <input type="password" required autocomplete="off"/>
+                <input type="password" id="confirm-password" required autocomplete="off"/>
               </div>
             </div>
             
-            <button type="submit" class="r-button button-block">Get Started</button>
+            <button type="button" id="btnSignUp" class="r-button button-block">Get Started</button>
           
           </form>
 
@@ -112,17 +111,17 @@
           <form action="/j_spring_security_check" method="post">
 
           <div class="field-wrap">
-            <label>
+            <label for="username">
               Username<span class="req">*</span>
             </label>
             <input type="text" id ="username" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
-            <label>
+            <label for="password">
               Password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off"/>
+            <input type="password" id="password" required autocomplete="off"/>
           </div>
           
           <button type="submit" class="r-button button-block">Log In</button>
@@ -133,6 +132,7 @@
   </div>
 
   <script src="/js/scripts.min.js"></script>
+  <script src="/js/signUp.js"></script>
 
 </body>
 </html>

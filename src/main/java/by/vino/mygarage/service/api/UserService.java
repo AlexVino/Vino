@@ -18,7 +18,7 @@ public interface UserService {
      *
      * @return true (if username is free) or false (username isn't free)
      * */
-    boolean checkUsername(String username);
+    boolean isUsernameFree(String username);
 
     /**
      * Loads user by username. If user with this username does not exist
@@ -29,4 +29,14 @@ public interface UserService {
      * @return user
      * */
     User loadUserByUsername(String username);
+
+    /**
+     * Loads user by id. If user with this id does not exist
+     * it returns null.
+     *
+     * @param id user id
+     *
+     * @return user
+     * */
+    User loadUserById(int id);
 }

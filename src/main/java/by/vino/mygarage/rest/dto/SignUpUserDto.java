@@ -23,11 +23,6 @@ public class SignUpUserDto {
     private String password;
 
     @NotNull
-    @Email
-    @Size(min = 4, max = 255, message = "form.email.size")
-    private String email;
-
-    @NotNull
     private String firstname;
 
     @NotNull

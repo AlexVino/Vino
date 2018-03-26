@@ -16,15 +16,15 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public void createUser(User user) {
-        userDao.createUser(user);
+        userDao.create(user);
     }
 
     /**
      * {@inheritDoc}
      * */
     @Override
-    public boolean checkUsername(String username) {
-        return userDao.findUserByUsername(username) == null;
+    public boolean isUsernameFree(String username) {
+        return userDao.findByUsername(username) == null;
     }
 
     /**
@@ -32,6 +32,14 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public User loadUserByUsername(String username) {
-        return userDao.findUserByUsername(username);
+        return userDao.findByUsername(username);
+    }
+
+    /**
+     * {@inheritDoc}
+     * */
+    @Override
+    public User loadUserById(int id) {
+        return userDao.findById(id);
     }
 }
