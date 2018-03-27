@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -25,6 +25,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
   <link rel="stylesheet" href="/css/main.min.css">
+  <%--<script src="/js/jquery-3.3.1.min.js"></script>--%>
 
 </head>
 
@@ -35,7 +36,6 @@
       <div class="container">
         <div class="row justify-content-between">
           <div class="col-sm-9"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-          <div class="col-sm-2"><a href="#" class="button b-sign">Sign in</a></div>
         </div>
       </div>
     </div>
@@ -92,13 +92,15 @@
               </div>
           
               <div class="field-wrap">
-                <label>
+                <label for="confirm-password">
                   Confirm password<span class="req">*</span>
                 </label>
                 <input type="password" id="confirm-password" required autocomplete="off"/>
               </div>
             </div>
-            
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
             <button type="button" id="btnSignUp" class="r-button button-block">Get Started</button>
           
           </form>
@@ -125,13 +127,17 @@
           </div>
           
           <button type="submit" class="r-button button-block">Log In</button>
-          
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
           </form>
         </div>
       </div>
   </div>
 
-  <script src="/js/scripts.min.js"></script>
+  <%--<script src="/js/bootstrap.min.js"></script>--%>
+
+  <script src="/js/signUp_scripts_min.js"></script>
+  <script src="/js/jquery-3.3.1.min.js"></script>
   <script src="/js/signUp.js"></script>
 
 </body>

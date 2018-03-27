@@ -24,9 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/signUp").permitAll()
                 .antMatchers("/user/**").hasAnyRole("USER")
                 .and().formLogin().loginProcessingUrl("/j_spring_security_check")
-                .loginPage("/signUp")
+                .loginPage("/signUp").permitAll()
                 .defaultSuccessUrl("/")
                 .failureUrl("/signUp?error=true")
                 .usernameParameter("username")

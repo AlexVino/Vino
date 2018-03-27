@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/rest/users")
-public class UserControllerImpl {
+        public class UserControllerImpl {
     @Autowired
     private UserService userService;
 
@@ -35,7 +35,7 @@ public class UserControllerImpl {
      * @return result of creating a user (true or false)
      * */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> addUser(@RequestBody @Valid SignUpUserDto signUpUserDto) {
+    public ResponseEntity<?> addUser(@RequestBody SignUpUserDto signUpUserDto) {
         User user = modelMapper.map(signUpUserDto, User.class);
         user.setPassword(encoder.encode(user.getPassword()));
         userService.createUser(user);

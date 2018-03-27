@@ -14,8 +14,6 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class SignUpUserDto {
-    @NotNull
-    @Size(min = 4, max = 32, message = "form.username.size")
     private String username;
 
     @NotNull
