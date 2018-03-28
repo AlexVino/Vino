@@ -116,14 +116,14 @@
             <label for="username">
               Username<span class="req">*</span>
             </label>
-            <input type="text" id ="username" required autocomplete="off"/>
+            <input type="text" id ="username" name="username" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label for="password">
               Password<span class="req">*</span>
             </label>
-            <input type="password" id="password" required autocomplete="off"/>
+            <input type="password" id="password" name="password" required autocomplete="off"/>
           </div>
           
           <button type="submit" class="r-button button-block">Log In</button>

@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -17,13 +18,18 @@ import java.util.Collections;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    @Autowired
     private UserDao userDao;
 
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         User activeUserInfo = userDao.findByUsername(username);
+        System.out.println(activeUserInfo.getPassword() + "\r\n"+encoder.encode(activeUserInfo.getPassword()));
         GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole().getRoleName());
+
         return new org.springframework.security.core.userdetails.User(
                 activeUserInfo.getUsername(),
                 activeUserInfo.getPassword(),

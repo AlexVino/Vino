@@ -459,7 +459,8 @@
     </div>
 </div>
 
-<script src="/js/scripts.min.js"></script>
+<script src="/js/main_scripts_min.js"></script>
+<script src="/js/home.js"></script>
 
 </body>
 </html>
