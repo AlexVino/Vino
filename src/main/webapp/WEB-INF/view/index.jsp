@@ -37,7 +37,7 @@
                 <div class="container">
                     <div class="row justify-content-between">
                         <div class="col-sm-9"><a href="#" class="logo"><img src="img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-                        <div class="col-sm-2"><a href="/signUp" class="button b-sign">Sign in</a></div>
+                        <div class="col-sm-2"><a href="/signUp" id="username" class="button b-sign">Sign in</a></div>
                         <div class="col-sm-1">
                             <a href="#my-menu" class="hamburger hamburger--spin">
                                 <span class="hamburger-box"><span class="hamburger-inner"></span></span>

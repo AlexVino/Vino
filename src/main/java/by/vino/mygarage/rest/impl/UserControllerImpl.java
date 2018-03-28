@@ -3,6 +3,7 @@ package by.vino.mygarage.rest.impl;
 import by.vino.mygarage.dao.jpa.User;
 import by.vino.mygarage.rest.dto.SignUpUserDto;
 import by.vino.mygarage.service.api.UserService;
+import by.vino.mygarage.util.SecurityHelper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,13 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/rest/users")
-        public class UserControllerImpl {
+public class UserControllerImpl {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private SecurityHelper securityHelper;
     @Autowired
     private BCryptPasswordEncoder encoder;
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -63,27 +64,11 @@ import javax.validation.Valid;
      * */
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     public ResponseEntity<?> getUsername() {
-        UserDetails currentUser = getCurrentUser();
+        UserDetails currentUser = securityHelper.getCurrentUser();
         if (currentUser != null) {
             return ResponseEntity.ok(currentUser.getUsername());
         } else {
             return ResponseEntity.ok(false);
-        }
-    }
-
-    private UserDetails getCurrentUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (null == auth) {
-            return null;
-        }
-
-        Object obj = auth.getPrincipal();
-
-        if (obj instanceof UserDetails) {
-            return (UserDetails) obj;
-        } else {
-            return null;
         }
     }
 }
