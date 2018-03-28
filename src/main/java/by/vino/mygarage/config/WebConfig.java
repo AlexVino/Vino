@@ -1,5 +1,6 @@
 package by.vino.mygarage.config;
 
+import com.kumuluz.ee.rest.utils.QueryStringDefaults;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -70,5 +71,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public QueryStringDefaults queryStringDefaults() {
+        return new QueryStringDefaults().defaultLimit(0).maxLimit(Long.MAX_VALUE);
     }
 }

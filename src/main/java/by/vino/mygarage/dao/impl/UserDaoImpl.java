@@ -7,7 +7,6 @@ import by.vino.mygarage.dao.jpa.User_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -28,7 +27,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
     }
 
     @Override
-    public User findById(int id) {
+    public User get(int id) {
         CriteriaQuery<User> query = entityManager.getCriteriaBuilder().createQuery(User.class);
         Root<User> user = query.from(User.class);
         return super.get(query.where(entityManager.getCriteriaBuilder().equal(user.get(User_.userId), id)));

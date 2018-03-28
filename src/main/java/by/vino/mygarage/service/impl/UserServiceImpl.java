@@ -40,6 +40,6 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public User loadUserById(int id) {
-        return userDao.findById(id);
+        return userDao.get(id);
     }
 }

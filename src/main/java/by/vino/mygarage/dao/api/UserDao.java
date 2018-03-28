@@ -4,5 +4,4 @@ import by.vino.mygarage.dao.jpa.User;
 
 public interface UserDao extends CrudDao<User> {
     User findByUsername(String username);
-    User findById(int id);
 }
