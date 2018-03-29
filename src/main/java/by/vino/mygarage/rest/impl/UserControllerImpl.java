@@ -37,11 +37,84 @@ public class UserControllerImpl {
      * */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addUser(@RequestBody SignUpUserDto signUpUserDto) {
+
+        if (!checkUsername(signUpUserDto.getUsername())) {
+            ResponseEntity.ok(false);
+        }
+        if (!checkPassword(signUpUserDto.getPassword())) {
+            ResponseEntity.ok(false);
+        }
+        if (!checkFirstname(signUpUserDto.getFirstname())) {
+            ResponseEntity.ok(false);
+        }
+        if (!checkLastname(signUpUserDto.getLastname())) {
+            ResponseEntity.ok(false);
+        }
+        if (!checkPhone(signUpUserDto.getPhone())) {
+            ResponseEntity.ok(false);
+        }
+
         User user = modelMapper.map(signUpUserDto, User.class);
         user.setPassword(encoder.encode(user.getPassword()));
         userService.createUser(user);
         return ResponseEntity.ok(true);
     }
+
+    private boolean checkUsername(String username){
+        if (username == null) {
+            return false;
+        } else if (username.length() <= 3) {
+            return false;
+        } else if (username.length() >= 23) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkPassword(String password){
+        if (password == null) {
+            return false;
+        }
+        if (password.length() < 8) {
+            return false;
+        }
+        if (password.length() >= 255) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkFirstname(String firstname){
+        if (firstname == null) {
+            return false;
+        } else if (firstname.length() <= 3 || firstname.length() >= 23) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkLastname(String lastname){
+        if (lastname == null || lastname.length() <= 3 || lastname.length() >= 23) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkPhone(String phone){
+        for (int i = 0; i < phone.length(); i++){
+            try {
+                Integer.parseInt(String.valueOf(phone.charAt(i)));
+            } catch (Exception exc){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     /**
      * Processes GET request to '/rest/users/valid' and
@@ -53,7 +126,12 @@ public class UserControllerImpl {
      * */
     @RequestMapping(value = "/valid", method = RequestMethod.GET)
     public ResponseEntity<?> isValidUsername(@RequestParam("username") String username) {
-        return ResponseEntity.ok(userService.isUsernameFree(username));
+
+        if (username != null) {
+            return ResponseEntity.ok(userService.isUsernameFree(username));
+        } else {
+            return ResponseEntity.ok(false);
+        }
     }
 
     /**

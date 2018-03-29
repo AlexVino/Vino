@@ -27,6 +27,12 @@ public class JpaConfig implements TransactionManagementConfigurer {
     private String driver;
     @Value("${dataSource.url}")
     private String url;
+
+    @Value("${dataSource.username}")
+    private String username;
+    @Value("${dataSource.password}")
+    private String password;
+
     @Value("${hibernate.dialect}")
     private String dialect;
     @Value("${hibernate.hbm2ddl.auto}")
@@ -37,6 +43,8 @@ public class JpaConfig implements TransactionManagementConfigurer {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(driver);
         config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
 
         return new HikariDataSource(config);
     }
