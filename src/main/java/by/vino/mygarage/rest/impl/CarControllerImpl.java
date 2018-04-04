@@ -1,6 +1,8 @@
 package by.vino.mygarage.rest.impl;
 
+import by.vino.mygarage.dao.jpa.Car;
 import by.vino.mygarage.service.api.CarService;
+import by.vino.mygarage.util.CarMapper;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.QueryStringDefaults;
 import org.modelmapper.ModelMapper;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/rest/cars")
 public class CarControllerImpl {
     @Autowired
-    private ModelMapper modelMapper;
+    private CarMapper carMapper;
     @Autowired
     private CarService carService;
     @Autowired
@@ -30,7 +34,8 @@ public class CarControllerImpl {
     public ResponseEntity<?> listCars() {
         String s = ServletUriComponentsBuilder.fromCurrentRequest().build().getQuery();
         QueryParameters queryParameters = qsd.builder().queryEncoded(s).build();
-        return ResponseEntity.ok(carService.list(queryParameters));
+        List<Car> cars = carService.list(queryParameters);
+        return ResponseEntity.ok(carMapper.toDtoList(cars));
     }
 
 }

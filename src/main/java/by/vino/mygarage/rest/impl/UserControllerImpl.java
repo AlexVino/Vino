@@ -60,7 +60,7 @@ public class UserControllerImpl {
         return ResponseEntity.ok(true);
     }
 
-    private boolean checkUsername(String username){
+    public boolean checkUsername(String username){
         if (username == null) {
             return false;
         } else if (username.length() <= 3) {

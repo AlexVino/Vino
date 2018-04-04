@@ -48,7 +48,8 @@ public abstract class BaseDao<T> implements CrudDao<T> {
 
     @Override
     public List<T> getAll(Class<T> c, QueryParameters queryParameters) {
-        return JPAUtils.queryEntities(entityManager, c, queryParameters);
+        List<T> list =  JPAUtils.queryEntities(entityManager, c, queryParameters);
+        return list;
     }
 
     @Override

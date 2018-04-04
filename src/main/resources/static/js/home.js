@@ -1,18 +1,33 @@
 $(document).ready(function () {
-    getUserName()
+    getUserName();
+    $('.b-search').click(function () { search(); });
 });
 
 function getUserName() {
     $.ajax({
         type: "GET",
-        contentType: "application/json",
         url: "/rest/users/username",
-        dataType: 'json',
         cache: false,
         timeout: 600000,
+        dataType: "text",
         success: function (data) {
-            if (data) {
-                $('#username').text(data).removeAttr('href');
+            if (data !== "false") {
+                $('.b-sign').text(data).attr('href', "/logout");
+            }
+        }
+    });
+}
+
+function search() {
+    $.ajax({
+        type: "GET",
+        url: "/rest/cars?order=carId ASC",
+        cache: false,
+        timeout: 600000,
+        dataType: "text",
+        success: function (data) {
+            if (data !== "false") {
+                console.log(JSON.stringify(data));
             }
         }
     });

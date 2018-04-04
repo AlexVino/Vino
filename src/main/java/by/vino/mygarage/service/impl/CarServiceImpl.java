@@ -1,6 +1,6 @@
 package by.vino.mygarage.service.impl;
 
-import by.vino.mygarage.dao.api.BaseDao;
+import by.vino.mygarage.dao.api.CarDao;
 import by.vino.mygarage.dao.jpa.Car;
 import by.vino.mygarage.service.api.CarService;
 import com.kumuluz.ee.rest.beans.QueryParameters;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class CarServiceImpl implements CarService {
     @Autowired
-    private BaseDao<Car> carDao;
+    private CarDao carDao;
 
     @Override
     public Car create(Car car) {
@@ -37,6 +37,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> list(QueryParameters query) {
-        return carDao.getAll(Car.class, query);
+        return carDao.getAll();
     }
 }
