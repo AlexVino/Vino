@@ -1,7 +1,7 @@
 package by.vino.mygarage.service.api;
 
 import by.vino.mygarage.dao.jpa.Car;
-import com.kumuluz.ee.rest.beans.QueryParameters;
+import by.vino.mygarage.rest.dto.SearchCarDto;
 
 import java.util.List;
 
@@ -36,9 +36,13 @@ public interface CarService {
 
     /**
      * Loads list of cars.
-     *
-     * @param query query parameters
      * */
-    List<Car> list(QueryParameters query);
+    List<Car> getAll();
 
+    /**
+     * Loads list of cars by searching params.
+     *
+     * @param search search dto
+     */
+    List<Car> getAll(SearchCarDto search);
 }

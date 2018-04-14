@@ -1,10 +1,10 @@
 package by.vino.mygarage.dao.jpa;
 
-import lombok.EqualsAndHashCode;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-
-@EqualsAndHashCode
 @Entity
 @Table(name="makes")
 public class Make {
@@ -28,5 +28,23 @@ public class Make {
 
     public void setMakeName(String makeName) {
         this.makeName = makeName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Make make = (Make) o;
+
+        if (makeId != make.makeId) return false;
+        return makeName != null ? makeName.equals(make.makeName) : make.makeName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = makeId;
+        result = 31 * result + (makeName != null ? makeName.hashCode() : 0);
+        return result;
     }
 }

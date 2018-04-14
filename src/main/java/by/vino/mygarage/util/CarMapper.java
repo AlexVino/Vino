@@ -9,6 +9,14 @@ import java.util.List;
 
 @Component
 public class CarMapper {
+    public List<BaseCarDto> toDtoList(Iterable<Car> cars) {
+        List<BaseCarDto> list = new ArrayList<>();
+        for (Car car : cars) {
+            list.add(toDto(car));
+        }
+        return list;
+    }
+
     public List<BaseCarDto> toDtoList(List<Car> cars) {
         List<BaseCarDto> list = new ArrayList<>();
         for (Car car : cars) {

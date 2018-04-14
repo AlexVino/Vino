@@ -1,7 +1,5 @@
 package by.vino.mygarage.dao.api;
 
-import com.kumuluz.ee.rest.beans.QueryParameters;
-import com.kumuluz.ee.rest.utils.JPAUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -43,12 +41,6 @@ public abstract class BaseDao<T> implements CrudDao<T> {
         } catch (NoResultException ignored) {
 
         }
-        return list;
-    }
-
-    @Override
-    public List<T> getAll(Class<T> c, QueryParameters queryParameters) {
-        List<T> list =  JPAUtils.queryEntities(entityManager, c, queryParameters);
         return list;
     }
 

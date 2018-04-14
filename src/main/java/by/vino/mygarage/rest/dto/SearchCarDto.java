@@ -1,23 +1,15 @@
 package by.vino.mygarage.rest.dto;
 
-public class BaseCarDto {
-    private int carId;
+public class SearchCarDto {
     private String model;
-    private int price;
-    private String bodystyle;
-    private int year;
-    private int mileage;
+    private Integer minPrice;
+    private Integer maxPrice;
+    private String[] bodystyles;
+    private Integer year;
+    private Integer mileage;
     private String transmission;
     private String fuelType;
     private String color;
-
-    public int getCarId() {
-        return carId;
-    }
-
-    public void setCarId(int carId) {
-        this.carId = carId;
-    }
 
     public String getModel() {
         return model;
@@ -27,35 +19,43 @@ public class BaseCarDto {
         this.model = model;
     }
 
-    public int getPrice() {
-        return price;
+    public Integer getMinPrice() {
+        return minPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setMinPrice(Integer minPrice) {
+        this.minPrice = minPrice;
     }
 
-    public String getBodystyle() {
-        return bodystyle;
+    public Integer getMaxPrice() {
+        return maxPrice;
     }
 
-    public void setBodystyle(String bodystyle) {
-        this.bodystyle = bodystyle;
+    public void setMaxPrice(Integer maxPrice) {
+        this.maxPrice = maxPrice;
     }
 
-    public int getYear() {
+    public String[] getBodystyles() {
+        return bodystyles;
+    }
+
+    public void setBodystyles(String[] bodystyles) {
+        this.bodystyles = bodystyles;
+    }
+
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public int getMileage() {
+    public Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
 

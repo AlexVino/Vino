@@ -25,6 +25,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
     <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/main.block.min.css">
 
 </head>
 <body class="ishome">
@@ -444,6 +445,11 @@
 
     </div>
 
+    <div id="content"><ul class="list">
+
+    </ul></div>
+
+
     <div id="my-footer">
         <div class="main-footer">
             <div class="container">
@@ -462,6 +468,7 @@
 
 <script src="/js/main_scripts_min.js"></script>
 <script src="/js/home.js"></script>
+<script src="/js/list.min.js"></script>
 
 </body>
 </html>

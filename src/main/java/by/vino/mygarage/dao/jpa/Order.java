@@ -1,10 +1,7 @@
 package by.vino.mygarage.dao.jpa;
 
-import lombok.EqualsAndHashCode;
-
 import javax.persistence.*;
 
-@EqualsAndHashCode
 @Entity
 @Table(name="orders")
 public class Order {
@@ -51,5 +48,27 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (orderId != order.orderId) return false;
+        if (user != null ? !user.equals(order.user) : order.user != null) return false;
+        if (car != null ? !car.equals(order.car) : order.car != null) return false;
+        return status != null ? status.equals(order.status) : order.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = orderId;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (car != null ? car.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

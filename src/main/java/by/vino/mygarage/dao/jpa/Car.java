@@ -1,10 +1,10 @@
 package by.vino.mygarage.dao.jpa;
 
-import lombok.EqualsAndHashCode;
+import com.querydsl.core.annotations.PropertyType;
+import com.querydsl.core.annotations.QueryType;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode
 @Entity
 @Table(name="cars")
 public class Car {
@@ -17,6 +17,9 @@ public class Car {
     private Model model;
     @Column
     private int price;
+    @Transient
+    private int minPrice;
+    @QueryType(value = PropertyType.STRING)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bodystyleId")
     private Bodystyle bodystyle;
@@ -104,5 +107,37 @@ public class Car {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (carId != car.carId) return false;
+        if (price != car.price) return false;
+        if (year != car.year) return false;
+        if (mileage != car.mileage) return false;
+        if (model != null ? !model.equals(car.model) : car.model != null) return false;
+        if (bodystyle != null ? !bodystyle.equals(car.bodystyle) : car.bodystyle != null) return false;
+        if (transmission != null ? !transmission.equals(car.transmission) : car.transmission != null) return false;
+        if (fuelType != null ? !fuelType.equals(car.fuelType) : car.fuelType != null) return false;
+        return color != null ? color.equals(car.color) : car.color == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = carId;
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + price;
+        result = 31 * result + (bodystyle != null ? bodystyle.hashCode() : 0);
+        result = 31 * result + year;
+        result = 31 * result + mileage;
+        result = 31 * result + (transmission != null ? transmission.hashCode() : 0);
+        result = 31 * result + (fuelType != null ? fuelType.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        return result;
     }
 }

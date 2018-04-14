@@ -2,8 +2,8 @@ package by.vino.mygarage.service.impl;
 
 import by.vino.mygarage.dao.api.CarDao;
 import by.vino.mygarage.dao.jpa.Car;
+import by.vino.mygarage.rest.dto.SearchCarDto;
 import by.vino.mygarage.service.api.CarService;
-import com.kumuluz.ee.rest.beans.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> list(QueryParameters query) {
+    public List<Car> getAll() {
         return carDao.getAll();
+    }
+
+    @Override
+    public List<Car> getAll(SearchCarDto search) {
+        return null;
     }
 }

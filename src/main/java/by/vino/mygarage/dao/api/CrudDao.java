@@ -1,7 +1,5 @@
 package by.vino.mygarage.dao.api;
 
-import com.kumuluz.ee.rest.beans.QueryParameters;
-
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
@@ -41,16 +39,6 @@ public interface CrudDao<T> {
      * @return list of objects
      * */
     List<T> getAll(CriteriaQuery<T> criteriaQuery);
-
-    /**
-     * Loads all entities from db by query parameters.
-     *
-     * @param c class
-     * @param queryParameters query
-     *
-     * @return list of objects
-     * */
-    List<T> getAll(Class<T> c, QueryParameters queryParameters);
 
     /**
      * Updates entity.
