@@ -1,7 +1,10 @@
 package by.vino.mygarage.service.api;
 
 import by.vino.mygarage.dao.jpa.Car;
+import by.vino.mygarage.rest.dto.BaseCarDto;
 import by.vino.mygarage.rest.dto.SearchCarDto;
+import com.querydsl.core.types.Predicate;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -35,14 +38,10 @@ public interface CarService {
     Car get(int carId);
 
     /**
-     * Loads list of cars.
-     * */
-    List<Car> getAll();
-
-    /**
      * Loads list of cars by searching params.
      *
-     * @param search search dto
+     * @param predicate search entity
+     * @param pageable page, size
      */
-    List<Car> getAll(SearchCarDto search);
+    List<BaseCarDto> getAll(Predicate predicate, Pageable pageable);
 }

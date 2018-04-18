@@ -100,16 +100,8 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span>Make (Any)</span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="filter_makes">
                                             <li><a class="dropy__header">Make (Any)</a></li>
-                                            <li><a>Audi</a></li>
-                                            <li><a>Ford</a></li>
-                                            <li><a>Mazda</a></li>
-                                            <li><a>Nissan</a></li>
-                                            <li><a>Opel</a></li>
-                                            <li><a>Peugeot</a></li>
-                                            <li><a>Renault</a></li>
-                                            <li><a>Tesla</a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -122,9 +114,8 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span>Model (Any)</span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="filter_models">
                                             <li><a class="dropy__header">Model (Any)</a></li>
-                                            <li><a>-------</a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first"/>
@@ -344,7 +335,7 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span>Transmission (Any)</span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="filter_transmission">
                                             <li><a class="dropy__header">Transmission (Any)</a></li>
                                             <li><a>Automatic</a></li>
                                             <li><a>Manual</a></li>
@@ -445,9 +436,14 @@
 
     </div>
 
-    <div id="content"><ul class="list">
-
-    </ul></div>
+    <div id="content" class="container">
+        <div id='result' class="row"></div>
+        <div class="row justify-content-center">
+            <div class="col-sm-auto">
+                <a class="button b-page">More results</a>
+            </div>
+        </div>
+    </div>
 
 
     <div id="my-footer">
@@ -467,8 +463,8 @@
 </div>
 
 <script src="/js/main_scripts_min.js"></script>
-<script src="/js/home.js"></script>
 <script src="/js/list.min.js"></script>
+<script src="/js/home.js"></script>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package by.vino.mygarage.rest.dto;
 
 public class BaseCarDto {
     private int carId;
+    private String fullModel;
     private String model;
     private int price;
     private String bodystyle;
@@ -81,5 +82,13 @@ public class BaseCarDto {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getFullModel() {
+        return fullModel;
+    }
+
+    public void setFullModel(String fullModel) {
+        this.fullModel = fullModel;
     }
 }

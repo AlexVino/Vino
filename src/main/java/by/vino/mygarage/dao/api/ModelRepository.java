@@ -1,7 +1,8 @@
 package by.vino.mygarage.dao.api;
 
-import by.vino.mygarage.dao.jpa.Car;
+import by.vino.mygarage.dao.jpa.Model;
 import by.vino.mygarage.dao.jpa.QCar;
+import by.vino.mygarage.dao.jpa.QModel;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.core.types.dsl.StringPath;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
@@ -12,14 +13,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
-@Repository
 @RepositoryRestResource(exported = false)
-public interface CarRepository extends
-        CrudRepository<Car, Integer>, QuerydslPredicateExecutor<Car>, QuerydslBinderCustomizer<QCar> {
-
+public interface ModelRepository extends
+        CrudRepository<Model, Integer>, QuerydslPredicateExecutor<Model>, QuerydslBinderCustomizer<QModel> {
     @Override
-    default void customize(QuerydslBindings bindings, QCar root) {
+    default void customize(QuerydslBindings bindings, QModel root) {
         bindings.bind(String.class).first(
-                (SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
+                (SingleValueBinding<StringPath, String>) StringExpression::equalsIgnoreCase);
     }
 }
