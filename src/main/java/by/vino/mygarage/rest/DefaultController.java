@@ -21,4 +21,8 @@ public class DefaultController {
         return "/signUp";
     }
 
+    @GetMapping("/car")
+    public String car() {
+        return "/car";
+    }
 }
