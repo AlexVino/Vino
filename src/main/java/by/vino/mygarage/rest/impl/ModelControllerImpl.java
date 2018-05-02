@@ -1,7 +1,6 @@
 package by.vino.mygarage.rest.impl;
 
 import by.vino.mygarage.dao.api.ModelRepository;
-import by.vino.mygarage.dao.jpa.Make;
 import by.vino.mygarage.dao.jpa.Model;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;

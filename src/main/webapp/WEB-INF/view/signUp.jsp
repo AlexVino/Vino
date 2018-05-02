@@ -25,7 +25,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
   <link rel="stylesheet" href="/css/main.min.css">
-  <%--<script src="/js/jquery-3.3.1.min.js"></script>--%>
+  <link rel="stylesheet" href="/css/error_block.css">
 
 </head>
 
@@ -99,8 +99,6 @@
               </div>
             </div>
 
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
             <button type="button" id="btnSignUp" class="r-button button-block">Get Started</button>
           
           </form>
@@ -134,11 +132,14 @@
       </div>
   </div>
 
-  <%--<script src="/js/bootstrap.min.js"></script>--%>
+  <div class="error_message">
+    <p>Error</p>
+  </div>
 
   <script src="/js/signUp_scripts_min.js"></script>
   <script src="/js/jquery-3.3.1.min.js"></script>
   <script src="/js/signUp.js"></script>
+  <script src="/js/error.js"></script>
 
 </body>
 </html>

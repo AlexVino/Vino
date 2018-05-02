@@ -2,7 +2,6 @@ package by.vino.mygarage.service.api;
 
 import by.vino.mygarage.dao.jpa.Car;
 import by.vino.mygarage.rest.dto.BaseCarDto;
-import by.vino.mygarage.rest.dto.SearchCarDto;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Pageable;
 
@@ -35,7 +34,7 @@ public interface CarService {
      *
      * @param carId car id
      * */
-    Car get(int carId);
+    BaseCarDto get(int carId);
 
     /**
      * Loads list of cars by searching params.

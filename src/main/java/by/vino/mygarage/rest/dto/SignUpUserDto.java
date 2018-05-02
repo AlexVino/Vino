@@ -4,22 +4,31 @@ import by.vino.mygarage.dao.jpa.Role;
 import by.vino.mygarage.dao.jpa.RoleEnum;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import static javax.validation.constraints.Pattern.Flag.UNICODE_CASE;
+
 public class SignUpUserDto {
+    @NotNull(message = "form.username.empty")
+    @Size(min = 3, max = 23, message = "form.username.size")
     private String username;
 
     @NotNull
-    @Size(min = 8, max = 20, message = "form.password.size")
+    @Size(min = 8, max = 255, message = "form.password.size")
     private String password;
 
     @NotNull
+    @Size(min = 3, max = 23, message = "form.firstname.size")
     private String firstname;
 
     @NotNull
+    @Size(min = 3, max = 23, message = "form.lastname.size")
     private String lastname;
 
     @NotNull
+    @Size(min = 4, max = 20, message = "form.phone.size")
+    @Pattern(regexp = "[\\d]+", flags = {UNICODE_CASE},message = "form.phone.pattern")
     private String phone;
 
     private Role role = new Role(RoleEnum.USER);

@@ -15,25 +15,4 @@ import static org.junit.Assert.*;
 public class UserControllerImplTest {
 
     private UserControllerImpl userController = new UserControllerImpl();
-
-    @Test
-    public void checkUsernameWithNullShouldReturnedFalse() {
-        // when
-        boolean result = userController.checkUsername(null);
-
-        // then
-        Assert.assertFalse(result);
-    }
-
-    @Test
-    public void checkUsernameWithShortNameLengthShouldReturnedFalse() {
-        // given
-        String username = "tt";
-
-        // when
-        boolean result = userController.checkUsername(username);
-
-        // then
-        Assert.assertFalse(result);
-    }
 }

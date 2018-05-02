@@ -26,6 +26,7 @@
 
     <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/main.block.min.css">
+    <link rel="stylesheet" href="/css/error_block.css">
 
 </head>
 <body class="ishome">
@@ -128,7 +129,7 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span>Min price (Any)</span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="minprice">
                                             <li><a class="dropy__header">Min price (Any)</a></li>
                                             <li><a>$1</a></li>
                                             <li><a>$500</a></li>
@@ -171,7 +172,7 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span>Max price (Any)</span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="maxprice">
                                             <li><a class="dropy__header">Max price (Any)</a></li>
                                             <li><a>$1</a></li>
                                             <li><a>$500</a></li>
@@ -462,9 +463,14 @@
     </div>
 </div>
 
+<div class="error_message">
+    <p>Error</p>
+</div>
+
 <script src="/js/main_scripts_min.js"></script>
 <script src="/js/list.min.js"></script>
 <script src="/js/home.js"></script>
+<script src="/js/error.js"></script>
 
 </body>
 </html>

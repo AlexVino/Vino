@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $("#btnSignUp").click(function (event) {
-        event.preventDefault();
+    $("#btnSignUp").click(function () {
         registerUser();
     });
 });
@@ -21,21 +20,14 @@ function registerUser() {
         url: "/rest/users",
         data: JSON.stringify(user),
         dataType: 'json',
-        cache: false,
-        timeout: 600000,
         success: function (data) {
             if (data !== null) {
-                if (data.id !== -1) {
-                    window.location.href = '/';
-                }
-            } else {
-                $('.error').css('display', 'block');
+                throwMessage("You can sign in.");
             }
-
             $("#btnSignUp").prop("disabled", false);
         },
         error: function (e) {
-            $('.error').css('display', 'block');
+            throwMessage(e.responseJSON.message);
             $("#btnSignUp").prop("disabled", false);
         }
     });

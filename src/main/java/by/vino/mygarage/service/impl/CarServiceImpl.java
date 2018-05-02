@@ -33,8 +33,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car get(int carId) {
-        return carRepository.findById(carId).orElse(null);
+    public BaseCarDto get(int carId) {
+        return toDto(carRepository.findById(carId).orElse(null));
     }
 
     @Override

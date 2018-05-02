@@ -1,6 +1,6 @@
 package by.vino.mygarage.service.impl;
 
-import by.vino.mygarage.dao.api.UserDao;
+import by.vino.mygarage.dao.api.UserRepository;
 import by.vino.mygarage.dao.jpa.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,12 +20,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        User activeUserInfo = userDao.findByUsername(username);
+        User activeUserInfo = userRepository.findByUsername(username);
         System.out.println(activeUserInfo.getPassword() + "\r\n"+encoder.encode(activeUserInfo.getPassword()));
         GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole().getRoleName());
 

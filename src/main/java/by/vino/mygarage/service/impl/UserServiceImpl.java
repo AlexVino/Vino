@@ -1,6 +1,6 @@
 package by.vino.mygarage.service.impl;
 
-import by.vino.mygarage.dao.api.UserDao;
+import by.vino.mygarage.dao.api.UserRepository;
 import by.vino.mygarage.dao.jpa.User;
 import by.vino.mygarage.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     /**
      * {@inheritDoc}
      * */
     @Override
     public void createUser(User user) {
-        userDao.create(user);
+        userRepository.save(user);
     }
 
     /**
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public boolean isUsernameFree(String username) {
-        return userDao.findByUsername(username) == null;
+        return userRepository.findByUsername(username) == null;
     }
 
     /**
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public User loadUserByUsername(String username) {
-        return userDao.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -40,6 +40,6 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public User loadUserById(int id) {
-        return userDao.get(id);
+        return userRepository.findById(id).orElse(null);
     }
 }

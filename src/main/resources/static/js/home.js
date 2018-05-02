@@ -19,6 +19,9 @@ function getUserName() {
             if (data !== "false") {
                 $('.b-sign').text(data).attr('href', "/logout");
             }
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
         }
     });
 }
@@ -39,6 +42,9 @@ function getMakesFilterItems() {
                     getModels();
                 });
             }
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
         }
     });
 }
@@ -59,6 +65,9 @@ function getModels() {
                 });
                 dropyList();
             }
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
         }
     });
 }
@@ -72,18 +81,22 @@ function search(page) {
     addIfNotEmpty(data, 'model.modelName', $('#filter_models').find('li a.selected').text());
     addIfNotEmpty(data, 'model.make.makeName', $('#filter_makes').find('li a.selected').text());
     addIfNotEmpty(data, 'transmission.transmissionName', $('#filter_transmission').find('li a.selected').text());
+    var min = addOrDefault(data, 'price', $('#minprice').find('li a.selected').text(), 0);
+    var max = addOrDefault(data, 'price', $('#maxprice').find('li a.selected').text(), 1000000000);
     data['page'] = page;
     data['size'] = size;
     $.ajax({
         type: "GET",
-        url: "/rest/cars",
+        url: "/rest/cars?price=" + min + "&price=" + max,
         data: data,
         contentType: "application/json",
         success: function (data) {
             if (data !== "false") {
-                //console.log(JSON.stringify(data));
                 showCars(data, page);
             }
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
         }
     });
 }
@@ -141,6 +154,16 @@ function addIfNotEmpty(data, param, value) {
         data[param] = value;
     }
 }
+
+function addOrDefault(data, param, value, defaultValue) {
+    if (value !== "") {
+        data[param] = value.substr(1, value.length - 1).replace(",", "");
+    } else {
+        data[param] = defaultValue;
+    }
+    return data[param];
+}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
