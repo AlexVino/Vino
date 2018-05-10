@@ -24,9 +24,10 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
-    <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/main.block.min.css">
     <link rel="stylesheet" href="/css/error_block.css">
+    <link rel="stylesheet" href="/css/main.min.css">
+    <%--<link rel="stylesheet" href="/css/main.min.new.css">--%>
 
 </head>
 <body class="ishome">
@@ -38,25 +39,21 @@
             <div class="top-line boxShadow">
                 <div class="container">
                     <div class="row justify-content-between">
-                        <div class="col-sm-7"><a href="#" class="logo"><img src="img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-                        <div class="col-sm-2" id="username"></div>
-                        <div class="col-sm-2"><a href="/signUp" class="button b-sign">Sign in</a></div>
-                        <div class="col-sm-1">
-                            <a href="#my-menu" class="hamburger hamburger--spin">
-                                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
-                            </a>
+                        <div class="col-auto"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
+
+                        <div class="col-5"></div>
+
+                        <!-- LANGUAGE BUTTON -->
+                        <div class="col-auto switch-button">
+                            <span class="switch-active"></span>
+                            <a href="?lang=ru"><button class="switch-button-case left active-case">RU</button></a>
+                            <a href="?lang=en"><button class="switch-button-case right">EN</button></a>
                         </div>
+
+                        <div class="col-auto"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
+                        <div class="col-auto"><a href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
                     </div>
                 </div>
-
-                <nav id="my-menu">
-                    <ul>
-                        <li class="mSearch"><a href="#">Search</a></li>
-                        <li class="mCategories"><a href="#">Categories</a></li>
-                        <li class="mSmart"><a href="#">Smart Search</a></li>
-                        <li class="mAbout"><a href="#">About</a></li>
-                    </ul>
-                </nav>
             </div>
 
             <div class="header-flex">
@@ -66,15 +63,12 @@
                             <div class="col-sm-5">
                                 <div class="header-composition">
                                     <div class="welcome">
-                                        <h1 class="h1">Find the right car <br> for you</h1>
+                                        <h1 class="h1"><spring:message code="main.welcome"/></h1>
                                     </div>
 
                                     <div class="why">
-                                        <h2 class="h2">WHY CHOOSE MyGarage TO FIND YOUR NEXT CAR?</h2>
-                                        <p>With history-checked cars and innovative search options,
-                                            there are many ways MyGarage can help you to find your next vehicle.
-                                            We list a wide range of new and used cars for sale from trusted dealers,
-                                            so you can be confident of finding the right car for your needs.</p>
+                                        <h2 class="h2"><spring:message code="main.why_h2"/></h2>
+                                        <p><spring:message code="main.why_p"/></p>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +85,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
-                            <p><strong>Search</strong></p>
+                            <p><strong><spring:message code="main.search"/></strong></p>
                         </div>
                     </div>
 
@@ -99,10 +93,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Make (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.make.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul id="filter_makes">
-                                            <li><a class="dropy__header">Make (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.make.any"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -113,10 +107,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Model (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.model.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul id="filter_models">
-                                            <li><a class="dropy__header">Model (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.model.any"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first"/>
@@ -127,10 +121,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Min price (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.min_price.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul id="minprice">
-                                            <li><a class="dropy__header">Min price (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.min_price.any"/></a></li>
                                             <li><a>$1</a></li>
                                             <li><a>$500</a></li>
                                             <li><a>$1,000</a></li>
@@ -170,10 +164,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Max price (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.max_price.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul id="maxprice">
-                                            <li><a class="dropy__header">Max price (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.max_price.any"/></a></li>
                                             <li><a>$1</a></li>
                                             <li><a>$500</a></li>
                                             <li><a>$1,000</a></li>
@@ -217,7 +211,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
-                            <p><strong>Bodystyle</strong></p>
+                            <p><strong><spring:message code="search.bodystyle"/></strong></p>
                         </div>
                     </div>
 
@@ -228,31 +222,31 @@
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="convertible" class="m-multi__item _convertible"><span class="label">convertible</span></button>
+                            <button title="convertible" class="m-multi__item _convertible"><span class="label"><spring:message code="search.bodystyle.convertible"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="coupe" class="m-multi__item _coupe"><span class="label">coupe</span></button>
+                            <button title="coupe" class="m-multi__item _coupe"><span class="label"><spring:message code="search.bodystyle.coupe"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="estate" class="m-multi__item _estate"><span class="label">estate</span></button>
+                            <button title="estate" class="m-multi__item _estate"><span class="label"><spring:message code="search.bodystyle.estate"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="hatchback" class="m-multi__item _hatchback"><span class="label">hatchback</span></button>
+                            <button title="hatchback" class="m-multi__item _hatchback"><span class="label"><spring:message code="search.bodystyle.hatchback"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="people carrier" class="m-multi__item _peoplecarrier"><span class="label">people carrier</span></button>
+                            <button title="people carrier" class="m-multi__item _peoplecarrier"><span class="label"><spring:message code="search.bodystyle.people_carrier"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="pick-up" class="m-multi__item _pickup"><span class="label">pick-up</span></button>
+                            <button title="pick-up" class="m-multi__item _pickup"><span class="label"><spring:message code="search.bodystyle.pick-up"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="saloon" class="m-multi__item _saloon"><span class="label">saloon</span></button>
+                            <button title="saloon" class="m-multi__item _saloon"><span class="label"><spring:message code="search.bodystyle.saloon"/></span></button>
                         </div>
 
                     </div>
@@ -267,7 +261,7 @@
 
                     <div class="row">
                         <div class="col-sm-3">
-                            <p><strong>Vehicle Spec</strong></p>
+                            <p><strong><spring:message code="search.vehicle_spec"/></strong></p>
                         </div>
                     </div>
 
@@ -276,10 +270,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Age (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.age.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul>
-                                            <li><a class="dropy__header">Age (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.age.any"/></a></li>
                                             <li><a>up to 1 year old</a></li>
                                             <li><a>up to 2 year old</a></li>
                                             <li><a>up to 3 year old</a></li>
@@ -301,10 +295,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Mileage (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.mileage.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul>
-                                            <li><a class="dropy__header">Mileage (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.mileage.any"/></a></li>
                                             <li><a>up to 100 miles</a></li>
                                             <li><a>up to 500 miles</a></li>
                                             <li><a>up to 1,000 miles</a></li>
@@ -334,10 +328,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Transmission (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.transmission.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul id="filter_transmission">
-                                            <li><a class="dropy__header">Transmission (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.transmission.any"/></a></li>
                                             <li><a>Automatic</a></li>
                                             <li><a>Manual</a></li>
                                             <li><a>Semi Automatic</a></li>
@@ -351,10 +345,10 @@
                         <div class="col-sm-3">
                             <div class="subdiv">
                                 <dl class="dropy">
-                                    <dt class="dropy__title"><span>Fuel Type (Any)</span></dt>
+                                    <dt class="dropy__title"><span><spring:message code="search.fuel_type.any"/></span></dt>
                                     <dd class="dropy__content">
                                         <ul>
-                                            <li><a class="dropy__header">Fuel Type (Any)</a></li>
+                                            <li><a class="dropy__header"><spring:message code="search.fuel_type.any"/></a></li>
                                             <li><a>petrol</a></li>
                                             <li><a>petrol/electric hybrid</a></li>
                                             <li><a>diesel</a></li>
@@ -379,7 +373,7 @@
 
                     <div class="row">
                         <div class="col-sm-3">
-                            <p><strong>Colors</strong></p>
+                            <p><strong><spring:message code="search.color"/></strong></p>
                         </div>
                     </div>
 
@@ -430,7 +424,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-sm-auto">
-                    <a class="button b-search">SEARCH</a>
+                    <a class="button b-search"><spring:message code="main.search"/></a>
                 </div>
             </div>
         </section>
@@ -441,7 +435,7 @@
         <div id='result' class="row"></div>
         <div class="row justify-content-center">
             <div class="col-sm-auto">
-                <a class="button b-page">More results</a>
+                <a class="button b-page"><spring:message code="main.more_results"/></a>
             </div>
         </div>
     </div>
@@ -468,7 +462,7 @@
 </div>
 
 <script src="/js/main_scripts_min.js"></script>
-<script src="/js/list.min.js"></script>
+<script src="/js/common.js"></script>
 <script src="/js/home.js"></script>
 <script src="/js/error.js"></script>
 

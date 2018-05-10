@@ -34,4 +34,9 @@ public class DefaultController {
         modelAndView.addObject("car", carService.get(id));
         return modelAndView;
     }
+
+    @GetMapping("/orders")
+    public String orders() {
+        return "/orders";
+    }
 }
