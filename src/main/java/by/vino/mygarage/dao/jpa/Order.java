@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name="orders")
@@ -24,8 +25,6 @@ public class Order {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "carId")
     private Car car;
-    @Column
-    private String status;
 
     public int getOrderId() {
         return orderId;
@@ -51,33 +50,18 @@ public class Order {
         this.car = car;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Order order = (Order) o;
-
-        if (orderId != order.orderId) return false;
-        if (user != null ? !user.equals(order.user) : order.user != null) return false;
-        if (car != null ? !car.equals(order.car) : order.car != null) return false;
-        return status != null ? status.equals(order.status) : order.status == null;
+        return orderId == order.orderId &&
+                Objects.equals(user, order.user) &&
+                Objects.equals(car, order.car);
     }
 
     @Override
     public int hashCode() {
-        int result = orderId;
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (car != null ? car.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+        return Objects.hash(orderId, user, car);
     }
 }

@@ -27,7 +27,6 @@
     <link rel="stylesheet" href="/css/main.block.min.css">
     <link rel="stylesheet" href="/css/error_block.css">
     <link rel="stylesheet" href="/css/main.min.css">
-    <%--<link rel="stylesheet" href="/css/main.min.new.css">--%>
 
 </head>
 <body class="ishome">
@@ -37,21 +36,19 @@
     <div id="my-header">
         <header class="site-header" style="background-image: url(img/aston-martin.jpg);">
             <div class="top-line boxShadow">
-                <div class="container">
-                    <div class="row justify-content-between">
-                        <div class="col-auto"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
+                <div class="container-fluid">
+                    <div>
+                        <div class="col-auto float-left"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
 
-                        <div class="col-5"></div>
+                        <div class="col-auto float-right"><a id="btn-sign" href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
+                        <div class="col-auto float-right"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
 
                         <!-- LANGUAGE BUTTON -->
-                        <div class="col-auto switch-button">
+                        <div class="col-auto switch-button float-right">
                             <span class="switch-active"></span>
                             <a href="?lang=ru"><button class="switch-button-case left active-case">RU</button></a>
                             <a href="?lang=en"><button class="switch-button-case right">EN</button></a>
                         </div>
-
-                        <div class="col-auto"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
-                        <div class="col-auto"><a href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
                     </div>
                 </div>
             </div>
@@ -218,7 +215,7 @@
                     <div class="row no-gutters justify-content-center">
 
                         <div class="col-sm-auto m-multi">
-                            <button title="4 x 4" class="m-multi__item _4x4"><span class="label">4 x 4</span></button>
+                            <button title="4x4" class="m-multi__item _4x4"><span class="label">4x4</span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
@@ -238,7 +235,7 @@
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="people carrier" class="m-multi__item _peoplecarrier"><span class="label"><spring:message code="search.bodystyle.people_carrier"/></span></button>
+                            <button title="people-carrier" class="m-multi__item _peoplecarrier"><span class="label"><spring:message code="search.bodystyle.people-carrier"/></span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">
@@ -272,19 +269,18 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span><spring:message code="search.age.any"/></span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="filter_year">
                                             <li><a class="dropy__header"><spring:message code="search.age.any"/></a></li>
-                                            <li><a>up to 1 year old</a></li>
-                                            <li><a>up to 2 year old</a></li>
-                                            <li><a>up to 3 year old</a></li>
-                                            <li><a>up to 4 year old</a></li>
-                                            <li><a>up to 5 year old</a></li>
-                                            <li><a>up to 6 year old</a></li>
-                                            <li><a>up to 7 year old</a></li>
-                                            <li><a>up to 8 year old</a></li>
-                                            <li><a>up to 9 year old</a></li>
-                                            <li><a>up to 10 year old</a></li>
-                                            <li><a>over 10 years old</a></li>
+                                            <li><a title="1"><spring:message code="search.age.1"/></a></li>
+                                            <li><a title="2"><spring:message code="search.age.2"/></a></li>
+                                            <li><a title="3"><spring:message code="search.age.3"/></a></li>
+                                            <li><a title="4"><spring:message code="search.age.4"/></a></li>
+                                            <li><a title="5"><spring:message code="search.age.5"/></a></li>
+                                            <li><a title="10"><spring:message code="search.age.10"/></a></li>
+                                            <li><a title="15"><spring:message code="search.age.15"/></a></li>
+                                            <li><a title="20"><spring:message code="search.age.20"/></a></li>
+                                            <li><a title="25"><spring:message code="search.age.25"/></a></li>
+                                            <li><a title="50"><spring:message code="search.age.50"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -297,23 +293,22 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span><spring:message code="search.mileage.any"/></span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="filter_mileage">
                                             <li><a class="dropy__header"><spring:message code="search.mileage.any"/></a></li>
-                                            <li><a>up to 100 miles</a></li>
-                                            <li><a>up to 500 miles</a></li>
-                                            <li><a>up to 1,000 miles</a></li>
-                                            <li><a>up to 5,000 miles</a></li>
-                                            <li><a>up to 10,000 miles</a></li>
-                                            <li><a>up to 20,000 miles</a></li>
-                                            <li><a>up to 30,000 miles</a></li>
-                                            <li><a>up to 40,000 miles</a></li>
-                                            <li><a>up to 50,000 miles</a></li>
-                                            <li><a>up to 60,000 miles</a></li>
-                                            <li><a>up to 70,000 miles</a></li>
-                                            <li><a>up to 80,000 miles</a></li>
-                                            <li><a>up to 90,000 miles</a></li>
-                                            <li><a>up to 100,000 miles</a></li>
-                                            <li><a>over 100,000 miles</a></li>
+                                            <li><a title="100"><spring:message code="search.mileage.100"/></a></li>
+                                            <li><a title="500"><spring:message code="search.mileage.500"/></a></li>
+                                            <li><a title="1000"><spring:message code="search.mileage.1000"/></a></li>
+                                            <li><a title="5000"><spring:message code="search.mileage.5000"/></a></li>
+                                            <li><a title="10000"><spring:message code="search.mileage.10000"/></a></li>
+                                            <li><a title="20000"><spring:message code="search.mileage.20000"/></a></li>
+                                            <li><a title="30000"><spring:message code="search.mileage.30000"/></a></li>
+                                            <li><a title="40000"><spring:message code="search.mileage.40000"/></a></li>
+                                            <li><a title="50000"><spring:message code="search.mileage.50000"/></a></li>
+                                            <li><a title="60000"><spring:message code="search.mileage.60000"/></a></li>
+                                            <li><a title="70000"><spring:message code="search.mileage.70000"/></a></li>
+                                            <li><a title="80000"><spring:message code="search.mileage.80000"/></a></li>
+                                            <li><a title="90000"><spring:message code="search.mileage.90000"/></a></li>
+                                            <li><a title="100000"><spring:message code="search.mileage.100000"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -332,9 +327,9 @@
                                     <dd class="dropy__content">
                                         <ul id="filter_transmission">
                                             <li><a class="dropy__header"><spring:message code="search.transmission.any"/></a></li>
-                                            <li><a>Automatic</a></li>
-                                            <li><a>Manual</a></li>
-                                            <li><a>Semi Automatic</a></li>
+                                            <li><a title="Automatic"><spring:message code="search.transmission.automatic"/></a></li>
+                                            <li><a title="Manual"><spring:message code="search.transmission.manual"/></a></li>
+                                            <li><a title="Semi Automatic"><spring:message code="search.transmission.semi-automatic"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -347,13 +342,13 @@
                                 <dl class="dropy">
                                     <dt class="dropy__title"><span><spring:message code="search.fuel_type.any"/></span></dt>
                                     <dd class="dropy__content">
-                                        <ul>
+                                        <ul id="filter_fueltype">
                                             <li><a class="dropy__header"><spring:message code="search.fuel_type.any"/></a></li>
-                                            <li><a>petrol</a></li>
-                                            <li><a>petrol/electric hybrid</a></li>
-                                            <li><a>diesel</a></li>
-                                            <li><a>diesel/electric hybrid</a></li>
-                                            <li><a>electric</a></li>
+                                            <li><a title="petrol"><spring:message code="search.fuel_type.petrol"/></a></li>
+                                            <li><a title="petrol/electric hybrid"><spring:message code="search.fuel_type.petrol-electric-hybrid"/></a></li>
+                                            <li><a title="diesel"><spring:message code="search.fuel_type.diesel"/></a></li>
+                                            <li><a title="diesel/electric hybrid"><spring:message code="search.fuel_type.diesel-electric-hybrid"/></a></li>
+                                            <li><a title="electric"><spring:message code="search.fuel_type.electric"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -460,6 +455,9 @@
 <div class="error_message">
     <p>Error</p>
 </div>
+
+<input type="hidden" id="full-details" value="<spring:message code="main.full-details"/>">
+<input type="hidden" id="mileage" value="<spring:message code="cars.mileage"/>">
 
 <script src="/js/main_scripts_min.js"></script>
 <script src="/js/common.js"></script>

@@ -6,6 +6,7 @@ import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Locale;
 
 public interface CarService {
     /**
@@ -34,7 +35,7 @@ public interface CarService {
      *
      * @param carId car id
      * */
-    BaseCarDto get(int carId);
+    BaseCarDto get(int carId, Locale locale);
 
     /**
      * Loads list of cars by searching params.
@@ -42,5 +43,5 @@ public interface CarService {
      * @param predicate search entity
      * @param pageable page, size
      */
-    List<BaseCarDto> getAll(Predicate predicate, Pageable pageable);
+    List<BaseCarDto> getAll(Predicate predicate, Pageable pageable, Locale locale);
 }

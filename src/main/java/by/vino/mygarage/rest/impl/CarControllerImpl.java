@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 @RestController
 @RequestMapping("/rest/cars")
 public class CarControllerImpl {
@@ -26,8 +28,8 @@ public class CarControllerImpl {
      * */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> listCars(
-            @QuerydslPredicate(root = Car.class) Predicate predicate, Pageable pageable) {
-        return ResponseEntity.ok(carService.getAll(predicate, pageable));
+            @QuerydslPredicate(root = Car.class) Predicate predicate, Pageable pageable, Locale locale) {
+        return ResponseEntity.ok(carService.getAll(predicate, pageable, locale));
     }
 
 }

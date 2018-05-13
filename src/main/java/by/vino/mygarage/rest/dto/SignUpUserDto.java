@@ -31,7 +31,7 @@ public class SignUpUserDto {
     @Pattern(regexp = "[\\d]+", flags = {UNICODE_CASE},message = "form.phone.pattern")
     private String phone;
 
-    private Role role = new Role(RoleEnum.USER);
+    private Role role = new Role(RoleEnum.ROLE_USER);
 
     public String getUsername() {
         return username;

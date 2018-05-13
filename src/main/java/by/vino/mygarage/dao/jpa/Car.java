@@ -1,8 +1,5 @@
 package by.vino.mygarage.dao.jpa;
 
-import com.querydsl.core.annotations.PropertyType;
-import com.querydsl.core.annotations.QueryType;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import java.util.Arrays;
+import java.util.Objects;
 
 @Entity
 @Table(name="cars")
@@ -26,9 +25,6 @@ public class Car {
     private Model model;
     @Column
     private int price;
-    @Transient
-    private int minPrice;
-    @QueryType(value = PropertyType.STRING)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bodystyleId")
     private Bodystyle bodystyle;
@@ -45,6 +41,13 @@ public class Car {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "colorId")
     private Color color;
+    @Column
+    private String description;
+    @Lob
+    @Column
+    private byte[] image;
+    @Column
+    private double engine;
 
     public int getCarId() {
         return carId;
@@ -118,35 +121,54 @@ public class Car {
         this.color = color;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public double getEngine() {
+        return engine;
+    }
+
+    public void setEngine(double engine) {
+        this.engine = engine;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Car car = (Car) o;
-
-        if (carId != car.carId) return false;
-        if (price != car.price) return false;
-        if (year != car.year) return false;
-        if (mileage != car.mileage) return false;
-        if (model != null ? !model.equals(car.model) : car.model != null) return false;
-        if (bodystyle != null ? !bodystyle.equals(car.bodystyle) : car.bodystyle != null) return false;
-        if (transmission != null ? !transmission.equals(car.transmission) : car.transmission != null) return false;
-        if (fuelType != null ? !fuelType.equals(car.fuelType) : car.fuelType != null) return false;
-        return color != null ? color.equals(car.color) : car.color == null;
+        return carId == car.carId &&
+                price == car.price &&
+                year == car.year &&
+                mileage == car.mileage &&
+                Double.compare(car.engine, engine) == 0 &&
+                Objects.equals(model, car.model) &&
+                Objects.equals(bodystyle, car.bodystyle) &&
+                Objects.equals(transmission, car.transmission) &&
+                Objects.equals(fuelType, car.fuelType) &&
+                Objects.equals(color, car.color) &&
+                Objects.equals(description, car.description) &&
+                Arrays.equals(image, car.image);
     }
 
     @Override
     public int hashCode() {
-        int result = carId;
-        result = 31 * result + (model != null ? model.hashCode() : 0);
-        result = 31 * result + price;
-        result = 31 * result + (bodystyle != null ? bodystyle.hashCode() : 0);
-        result = 31 * result + year;
-        result = 31 * result + mileage;
-        result = 31 * result + (transmission != null ? transmission.hashCode() : 0);
-        result = 31 * result + (fuelType != null ? fuelType.hashCode() : 0);
-        result = 31 * result + (color != null ? color.hashCode() : 0);
+
+        int result = Objects.hash(carId, model, price, bodystyle, year, mileage, transmission, fuelType, color, description, engine);
+        result = 31 * result + Arrays.hashCode(image);
         return result;
     }
 }

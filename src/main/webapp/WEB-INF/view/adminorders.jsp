@@ -59,6 +59,9 @@
                             <thead>
                             <tr>
                                 <th>№</th>
+                                <th><spring:message code="form.firstname"/></th>
+                                <th><spring:message code="form.lastname"/></th>
+                                <th><spring:message code="form.phone"/></th>
                                 <th><spring:message code="main.name"/></th>
                                 <th><spring:message code="main.price"/></th>
                                 <th><spring:message code="main.select"/></th>
@@ -76,7 +79,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-auto"><a id="cancel" class="button"><spring:message code="main.cancel"/></a></div>
+            <div class="col-auto"><a id="cancel" class="button"><spring:message code="main.complete"/></a></div>
         </div>
 
     </div>
@@ -100,7 +103,7 @@
 </div>
 
 <script src="/js/scripts.min.js"></script>
-<script src="/js/orders.js"></script>
+<script src="/js/adminorders.js"></script>
 <script src="/js/error.js"></script>
 
 </body>

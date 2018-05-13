@@ -21,7 +21,7 @@ public class MyExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(MyExceptionHandler.class);
 
-    private static final String DEBUG_MESSAGE = "ERROR %d: %s";
+    private static final String DEBUG_MESSAGE = "ERROR: %s";
     private static final int VALID_EXCEPTION_CODE = 911;
 
     @Autowired
@@ -29,10 +29,10 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(RestException.class)
     public ResponseEntity<RestMessage> handleRestException(RestException ex, Locale locale) {
-        int code = ex.getCode();
-        String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
-        logger.error(String.format(DEBUG_MESSAGE, code, errorMessage));
-        return new ResponseEntity<>(new RestMessage(code, errorMessage), HttpStatus.BAD_REQUEST);
+        String errorMessage = messageSource.getMessage(ex.getCode(), null, locale);
+        String error = messageSource.getMessage(ex.getCode(), null, Locale.US);
+        logger.error(String.format(DEBUG_MESSAGE, error));
+        return new ResponseEntity<>(new RestMessage(400, errorMessage), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

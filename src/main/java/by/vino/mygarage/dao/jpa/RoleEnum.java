@@ -1,8 +1,8 @@
 package by.vino.mygarage.dao.jpa;
 
 public enum RoleEnum {
-    ADMIN(1),
-    USER(2);
+    ROLE_ADMIN(1),
+    ROLE_USER(2);
 
     private int i;
 

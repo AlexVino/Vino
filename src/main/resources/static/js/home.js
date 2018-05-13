@@ -17,7 +17,7 @@ function getUserName() {
         dataType: "text",
         success: function (data) {
             if (data !== "false") {
-                $('.b-sign').text(data).attr('href', "/logout");
+                $('#btn-sign').text(data).attr('href', "/logout");
             }
         },
         error: function (e) {
@@ -80,14 +80,30 @@ function search(page) {
     var data = {};
     addIfNotEmpty(data, 'model.modelName', $('#filter_models').find('li a.selected').text());
     addIfNotEmpty(data, 'model.make.makeName', $('#filter_makes').find('li a.selected').text());
-    addIfNotEmpty(data, 'transmission.transmissionName', $('#filter_transmission').find('li a.selected').text());
-    var min = addOrDefault(data, 'price', $('#minprice').find('li a.selected').text(), 0);
-    var max = addOrDefault(data, 'price', $('#maxprice').find('li a.selected').text(), 1000000000);
+    addIfNotEmptyForTitle(data, 'transmission.transmissionName', $('#filter_transmission').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'fuelType.fuelTypeName', $('#filter_fueltype').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'mileage', $('#filter_mileage').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'year', $('#filter_year').find('li a.selected'));
+    var min = addOrDefault($('#minprice').find('li a.selected').text(), 0);
+    var max = addOrDefault($('#maxprice').find('li a.selected').text(), 1000000000);
+
+    var bodies = $('.bodystyles').find('button.active');
+    var bodyStyles = "";
+    for (var i = 0; i < bodies.length; i++) {
+        bodyStyles += '&bodystyle.bodystyleName=' + bodies[i].title;
+    }
+
+    var colorsButton = $('.colors').find('button.active');
+    var colors = "";
+    for (var i = 0; i < colorsButton.length; i++) {
+        colors += '&color.colorName=' + colorsButton[i].title;
+    }
+
     data['page'] = page;
     data['size'] = size;
     $.ajax({
         type: "GET",
-        url: "/rest/cars?price=" + min + "&price=" + max,
+        url: "/rest/cars?price=" + min + "&price=" + max + bodyStyles + colors,
         data: data,
         contentType: "application/json",
         success: function (data) {
@@ -124,25 +140,25 @@ function showCars(cars, page) {
                 '</div>' +
                 '<ul class="spec">' +
                     '<li class="spec__item">' +
-                        '<i class="icon">' + cars[i].mileage + 'k</i>' +
-                        '<span>Miles</span>' +
+                        '<i class="icon">' + cars[i].mileage + '</i>' +
+                        '<span>' + $('#mileage').val() +'</span>' +
                     '</li>' +
                     '<li class="spec__item">' +
                         '<img class="icon" src="/img/fuel.svg">' +
-                        '<span>' + capitalizeFirstLetter(cars[i].fuelType) + '</span>' +
+                        '<span>' + capitalizeFirstLetter(cars[i].fuelTypeLocal) + '</span>' +
                     '</li>' +
                     '<li class="spec__item">' +
                         '<img class="icon" src="/img/gears.svg">' +
-                        '<span>' + cars[i].transmission + '</span>' +
+                        '<span>' + cars[i].transmissionLocal + '</span>' +
                     '</li>' +
                     '<li class="spec__item body">' +
                         '<img class="icon" src="/img/bodystyle/' + cars[i].bodystyle + '.svg">' +
-                        '<span>' + cars[i].bodystyle + '</span>' +
+                        '<span>' + cars[i].bodystyleLocal + '</span>' +
                     '</li>' +
                 '</ul>' +
                 '<div class="r__cta">' +
                 '<a class="item button" href="/cars/' + cars[i].carId + '">' +
-                    '<span>Full Details</span>' +
+                    '<span>' + $('#full-details').val() + '</span>' +
                 '</a>' +
             '</div>' +
         '</div>');
@@ -155,13 +171,18 @@ function addIfNotEmpty(data, param, value) {
     }
 }
 
-function addOrDefault(data, param, value, defaultValue) {
-    if (value !== "") {
-        data[param] = value.substr(1, value.length - 1).replace(",", "");
-    } else {
-        data[param] = defaultValue;
+function addIfNotEmptyForTitle(data, param, value) {
+    if (value.length > 0 && value[0].title !== "") {
+        data[param] = value[0].title;
     }
-    return data[param];
+}
+
+function addOrDefault(value, defaultValue) {
+    if (value !== "") {
+        return value.substr(1, value.length - 1).replace(",", "");
+    } else {
+        return defaultValue;
+    }
 }
 
 function capitalizeFirstLetter(string) {

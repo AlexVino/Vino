@@ -6,11 +6,17 @@ public class BaseCarDto {
     private String model;
     private int price;
     private String bodystyle;
+    private String bodystyleLocal;
     private int year;
     private int mileage;
     private String transmission;
+    private String transmissionLocal;
     private String fuelType;
+    private String fuelTypeLocal;
     private String color;
+    private String description;
+    private double engine;
+    private byte[] image;
 
     public int getCarId() {
         return carId;
@@ -90,5 +96,53 @@ public class BaseCarDto {
 
     public void setFullModel(String fullModel) {
         this.fullModel = fullModel;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public double getEngine() {
+        return engine;
+    }
+
+    public void setEngine(double engine) {
+        this.engine = engine;
+    }
+
+    public String getBodystyleLocal() {
+        return bodystyleLocal;
+    }
+
+    public void setBodystyleLocal(String bodystyleLocal) {
+        this.bodystyleLocal = bodystyleLocal;
+    }
+
+    public String getTransmissionLocal() {
+        return transmissionLocal;
+    }
+
+    public void setTransmissionLocal(String transmissionLocal) {
+        this.transmissionLocal = transmissionLocal;
+    }
+
+    public String getFuelTypeLocal() {
+        return fuelTypeLocal;
+    }
+
+    public void setFuelTypeLocal(String fuelTypeLocal) {
+        this.fuelTypeLocal = fuelTypeLocal;
     }
 }
