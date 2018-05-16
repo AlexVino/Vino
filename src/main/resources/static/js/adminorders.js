@@ -1,26 +1,7 @@
 $(document).ready(function () {
-    getUserName();
     search();
     $('#cancel').click(function () { cancel(); });
 });
-
-function getUserName() {
-    $.ajax({
-        type: "GET",
-        url: "/rest/users/username",
-        cache: false,
-        timeout: 600000,
-        dataType: "text",
-        success: function (data) {
-            if (data !== "false") {
-                $('#btn-sign').text(data).attr('href', "/logout");
-            }
-        },
-        error: function (e) {
-            throwMessage(e.responseJSON.message);
-        }
-    });
-}
 
 function search() {
     $.ajax({

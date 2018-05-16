@@ -1,4 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -31,25 +33,7 @@
 
 <body class="ishome">
 
-<header class="site-header registration">
-    <div class="top-line boxShadow">
-        <div class="container-fluid">
-            <div>
-                <div class="col-auto float-left"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-
-                <div class="col-auto float-right"><a id="btn-sign" href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
-                <div class="col-auto float-right"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
-
-                <!-- LANGUAGE BUTTON -->
-                <div class="col-auto switch-button float-right">
-                    <span class="switch-active"></span>
-                    <a href="?lang=ru"><button class="switch-button-case left active-case">RU</button></a>
-                    <a href="?lang=en"><button class="switch-button-case right">EN</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<c:import url="header.jsp"/>
 
 <div id="my-content">
 
@@ -64,9 +48,20 @@
             <div class="col">
                 <p class="vehicle__title">$${car.price}</p>
             </div>
+            <security:authorize access="hasRole('ROLE_ADMIN')">
+                <div class="col">
+                    <button id="btn-edit" class="button"><spring:message code="cars.edit"/></button>
+                </div>
+                <div class="col">
+                    <button id="btn-delete" class="button"><spring:message code="cars.delete"/></button>
+                </div>
+            </security:authorize>
+
+            <security:authorize access="hasRole('ROLE_USER') or isAnonymous()">
             <div class="col">
                 <button id="btn-order" class="button"><spring:message code="orders.order"/></button>
             </div>
+            </security:authorize>
 
         </div>
 
@@ -142,7 +137,6 @@
 
 <input type="hidden" id="cancel" value="<spring:message code="main.cancel"/>">
 <input type="hidden" id="order" value="<spring:message code="orders.order"/>">
-<input type="hidden" id="username" value="">
 
 <script src="/js/scripts.min.js"></script>
 <script src="/js/car.js"></script>

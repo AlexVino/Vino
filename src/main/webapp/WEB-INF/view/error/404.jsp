@@ -30,16 +30,7 @@
 
 <body class="ishome">
 
-  <header class="site-header registration">
-    <div class="top-line boxShadow">
-      <div class="container-fluid">
-        <div class="row justify-content-between">
-          <div class="col-auto"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-          <div class="col-auto"><a href="/signUp" class="button b-sign">Sign in</a></div>
-        </div>
-      </div>
-    </div>
-  </header>
+<c:import url="header.jsp"/>
 
   <div id="my-content">
       <div class="container">

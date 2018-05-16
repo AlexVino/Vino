@@ -16,7 +16,7 @@
 .error_message p {
     color: rgba(248, 248, 248, 0.79);
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 60px;
     font-weight: bold;
     filter: dropshadow(color=rgba(248, 248, 248, 0.75), offx=1, offy=1);
     text-align: center;

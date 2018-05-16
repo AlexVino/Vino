@@ -5,6 +5,7 @@ import by.vino.mygarage.rest.dto.BaseCarDto;
 import by.vino.mygarage.service.api.CarService;
 import by.vino.mygarage.util.SecurityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,5 +61,11 @@ public class DefaultController {
         } else {
             return "/orders";
         }
+    }
+
+    @GetMapping("/cars/create")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String createCar() {
+            return "/car.create";
     }
 }

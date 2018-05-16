@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -31,15 +32,7 @@
 
 <body class="ishome">
 
-  <header class="site-header registration">
-    <div class="top-line boxShadow">
-      <div class="container">
-        <div class="row justify-content-between">
-          <div class="col-sm-9"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-        </div>
-      </div>
-    </div>
-  </header>
+<c:import url="header.jsp"/>
 
   <div class="form">
       
@@ -125,8 +118,6 @@
           </div>
           
           <button type="submit" class="r-button button-block">Log In</button>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
           </form>
         </div>
       </div>
@@ -135,6 +126,8 @@
   <div class="error_message">
     <p>Error</p>
   </div>
+
+  <input type="hidden" id="error-login-or-password" value="<spring:message code="main.error-login-or-password"/>">
 
   <script src="/js/signUp_scripts_min.js"></script>
   <script src="/js/jquery-3.3.1.min.js"></script>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -30,24 +31,7 @@
 
 <body class="ishome">
 
-<header class="site-header registration">
-    <div class="top-line boxShadow">
-        <div class="container-fluid">
-            <div>
-                <div class="col-auto float-left"><a href="/" class="logo"><img src="/img/MyGarageLogo.svg" alt="MyGarage"></a></div>
-
-                <div class="col-auto float-right"><a id="btn-sign" href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
-
-                <!-- LANGUAGE BUTTON -->
-                <div class="col-auto switch-button float-right">
-                    <span class="switch-active"></span>
-                    <a href="?lang=ru"><button class="switch-button-case left active-case">RU</button></a>
-                    <a href="?lang=en"><button class="switch-button-case right">EN</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+<c:import url="header.jsp"/>
 
 <div id="my-content">
     <div class="container">

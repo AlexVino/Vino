@@ -1,11 +1,119 @@
 $(document).ready(function () {
+    $('#btn-order').click(function () {
+        postOrder();
+    });
+    $("#btn-img").click(function() {
+        $("#input-img").trigger('click');
+    });
+    $('.button-image').click(function (event) {
+        event.stopPropagation(); // Остановка происходящего
+        event.preventDefault();  // Полная остановка происходящего
+
+        // Создадим данные формы и добавим в них данные файлов из files
+
+        var data = new FormData();
+        $.each(files, function (key, value) {
+            data.append(key, value);
+        });
+
+        // Отправляем запрос
+
+        $.ajax({
+            url: './submit.php?uploadfiles',
+            type: 'POST',
+            data: data,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Не обрабатываем файлы (Don't process the files)
+            contentType: false, // Так jQuery скажет серверу что это строковой запрос
+            success: function (respond, textStatus, jqXHR) {
+
+                // Если все ОК
+
+                if (typeof respond.error === 'undefined') {
+                    // Файлы успешно загружены, делаем что нибудь здесь
+
+                    // выведем пути к загруженным файлам в блок '.ajax-respond'
+
+                    var files_path = respond.files;
+                    var html = '';
+                    $.each(files_path, function (key, val) {
+                        html += val + '<br>';
+                    })
+                    $('.ajax-respond').html(html);
+                }
+                else {
+                    console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('ОШИБКИ AJAX запроса: ' + textStatus);
+            }
+        });
+
+    });
+});
+
+function postOrder() {
+    if ($('#username').val() !== "") {
+        if ($('#btn-order').hasClass('cancel')) {
+            $.ajax({
+                type: "DELETE",
+                url: "/rest/orders/" + window.location.href.match(/([^\/]*)\/*$/)[1],
+                success: function (data) {
+                    if (data !== "false") {
+                        $('#btn-order').text($('#order').val()).removeClass("cancel");
+                    }
+                },
+                error: function (e) {
+                    throwMessage(e.responseJSON.message);
+                }
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/rest/orders/" + window.location.href.match(/([^\/]*)\/*$/)[1],
+                success: function (data) {
+                    if (data !== "false") {
+                        $('#btn-order').text($('#cancel').val()).addClass("cancel");
+                    }
+                },
+                error: function (e) {
+                    throwMessage(e.responseJSON.message);
+                }
+            });
+        }
+    } else {
+        window.location.href = "/signUp";
+    }
+}
+
+
+$(document).ready(function () {
+    getUserName();
     getMakesFilterItems();
-    $('.b-search').click(function () { search(0); });
-    $('.b-page').click(function () { search(-1); });
     $('#filter_makes li a').click(function () {
         getModelsFilterItems();
     });
 });
+
+function getUserName() {
+    $.ajax({
+        type: "GET",
+        url: "/rest/users/username",
+        cache: false,
+        timeout: 600000,
+        dataType: "text",
+        success: function (data) {
+            if (data !== "false") {
+                $('#btn-sign').text(data).attr('href', "/logout");
+            }
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
+        }
+    });
+}
 
 function getMakesFilterItems() {
     $.ajax({
@@ -16,7 +124,7 @@ function getMakesFilterItems() {
         success: function (data) {
             if (data !== "false") {
                 data.forEach(function(item) {
-                    $('#filter_makes').append('<li><a>' + capitalizeFirstLetter(item) + '</a></li>');
+                    $('#filter_makes').append('<li><a>' + item + '</a></li>');
                 });
                 dropyList();
                 $("#filter_makes").on("click", "li", function(){
@@ -42,7 +150,7 @@ function getModels() {
             if (data !== "false") {
                 $('#filter_models').find('li:not(:first)').remove();
                 data.forEach(function(item) {
-                    $('#filter_models').append('<li><a>' + capitalizeFirstLetter(item) + '</a></li>');
+                    $('#filter_models').append('<li><a>' + item + '</a></li>');
                 });
                 dropyList();
             }
@@ -96,78 +204,6 @@ function search(page) {
             throwMessage(e.responseJSON.message);
         }
     });
-}
-
-function showCars(cars, page) {
-    if (page === 0) {
-        $('#result').find('div').remove();
-    }
-    for (var i = 0; i < cars.length; i++) {
-        $('#result').append(
-        '<div class="col-lg-4 col-md-6 col-xs-12" align="center">' +
-            '<div class="r">' +
-                '<a class="r__head dist" href="/cars/' + cars[i].carId + '">' +
-                    '<p class="title">' + cars[i].fullModel + '</p>' +
-                '</a>' +
-                '<a class="image" href="/cars/' + cars[i].carId + '">' +
-                    '<div class="ui-onvisible">' +
-                    '<img class="image__photo" src="/img/car-default.jpg" alt="no image">' +
-                    '</div>' +
-                '</a>' +
-                '<div class="detail">' +
-                    '<div class="detail__price" align="left">' + cars[i].price + '$</div>' +
-                    '<div class="detail__date">' + cars[i].year + '</div>' +
-                    '<div class="detail__finance"></div>' +
-                '</div>' +
-                '<ul class="spec">' +
-                    '<li class="spec__item">' +
-                        '<i class="icon">' + cars[i].mileage + '</i>' +
-                        '<span>' + $('#mileage').val() +'</span>' +
-                    '</li>' +
-                    '<li class="spec__item">' +
-                        '<img class="icon" src="/img/fuel.svg">' +
-                        '<span>' + capitalizeFirstLetter(cars[i].fuelTypeLocal) + '</span>' +
-                    '</li>' +
-                    '<li class="spec__item">' +
-                        '<img class="icon" src="/img/gears.svg">' +
-                        '<span>' + cars[i].transmissionLocal + '</span>' +
-                    '</li>' +
-                    '<li class="spec__item body">' +
-                        '<img class="icon" src="/img/bodystyle/' + cars[i].bodystyle + '.svg">' +
-                        '<span>' + cars[i].bodystyleLocal + '</span>' +
-                    '</li>' +
-                '</ul>' +
-                '<div class="r__cta">' +
-                '<a class="item button" href="/cars/' + cars[i].carId + '">' +
-                    '<span>' + $('#full-details').val() + '</span>' +
-                '</a>' +
-            '</div>' +
-        '</div>');
-    }
-}
-
-function addIfNotEmpty(data, param, value) {
-    if (value !== "") {
-        data[param] = value;
-    }
-}
-
-function addIfNotEmptyForTitle(data, param, value) {
-    if (value.length > 0 && value[0].title !== "") {
-        data[param] = value[0].title;
-    }
-}
-
-function addOrDefault(value, defaultValue) {
-    if (value !== "") {
-        return value.substr(1, value.length - 1).replace(",", "");
-    } else {
-        return defaultValue;
-    }
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function dropyList(){
