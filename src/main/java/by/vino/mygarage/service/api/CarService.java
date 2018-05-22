@@ -2,6 +2,7 @@ package by.vino.mygarage.service.api;
 
 import by.vino.mygarage.dao.jpa.Car;
 import by.vino.mygarage.rest.dto.BaseCarDto;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Pageable;
 
@@ -12,9 +13,10 @@ public interface CarService {
     /**
      * Creates new car.
      *
-     * @param car car
+     * @param dto car dto
+     * @param locale locale
      * */
-    Car create(Car car);
+    BaseCarDto create(BaseCarDto dto, Locale locale);
 
     /**
      * Updates car.

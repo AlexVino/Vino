@@ -1,7 +1,19 @@
 package by.vino.mygarage.service.impl;
 
+import by.vino.mygarage.dao.api.BodyStyleRepository;
 import by.vino.mygarage.dao.api.CarRepository;
+import by.vino.mygarage.dao.api.ColorRepository;
+import by.vino.mygarage.dao.api.FuelTypeRepository;
+import by.vino.mygarage.dao.api.ModelRepository;
+import by.vino.mygarage.dao.api.TransmissionRepository;
+import by.vino.mygarage.dao.jpa.Bodystyle;
 import by.vino.mygarage.dao.jpa.Car;
+import by.vino.mygarage.dao.jpa.Color;
+import by.vino.mygarage.dao.jpa.FuelType;
+import by.vino.mygarage.dao.jpa.Model;
+import by.vino.mygarage.dao.jpa.Transmission;
+import by.vino.mygarage.exception.ErrorCode;
+import by.vino.mygarage.exception.RestException;
 import by.vino.mygarage.rest.dto.BaseCarDto;
 import by.vino.mygarage.service.api.CarService;
 import com.querydsl.core.types.Predicate;
@@ -19,11 +31,21 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private CarRepository carRepository;
     @Autowired
+    private ModelRepository modelRepository;
+    @Autowired
+    private BodyStyleRepository bodyStyleRepository;
+    @Autowired
+    private TransmissionRepository transmissionRepository;
+    @Autowired
+    private FuelTypeRepository fuelTypeRepository;
+    @Autowired
+    private ColorRepository colorRepository;
+    @Autowired
     private MessageSource messageSource;
 
     @Override
-    public Car create(Car car) {
-        return carRepository.save(car);
+    public BaseCarDto create(BaseCarDto dto, Locale locale) {
+        return toDto(carRepository.save(toEntity(dto)), locale);
     }
 
     @Override
@@ -79,4 +101,41 @@ public class CarServiceImpl implements CarService {
         dto.setEngine(car.getEngine());
         return dto;
     }
+
+     private Car toEntity(BaseCarDto dto) {
+         Model model = modelRepository.findByModelNameIgnoreCaseAndMake_MakeNameIgnoreCase(dto.getModel(), dto.getMake());
+         if (model == null) {
+             throw new RestException(ErrorCode.MODEL_DOES_NOT_EXIST);
+         }
+         Bodystyle bodystyle = bodyStyleRepository.findByBodystyleNameIgnoreCase(dto.getBodystyle());
+         if (bodystyle == null) {
+             throw new RestException(ErrorCode.BODYSTYLE_DOES_NOT_EXIST);
+         }
+         Transmission transmission = transmissionRepository.findByTransmissionNameIgnoreCase(dto.getTransmission());
+         if (transmission == null) {
+             throw new RestException(ErrorCode.TRANSMISSION_DOES_NOT_EXIST);
+         }
+         FuelType fuelType = fuelTypeRepository.findByFuelTypeNameIgnoreCase(dto.getFuelType());
+         if (fuelType == null) {
+             throw new RestException(ErrorCode.FUELTYPE_DOES_NOT_EXIST);
+         }
+         Color color = colorRepository.findByColorNameIgnoreCase(dto.getColor());
+         if (color == null) {
+             throw new RestException(ErrorCode.COLOR_DOES_NOT_EXIST);
+         }
+         Car car = new Car();
+         car.setCarId(dto.getCarId());
+         car.setModel(model);
+         car.setPrice(dto.getPrice());
+         car.setBodystyle(bodystyle);
+         car.setYear(dto.getYear());
+         car.setMileage(dto.getMileage());
+         car.setTransmission(transmission);
+         car.setFuelType(fuelType);
+         car.setColor(color);
+         car.setImage(dto.getImage());
+         car.setDescription(dto.getDescription());
+         car.setEngine(dto.getEngine());
+         return car;
+     }
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -24,13 +25,14 @@
   <!-- iOS Safari -->
   <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
+  <link rel="stylesheet" href="/css/main.min.css">
   <link rel="stylesheet" href="/css/error.min.css">
 
 </head>
 
 <body class="ishome">
 
-<c:import url="header.jsp"/>
+<c:import url="../header.jsp"/>
 
   <div id="my-content">
       <div class="container">
@@ -39,18 +41,18 @@
 
             <div class="col-md-6 col-xs-hidden"></div>
             <div class="col-md-6 col-xs-12" align="center">
-                <div class="four "></div>
-                <div class="zero ">
-                    <div class="nail "></div>
+                <div class="four"></div>
+                <div class="zero">
+                    <div class="nail"></div>
                 </div>
                 <div class="four number"></div>
             </div>
 
             <div class="col-md-6 col-xs-hidden"></div>
               <div class="info col-md-6 col-xs-12">
-                  <h2>Something is wrong</h2>
-                  <p>The page you are looking for was moved, removed, renamed or might never existed.</p>
-                  <a href="/" class="button">Go Home</a>
+                  <h2><spring:message code="main.404.h"/></h2>
+                  <p><spring:message code="main.404.p"/></p>
+                  <a href="/" class="button"><spring:message code="main.home"/></a>
             </div>
       </div>
     </div>

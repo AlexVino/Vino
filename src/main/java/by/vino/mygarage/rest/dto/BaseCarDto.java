@@ -1,13 +1,33 @@
 package by.vino.mygarage.rest.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class BaseCarDto {
     private int carId;
     private String fullModel;
+    private String make;
+    @NotEmpty(message = "cars.model.empty")
+    @Size(min = 1, max = 30, message = "cars.model.size")
     private String model;
+    @NotNull(message = "cars.price.null")
+    @Min(value = 0, message = "cars.price.size")
+    @Max(value = 1_000_000_000, message = "cars.price.size")
     private int price;
+    @NotEmpty(message = "cars.bodystyle.empty")
+    @Size(min = 1, max = 30, message = "cars.bodystyle.size")
     private String bodystyle;
     private String bodystyleLocal;
+    @NotNull(message = "cars.year.null")
+    @Min(value = 1800, message = "cars.year.min")
+    @Max(value = 2100, message = "cars.year.max")
     private int year;
+    @NotNull(message = "cars.mileage.null")
+    @Min(value = 1800, message = "cars.mileage.size")
+    @Max(value = 2100, message = "cars.mileage.size")
     private int mileage;
     private String transmission;
     private String transmissionLocal;
@@ -144,5 +164,13 @@ public class BaseCarDto {
 
     public void setFuelTypeLocal(String fuelTypeLocal) {
         this.fuelTypeLocal = fuelTypeLocal;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
     }
 }

@@ -140,15 +140,15 @@
                         <dd class="dropy__content">
                             <ul id="filter_color">
                                 <li><a class="dropy__header"><spring:message code="search.color"/></a></li>
-                                <li><a>beige</a></li>
-                                <li><a>black</a></li>
-                                <li><a>green</a></li>
-                                <li><a>grey</a></li>
-                                <li><a>orange</a></li>
-                                <li><a>pink</a></li>
-                                <li><a>purple</a></li>
-                                <li><a>red</a></li>
-                                <li><a>silver</a></li>
+                                <li><a title="beige"><spring:message code="color.beige"/></a></li>
+                                <li><a title="black"><spring:message code="color.black"/></a></li>
+                                <li><a title="green"><spring:message code="color.green"/></a></li>
+                                <li><a title="grey"><spring:message code="color.grey"/></a></li>
+                                <li><a title="orange"><spring:message code="color.orange"/></a></li>
+                                <li><a title="pink"><spring:message code="color.pink"/></a></li>
+                                <li><a title="purple"><spring:message code="color.purple"/></a></li>
+                                <li><a title="red"><spring:message code="color.red"/></a></li>
+                                <li><a title="silver"><spring:message code="color.silver"/></a></li>
                             </ul>
                         </dd>
                         <input type="hidden" name="first">
@@ -163,52 +163,52 @@
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label>
-                        Price<span class="req">*</span>
+                        <spring:message code="main.price"/><span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" />
+                    <input type="text" id="price" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label>
-                        Mileage<span class="req">*</span>
+                        <spring:message code="cars.mileage"/><span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" />
+                    <input type="text" id="mileage" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label>
-                        Year<span class="req">*</span>
+                        <spring:message code="cars.year"/><span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" />
+                    <input type="number" id="year" maxlength="4" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label>
-                        Engine<span class="req">*</span>
+                        <spring:message code="cars.engine"/><span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" />
+                    <input type="number" id="engine" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label>
-                        Description<span class="req">*</span>
+                        <spring:message code="cars.description"/><span class="req">*</span>
                     </label>
-                    <input type="text" required autocomplete="off" />
+                    <input type="text" id="description" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-3 col-xs-1">
                 <button class="button" id="btn-img">
-                    Select Image
+                    <spring:message code="cars.select-image"/>
                 </button>
                 <input id="input-img" type="file" accept="image/*" style="visibility: hidden">
             </div>
 
             <div class="col-md-1 col-xs-1" id="upload-button">
-                <button class="button upload">Add</button>
+                <button id="add" class="button upload"><spring:message code="cars.add"/></button>
             </div>
         </div>
     </div>
