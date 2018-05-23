@@ -11,19 +11,19 @@ import static javax.validation.constraints.Pattern.Flag.UNICODE_CASE;
 
 public class SignUpUserDto {
     @NotNull(message = "form.username.empty")
-    @Size(min = 3, max = 23, message = "form.username.size")
+    @Size(min = 4, max = 20, message = "form.username.size")
     private String username;
 
     @NotNull
-    @Size(min = 8, max = 255, message = "form.password.size")
+    @Size(min = 4, max = 20, message = "form.password.size")
     private String password;
 
     @NotNull
-    @Size(min = 3, max = 23, message = "form.firstname.size")
+    @Size(min = 4, max = 30, message = "form.firstname.size")
     private String firstname;
 
     @NotNull
-    @Size(min = 3, max = 23, message = "form.lastname.size")
+    @Size(min = 4, max = 30, message = "form.lastname.size")
     private String lastname;
 
     @NotNull
