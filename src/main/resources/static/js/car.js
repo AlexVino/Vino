@@ -2,6 +2,23 @@ $(document).ready(function () {
     $('#btn-order').click(function () {
         postOrder();
     });
+    $('#btn-edit').click(function () {
+        window.location.href = "/cars/" + window.location.href.match(/([^\/]*)\/*$/)[1] + "/edit";
+    });
+    $('#btn-delete').click(function () {
+        $.ajax({
+            type: "DELETE",
+            url: "/rest/cars/" + window.location.href.match(/([^\/]*)\/*$/)[1],
+            success: function (data) {
+                if (data !== "false") {
+                    window.location.href = "/";
+                }
+            },
+            error: function (e) {
+                throwMessage(e.responseJSON.message);
+            }
+        });
+    });
 });
 
 function postOrder() {

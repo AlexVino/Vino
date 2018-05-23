@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +40,33 @@ public class CarControllerImpl {
         return ResponseEntity.ok(carService.getAll(predicate, pageable, locale));
     }
 
+    /**
+     * Processes GET request to '/rest/cars/{id}' and
+     * returns the car.
+     *
+     * @return car
+     * */
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCar(@PathVariable("id") int carId, Locale locale) {
+        return ResponseEntity.ok(carService.get(carId, locale));
+    }
+
     @PostMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<?> addCar(@Valid @RequestBody BaseCarDto dto, Locale locale) {
+    public ResponseEntity<?> addCar(@RequestBody @Valid BaseCarDto dto, Locale locale) {
         return ResponseEntity.ok(carService.create(dto, locale));
     }
 
+    @PostMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> updateCar(@RequestBody @Valid BaseCarDto dto, Locale locale) {
+        return ResponseEntity.ok(carService.create(dto, locale));
+    }
 
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> deleteCar(@PathVariable("id") int id) {
+        carService.remove(id);
+        return ResponseEntity.ok(true);
+    }
 }

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.b-page').hide();
     getMakesFilterItems();
     $('.b-search').click(function () { search(0); });
     $('.b-page').click(function () { search(-1); });
@@ -90,6 +91,11 @@ function search(page) {
         success: function (data) {
             if (data !== "false") {
                 showCars(data, page);
+                if (data.length < size) {
+                    $('.b-page').hide();
+                } else {
+                    $('.b-page').show();
+                }
             }
         },
         error: function (e) {
@@ -111,7 +117,7 @@ function showCars(cars, page) {
                 '</a>' +
                 '<a class="image" href="/cars/' + cars[i].carId + '">' +
                     '<div class="ui-onvisible">' +
-                    '<img class="image__photo" src="/img/car-default.jpg" alt="no image">' +
+                    '<img class="image__photo" src="' + cars[i].image + '" alt="no image">' +
                     '</div>' +
                 '</a>' +
                 '<div class="detail">' +

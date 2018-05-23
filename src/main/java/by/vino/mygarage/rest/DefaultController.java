@@ -68,4 +68,18 @@ public class DefaultController {
     public String createCar() {
             return "/car.create";
     }
+
+    @GetMapping("/cars/{id}/edit")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView editCar(@PathVariable("id") int id, Locale locale) {
+        BaseCarDto car = carService.get(id, locale);
+        ModelAndView modelAndView;
+        if (car != null) {
+            modelAndView = new ModelAndView("/car.edit");
+            modelAndView.addObject("car", car);
+        } else {
+            modelAndView = new ModelAndView("/error/404");
+        }
+        return modelAndView;
+    }
 }

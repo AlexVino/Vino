@@ -59,7 +59,7 @@ CREATE TABLE `cars` (
   `modelId` int(11) NOT NULL,
   `transmissionId` int(11) NOT NULL,
   `engine` FLOAT(11) NOT NULL,
-  `image` MEDIUMBLOB,
+  `image` LONGTEXT,
   `description` TEXT,
   PRIMARY KEY (`carId`),
   KEY `fk_cars_bodystyles_idx` (`bodystyleId`),
@@ -82,18 +82,17 @@ CREATE TABLE `cars` (
 LOCK TABLES `cars` WRITE;
 /*!40000 ALTER TABLE `cars` DISABLE KEYS */;
 INSERT INTO `cars` (`mileage`, `price`, `year`, `bodystyleId`, `colorId`, `fuelTypeId`,
-                    `modelId`, `transmissionId`, `engine`, `description`) VALUES
-  (500,2000,2001,1,2,3,4,1,1,'Insurance Group 31, Adjustable steering column, Alarm, Anti lock braking system, Central locking, Climate control, Drivers airbag, Electric mirrors, Front Electric windows, Front fog lights, Passenger airbag, Power assisted steering, Radio/CD, Rear Electric windows, Remote Central Locking, Side airbag,This car is in lovely condition and has been really looked after ,viewing essential . GOOGLE OUR PHONE NUMBER !! '),
-  (200,1000,1998,1,3,1,2,2,2.2,'car maybe'),
-  (300,1500,2003,1,2,3,4,1,3.2,'car car car.'),
-  (1000,1500,2003,1,2,3,28,1,2.2,'hi'),
-  (300,5000,2004,2,3,2,26,1,1.8,'very expensive!!'),
-  (300,1500,2005,3,8,1,15,3,1.5,'^_^'),
-  (300,1500,2006,4,10,3,10,1,2.2,'rdftugyiunkml'),
-  (300,1500,2006,5,2,4,3,3,1.8,'tvybiuno'),
-  (300,1500,2003,6,6,5,16,1,5,'-------->      $_$'),
-  (300,1500,2002,7,8,3,20,2,2.2,'car caaaaaar'),
-  (300,1500,1998,8,7,1,7,1,2,'Insurance Group 31, Adjustable steering column, Alarm, Anti lock braking system, Central locking, Climate control, Drivers airbag, Electric mirrors, Front Electric windows, Front fog lights, Passenger airbag, Power assisted steering, Radio/CD, Rear Electric windows, Remote Central Locking, Side airbag,This car is in lovely condition and has been really looked after ,viewing essential . GOOGLE OUR PHONE NUMBER !! ');
+                    `modelId`, `transmissionId`, `engine`, `description`, `image`) VALUES
+  (500,2000,2001,1,2,3,4,1,1,'Insurance Group 31, Adjustable steering column, Alarm, Anti lock braking system, Central locking, Climate control, Drivers airbag, Electric mirrors, Front Electric windows, Front fog lights, Passenger airbag, Power assisted steering, Radio/CD, Rear Electric windows, Remote Central Locking, Side airbag,This car is in lovely condition and has been really looked after ,viewing essential . GOOGLE OUR PHONE NUMBER !! ', '/img/car-default.jpg'),
+  (200,1000,1998,1,3,1,2,2,2.2,'car maybe', '/img/car-default.jpg'),
+  (300,1500,2003,1,2,3,4,1,3.2,'car car car.','/img/car-default.jpg'),
+  (1000,1500,2003,1,2,3,28,1,2.2,'hi', '/img/car-default.jpg'),
+  (300,5000,2004,2,3,2,26,1,1.8,'very expensive!!', '/img/car-default.jpg'),
+  (300,1500,2005,3,8,1,15,3,1.5,'^_^', '/img/car-default.jpg'),
+  (300,1500,2006,4,10,3,10,1,2.2,'rdftugyiunkml', '/img/car-default.jpg'),
+  (300,1500,2006,5,2,4,3,3,1.8,'tvybiuno', '/img/car-default.jpg'),
+  (300,1500,2003,6,6,5,16,1,5,'-------->      $_$', '/img/car-default.jpg'),
+  (300,1500,2002,7,8,3,20,2,2.2,'car caaaaaar', '/img/car-default.jpg');
 /*!40000 ALTER TABLE `cars` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,10 +213,10 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderId` int(11) NOT NULL AUTO_INCREMENT,
   `carId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`orderId`),
   KEY `fk_orders_cars_idx` (`carId`),
   KEY `fk_orders_users_idx` (`userId`),
   CONSTRAINT `fk_orders_cars` FOREIGN KEY (`carId`) REFERENCES `cars` (`carId`),
@@ -311,7 +310,7 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`userId`, `firstname`, `lastname`, `password`, `phone`, `username`, `roleId`) VALUES
   (1,'vgbhnj','vgbuhnjk','$2a$10$LGvWpOoFja/2gLBbPp/DQO.XTYlKfkF1RggMB3gj.kyGjU6r9y7by','3754851648','user',2),
-  (3,'admin','admin','$2a$10$fGyOLUoXvi7sw/NP.ebZ1Obn5PkogN1PTvFru9k3qV62qRmIhaaVW','123456789','admin',2);
+  (3,'admin','admin','$2a$10$fGyOLUoXvi7sw/NP.ebZ1Obn5PkogN1PTvFru9k3qV62qRmIhaaVW','123456789','admin',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -68,7 +68,7 @@
         <div class="row">
 
             <div class="col-5">
-                <img src="/img/car-default.jpg" class="main-image">
+                <img src="${car.image}" class="main-image">
             </div>
 
             <div class="col">
@@ -137,6 +137,7 @@
 
 <input type="hidden" id="cancel" value="<spring:message code="main.cancel"/>">
 <input type="hidden" id="order" value="<spring:message code="orders.order"/>">
+<input type="hidden" id="carId" value="${car.carId}">
 
 <script src="/js/scripts.min.js"></script>
 <script src="/js/car.js"></script>

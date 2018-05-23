@@ -2,6 +2,7 @@ package by.vino.mygarage.dao.api;
 
 import by.vino.mygarage.dao.jpa.Car;
 import by.vino.mygarage.dao.jpa.QCar;
+import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import com.querydsl.core.types.dsl.StringPath;

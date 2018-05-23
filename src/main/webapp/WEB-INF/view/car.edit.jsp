@@ -41,7 +41,7 @@
 
         <div class="row justify-content-between">
             <div class="col-md-8 col-xs-12">
-                <img id="myimage" src="/img/car-default.jpg" width="100%">
+                <img id="myimage" src="${car.image}" width="100%">
             </div>
 
             <div class="col-md-4 col-xs-12">
@@ -54,7 +54,7 @@
             <div class="col-md-4 col-xs-1">
                 <div class="subdiv">
                     <dl class="dropy">
-                        <dt class="dropy__title"><span><spring:message code="search.make.any"/></span></dt>
+                        <dt class="dropy__title"><span class="span_makes"><spring:message code="search.make.any"/></span></dt>
                         <dd class="dropy__content">
                             <ul id="filter_makes">
                                 <li><a class="dropy__header"><spring:message code="search.make.any"/></a></li>
@@ -68,7 +68,7 @@
             <div class="col-md-4 col-xs-1">
                 <div class="subdiv">
                     <dl class="dropy">
-                        <dt class="dropy__title"><span><spring:message code="search.model.any"/></span></dt>
+                        <dt class="dropy__title"><span class="span_models"><spring:message code="search.model.any"/></span></dt>
                         <dd class="dropy__content">
                             <ul id="filter_models">
                                 <li><a class="dropy__header"><spring:message code="search.model.any"/></a></li>
@@ -84,7 +84,7 @@
             <div class="col-md-4 col-xs-1">
                 <div class="subdiv">
                     <dl class="dropy">
-                        <dt class="dropy__title"><span><spring:message code="search.bodystyle"/></span></dt>
+                        <dt class="dropy__title"><span class="span_bodystyle"><spring:message code="search.bodystyle"/></span></dt>
                         <dd class="dropy__content">
                             <ul id="filter_bodystyle">
                                 <li><a class="dropy__header"><spring:message code="search.bodystyle"/></a></li>
@@ -109,13 +109,13 @@
             <div class="col-md-4 col-xs-1">
                 <div class="subdiv">
                     <dl class="dropy">
-                        <dt class="dropy__title"><span><spring:message code="search.transmission.any"/></span></dt>
+                        <dt class="dropy__title"><span class="span_transmission"><spring:message code="search.transmission.any"/></span></dt>
                         <dd class="dropy__content">
                             <ul id="filter_transmission">
                                 <li><a class="dropy__header"><spring:message code="search.transmission.any"/></a></li>
-                                <li><a title="Automatic"><spring:message code="search.transmission.automatic"/></a></li>
-                                <li><a title="Manual"><spring:message code="search.transmission.manual"/></a></li>
-                                <li><a title="Semi Automatic"><spring:message code="search.transmission.semi-automatic"/></a></li>
+                                <li><a title="automatic"><spring:message code="search.transmission.automatic"/></a></li>
+                                <li><a title="manual"><spring:message code="search.transmission.manual"/></a></li>
+                                <li><a title="semi-automatic"><spring:message code="search.transmission.semi-automatic"/></a></li>
                             </ul>
                         </dd>
                         <input type="hidden" name="first">
@@ -126,7 +126,7 @@
             <div class="col-md-4 col-xs-1">
                 <div class="subdiv">
                     <dl class="dropy">
-                        <dt class="dropy__title"><span><spring:message code="search.fuel_type.any"/></span></dt>
+                        <dt class="dropy__title"><span class="span_fuel"><spring:message code="search.fuel_type.any"/></span></dt>
                         <dd class="dropy__content">
                             <ul id="filter_fueltype">
                                 <li><a class="dropy__header"><spring:message code="search.fuel_type.any"/></a></li>
@@ -146,12 +146,13 @@
             <div class="col-md-4 col-xs-1">
                 <div class="subdiv">
                     <dl class="dropy">
-                        <dt class="dropy__title"><span><spring:message code="search.color"/></span></dt>
+                        <dt class="dropy__title"><span class="span_color"><spring:message code="search.color"/></span></dt>
                         <dd class="dropy__content">
                             <ul id="filter_color">
                                 <li><a class="dropy__header"><spring:message code="search.color"/></a></li>
                                 <li><a title="beige"><spring:message code="color.beige"/></a></li>
                                 <li><a title="black"><spring:message code="color.black"/></a></li>
+                                <li><a title="blue"><spring:message code="color.blue"/></a></li>
                                 <li><a title="green"><spring:message code="color.green"/></a></li>
                                 <li><a title="grey"><spring:message code="color.grey"/></a></li>
                                 <li><a title="orange"><spring:message code="color.orange"/></a></li>
@@ -241,11 +242,12 @@
 <input type="hidden" id="cancel" value="<spring:message code="main.cancel"/>">
 <input type="hidden" id="order" value="<spring:message code="orders.order"/>">
 <input type="hidden" id="username" value="">
+<input type="hidden" id="carid" value="${car.carId}">
 
 <script src="/js/scripts.min.car.create.js"></script>
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/common.js"></script>
-<script src="/js/car.create.js"></script>
+<script src="/js/car.edit.js"></script>
 <script src="/js/error.js"></script>
 
 </body>

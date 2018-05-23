@@ -26,8 +26,8 @@ public class BaseCarDto {
     @Max(value = 2100, message = "cars.year.max")
     private int year;
     @NotNull(message = "cars.mileage.null")
-    @Min(value = 1800, message = "cars.mileage.size")
-    @Max(value = 2100, message = "cars.mileage.size")
+    @Min(value = 0, message = "cars.mileage.size")
+    @Max(value = 1000000000, message = "cars.mileage.size")
     private int mileage;
     private String transmission;
     private String transmissionLocal;
@@ -35,8 +35,11 @@ public class BaseCarDto {
     private String fuelTypeLocal;
     private String color;
     private String description;
+    @NotNull(message = "cars.engine.null")
+    @Min(value = 0, message = "cars.engine.size")
+    @Max(value = 1000, message = "cars.engine.size")
     private double engine;
-    private byte[] image;
+    private String image;
 
     public int getCarId() {
         return carId;
@@ -126,11 +129,11 @@ public class BaseCarDto {
         this.description = description;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

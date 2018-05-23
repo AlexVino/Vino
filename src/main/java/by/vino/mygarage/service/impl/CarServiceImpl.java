@@ -5,6 +5,7 @@ import by.vino.mygarage.dao.api.CarRepository;
 import by.vino.mygarage.dao.api.ColorRepository;
 import by.vino.mygarage.dao.api.FuelTypeRepository;
 import by.vino.mygarage.dao.api.ModelRepository;
+import by.vino.mygarage.dao.api.OrderRepository;
 import by.vino.mygarage.dao.api.TransmissionRepository;
 import by.vino.mygarage.dao.jpa.Bodystyle;
 import by.vino.mygarage.dao.jpa.Car;
@@ -21,7 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +45,8 @@ public class CarServiceImpl implements CarService {
     private ColorRepository colorRepository;
     @Autowired
     private MessageSource messageSource;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public BaseCarDto create(BaseCarDto dto, Locale locale) {
@@ -55,6 +60,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void remove(int carId) {
+        if (orderRepository.findByCar_CarId(carId) != null){
+            throw new RestException(ErrorCode.CAR_ALREADY_ORDERED);
+        }
         carRepository.deleteById(carId);
     }
 
@@ -85,6 +93,7 @@ public class CarServiceImpl implements CarService {
         dto.setFullModel(String.format("%s %s",
                 car.getModel().getMake().getMakeName(),
                 car.getModel().getModelName()));
+        dto.setMake(car.getModel().getMake().getMakeName());
         dto.setModel(car.getModel().getModelName());
         dto.setPrice(car.getPrice());
         dto.setBodystyle(car.getBodystyle().getBodystyleName());

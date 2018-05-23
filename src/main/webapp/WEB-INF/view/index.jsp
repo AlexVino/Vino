@@ -57,8 +57,8 @@
                         <!-- LANGUAGE BUTTON -->
                         <div class="col-auto switch-button float-right">
                             <span class="switch-active"></span>
-                            <a href="?lang=ru"><button class="switch-button-case left active-case"><spring:message code="main.ru"/></button></a>
-                            <a href="?lang=en"><button class="switch-button-case right"><spring:message code="main.en"/></button></a>
+                            <a href="?lang=<spring:message code="main.ru"/>"><button class="switch-button-case left active-case"><spring:message code="main.ru"/></button></a>
+                            <a href="?lang=<spring:message code="main.en"/>"><button class="switch-button-case right"><spring:message code="main.en"/></button></a>
                         </div>
                     </div>
                 </div>
@@ -356,9 +356,9 @@
                                         <ul id="filter_fueltype">
                                             <li><a class="dropy__header"><spring:message code="search.fuel_type.any"/></a></li>
                                             <li><a title="petrol"><spring:message code="search.fuel_type.petrol"/></a></li>
-                                            <li><a title="petrol/electric hybrid"><spring:message code="search.fuel_type.petrol-electric-hybrid"/></a></li>
+                                            <li><a title="petrol-electric-hybrid"><spring:message code="search.fuel_type.petrol-electric-hybrid"/></a></li>
                                             <li><a title="diesel"><spring:message code="search.fuel_type.diesel"/></a></li>
-                                            <li><a title="diesel/electric hybrid"><spring:message code="search.fuel_type.diesel-electric-hybrid"/></a></li>
+                                            <li><a title="diesel-electric-hybrid"><spring:message code="search.fuel_type.diesel-electric-hybrid"/></a></li>
                                             <li><a title="electric"><spring:message code="search.fuel_type.electric"/></a></li>
                                         </ul>
                                     </dd>

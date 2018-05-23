@@ -4,6 +4,7 @@ $(document).ready(function () {
     });
     $('#add').click(function () {
         var data = {};
+        addIfNotEmpty(data, 'carId', $('#carid').val());
         addIfNotEmpty(data, 'model', $('#filter_models').find('li a.selected').text());
         addIfNotEmpty(data, 'make', $('#filter_makes').find('li a.selected').text());
         addIfNotEmptyForTitle(data, 'bodystyle', $('#filter_bodystyle').find('li a.selected'));
@@ -22,7 +23,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/rest/cars",
+            url: "/rest/cars/" + $('#carid'),
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (respond) {
@@ -32,15 +33,51 @@ $(document).ready(function () {
                 throwMessage(e.responseJSON.message);
             }
         });
+
     });
 });
 
 $(document).ready(function () {
     getMakesFilterItems();
-    $('#filter_makes li a').click(function () {
-        getModelsFilterItems();
-    });
+    loadCar();
 });
+
+function loadCar() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/rest/cars/" + $('#carid').val(),
+        success: function (respond) {
+            showCar(respond);
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
+        }
+    });
+}
+
+function showCar(car) {
+    $($('#filter_makes').find('li a:contains("' + car.make + '")')[0]).addClass('selected');
+    $($('.span_makes').text($('#filter_makes').find('li a.selected').text()));
+    getModels();
+    $($('#filter_models').find('li a:contains("' + car.model + '")')[0]).addClass('selected');
+    $($('.span_models').text($('#filter_models').find('li a.selected').text()));
+    $($('#filter_bodystyle').find('li a[title="' + car.bodystyle + '"]')[0]).addClass('selected');
+    $($('.span_bodystyle').text($($('#filter_bodystyle').find('li a.selected')[0]).text()));
+    $($('#filter_transmission').find('li a[title="' + car.transmission + '"]')[0]).addClass('selected');
+    $($('.span_transmission').text($($('#filter_transmission').find('li a.selected')[0]).text()));
+    $($('#filter_fueltype').find('li a[title="' + car.fuelType + '"]')[0]).addClass('selected');
+    $($('.span_fuel').text($($('#filter_fueltype').find('li a.selected')[0]).text()));
+    $($('#filter_color').find('li a[title="' + car.color + '"]')[0]).addClass('selected');
+    $($('.span_color').text($($('#filter_color').find('li a.selected')[0]).text()));
+
+    $('#price').val(car.price);
+    $('#mileage').val(car.mileage);
+    $('#engine').val(car.engine);
+    $('#description').val(car.description);
+    $('#year').val(car.year);
+
+}
 
 function onFileSelected(event) {
     var selectedFile = event.target.files[0];
@@ -87,6 +124,7 @@ function getModels() {
         url: "/rest/models",
         data: data,
         contentType: "application/json",
+        async: false,
         success: function (data) {
             if (data !== "false") {
                 $('#filter_models').find('li:not(:first)').remove();

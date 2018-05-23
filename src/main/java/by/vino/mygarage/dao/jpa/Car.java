@@ -43,9 +43,8 @@ public class Car {
     private Color color;
     @Column
     private String description;
-    @Lob
     @Column
-    private byte[] image;
+    private String image;
     @Column
     private double engine;
 
@@ -129,11 +128,11 @@ public class Car {
         this.description = description;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -161,14 +160,13 @@ public class Car {
                 Objects.equals(fuelType, car.fuelType) &&
                 Objects.equals(color, car.color) &&
                 Objects.equals(description, car.description) &&
-                Arrays.equals(image, car.image);
+                Objects.equals(image, car.image);
     }
 
     @Override
     public int hashCode() {
 
-        int result = Objects.hash(carId, model, price, bodystyle, year, mileage, transmission, fuelType, color, description, engine);
-        result = 31 * result + Arrays.hashCode(image);
-        return result;
+        return Objects.hash(carId, model, price, bodystyle, year, mileage, transmission, fuelType,
+                color, description, engine, image);
     }
 }
