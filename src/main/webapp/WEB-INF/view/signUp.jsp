@@ -38,25 +38,25 @@
       
       <ul class="tab-group">
         <li class="tab active"><a href="#signup"><spring:message code="form.sign_up"/></a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab"><a href="#login"><spring:message code="form.log_in"/></a></li>
       </ul>
       
       <div class="tab-content">
         <div id="signup">   
-          <h1>SIGN-UP TO A MYGARAGE ACCOUNT</h1>
+          <h1><spring:message code="form.sugn_up_h1"/></h1>
   
           <form>
             <div class="top-row">
               <div class="field-wrap">
                 <label for="firstname">
-                  First Name<span class="req">*</span>
+                  <spring:message code="form.firstname"/><span class="req">*</span>
                 </label>
                 <input type="text" id="firstname" required autocomplete="off" />
               </div>
           
               <div class="field-wrap">
                 <label for="lastname">
-                  Last Name<span class="req">*</span>
+                  <spring:message code="form.lastname"/><span class="req">*</span>
                 </label>
                 <input type="text" id="lastname" required autocomplete="off"/>
               </div>
@@ -64,14 +64,14 @@
 
             <div class="field-wrap">
               <label for="telephone">
-                Phone number<span class="req">*</span>
+                <spring:message code="form.phone"/><span class="req">*</span>
               </label>
               <input type="tel" id="telephone" required autocomplete="off"/>
             </div>
             
             <div class="field-wrap">
               <label for="new-username">
-                Username<span class="req">*</span>
+                <spring:message code="form.username"/><span class="req">*</span>
               </label>
               <input type="text" id="new-username" required autocomplete="off"/>
             </div>
@@ -79,45 +79,45 @@
             <div class="top-row">
               <div class="field-wrap">
                 <label for="new-password">
-                  Password<span class="req">*</span>
+                  <spring:message code="form.password"/><span class="req">*</span>
                 </label>
                 <input type="password" id="new-password" required autocomplete="off" />
               </div>
           
               <div class="field-wrap">
                 <label for="confirm-password">
-                  Confirm password<span class="req">*</span>
+                  <spring:message code="form.confirm_password"/><span class="req">*</span>
                 </label>
                 <input type="password" id="confirm-password" required autocomplete="off"/>
               </div>
             </div>
 
-            <button type="button" id="btnSignUp" class="r-button button-block">Get Started</button>
+            <button type="button" id="btnSignUp" class="r-button button-block"><spring:message code="form.get_started"/></button>
           
           </form>
 
         </div>
         
         <div id="login">   
-          <h1>RETURNING USER</h1>
+          <h1><spring:message code="form.returning_user"/></h1>
 
           <form action="/j_spring_security_check" method="post">
 
           <div class="field-wrap">
             <label for="username">
-              Username<span class="req">*</span>
+              <spring:message code="form.username"/><span class="req">*</span>
             </label>
             <input type="text" id ="username" name="username" required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label for="password">
-              Password<span class="req">*</span>
+              <spring:message code="form.password"/><span class="req">*</span>
             </label>
             <input type="password" id="password" name="password" required autocomplete="off"/>
           </div>
           
-          <button type="submit" class="r-button button-block">Log In</button>
+          <button type="submit" class="r-button button-block"><spring:message code="form.log_in"/></button>
           </form>
         </div>
       </div>
@@ -128,6 +128,7 @@
   </div>
 
   <input type="hidden" id="error-login-or-password" value="<spring:message code="main.error-login-or-password"/>">
+  <input type="hidden" id="error-password" value="<spring:message code="form.password_confirm"/>">
 
   <script src="/js/signUp_scripts_min.js"></script>
   <script src="/js/jquery-3.3.1.min.js"></script>

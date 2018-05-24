@@ -30,6 +30,11 @@ function registerUser() {
     user["lastname"] = $("#lastname").val();
     user["phone"] = $("#telephone").val();
 
+    if ($("#new-password").val() != $("#confirm-password").val()) {
+        throwMessage($('#error-password').val());
+        return;
+    }
+
     $("#btnSignUp").prop("disabled", true);
 
     $.ajax({

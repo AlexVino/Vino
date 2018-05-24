@@ -1,6 +1,8 @@
 package by.vino.mygarage.rest.impl;
 
 import by.vino.mygarage.dao.jpa.User;
+import by.vino.mygarage.exception.ErrorCode;
+import by.vino.mygarage.exception.RestException;
 import by.vino.mygarage.rest.dto.SignUpUserDto;
 import by.vino.mygarage.service.api.UserService;
 import by.vino.mygarage.util.SecurityHelper;
@@ -41,7 +43,11 @@ public class UserControllerImpl {
     public ResponseEntity<?> addUser(@RequestBody @Valid SignUpUserDto signUpUserDto) {
         User user = modelMapper.map(signUpUserDto, User.class);
         user.setPassword(encoder.encode(user.getPassword()));
-        userService.createUser(user);
+        if (userService.isUsernameFree(user.getUsername())) {
+            userService.createUser(user);
+        } else {
+            throw new RestException(ErrorCode.USERNAME_EXISTED);
+        }
         return ResponseEntity.ok(true);
     }
 

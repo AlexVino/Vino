@@ -12,6 +12,7 @@ import static javax.validation.constraints.Pattern.Flag.UNICODE_CASE;
 public class SignUpUserDto {
     @NotNull(message = "form.username.empty")
     @Size(min = 4, max = 20, message = "form.username.size")
+    @Pattern(regexp = "[a-zA-Z0-9-.]+", message = "form.username.size")
     private String username;
 
     @NotNull

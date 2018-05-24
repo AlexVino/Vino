@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-@SpringBootTest
-@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@RunWith(SpringRunner.class)
 public class PositiveTest {
     private WebDriver driver;
     private StringBuffer verificationErrors = new StringBuffer();
@@ -42,7 +42,7 @@ public class PositiveTest {
         driver.findElement(By.linkText("$1")).click();
         driver.findElement(By.xpath("//div[@id='my-content']/section/div[3]/div/div[2]/div/div/dl/dt/span")).click();
         driver.findElement(By.linkText("up to 25 year old")).click();
-        driver.findElement(By.xpath("//a[@class='b-search']")).click();
+        driver.findElement(By.id("s")).click();
         try {
             assertEquals("Audi Q7", driver.findElement(By.linkText("Audi Q7")).getText());
         } catch (Error e) {

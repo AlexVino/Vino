@@ -1,7 +1,5 @@
 package by.vino.mygarage.rest.dto;
 
-
-// TODO повторяющиеся пользователи, i18n регистрации, valid confirm password
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;

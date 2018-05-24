@@ -73,7 +73,8 @@ public class MyExceptionHandler {
         BindingResult result = ex.getBindingResult();
         String errorMessage = messageSource.getMessage(
                 Objects.requireNonNull(result.getAllErrors().get(0).getDefaultMessage()), null, locale);
-        logger.error(errorMessage);
+        String error = messageSource.getMessage(result.getAllErrors().get(0).getDefaultMessage(), null, Locale.US);
+        logger.error(error);
         return new ResponseEntity<>(new RestMessage(VALID_EXCEPTION_CODE, errorMessage), HttpStatus.BAD_REQUEST);
     }
 
