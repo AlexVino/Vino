@@ -175,7 +175,7 @@
                     <label>
                         <spring:message code="main.price"/><span class="req">*</span>
                     </label>
-                    <input type="text" id="price" step="1" min="0" max="1000000000" maxlength="10" required autocomplete="off" />
+                    <input type="text" id="price" maxlength="10" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
@@ -183,7 +183,7 @@
                     <label>
                         <spring:message code="cars.mileage"/><span class="req">*</span>
                     </label>
-                    <input type="text" id="mileage" step="1" min="0" max="1000000000" maxlength="10" required autocomplete="off" />
+                    <input type="text" id="mileage" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
@@ -191,7 +191,7 @@
                     <label>
                         <spring:message code="cars.year"/><span class="req">*</span>
                     </label>
-                    <input type="number" step="1" id="year" min="1800" max="2100" maxlength="4" required autocomplete="off" />
+                    <input type="text" maxlength="4" id="year" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
@@ -199,7 +199,7 @@
                     <label>
                         <spring:message code="cars.engine"/><span class="req">*</span>
                     </label>
-                    <input type="number"  min="0" max="1000" maxlength="10" id="engine" required autocomplete="off" />
+                    <input type="text"  maxlength="10" id="engine" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">

@@ -26,7 +26,7 @@ function postOrder() {
         if ($('#btn-order').hasClass('cancel')) {
             $.ajax({
                 type: "DELETE",
-                url: "/rest/orders/" + window.location.href.match(/([^\/]*)\/*$/)[1],
+                url: "/rest/orders/cars/" + window.location.href.match(/([^\/]*)\/*$/)[1],
                 success: function (data) {
                     if (data !== "false") {
                         $('#btn-order').text($('#order').val()).removeClass("cancel");

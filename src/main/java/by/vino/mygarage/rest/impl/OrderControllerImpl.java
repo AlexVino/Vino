@@ -58,4 +58,11 @@ public class OrderControllerImpl {
         }
         return ResponseEntity.ok(true);
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @DeleteMapping("/cars/{id}")
+    public ResponseEntity<?> deleteByCarId(@PathVariable("id") int id) {
+        orderService.removeByCarId(id);
+        return ResponseEntity.ok(true);
+    }
 }

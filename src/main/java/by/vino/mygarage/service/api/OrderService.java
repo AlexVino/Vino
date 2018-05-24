@@ -15,6 +15,7 @@ public interface OrderService {
     Order create(int carId, User user);
 
     void remove(int orderId);
+    void removeByCarId(int carId);
 
     void removeWithCar(int orderId);
 

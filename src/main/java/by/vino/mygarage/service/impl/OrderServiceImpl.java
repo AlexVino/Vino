@@ -45,6 +45,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void removeByCarId(int carId) {
+        Order order = orderRepository.findByCar_CarId(carId);
+        orderRepository.deleteById(order.getOrderId());
+    }
+
+    @Override
     public void removeWithCar(int orderId) {
         Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
