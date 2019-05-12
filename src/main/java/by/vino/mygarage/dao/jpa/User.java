@@ -27,6 +27,8 @@ public class User {
     private String lastname;
     @Column
     private String phone;
+    @Column
+    private String email;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "roleId")
     private Role role;
@@ -79,6 +81,10 @@ public class User {
         this.phone = phone;
     }
 
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
     public Role getRole() {
         return role;
     }
@@ -100,6 +106,7 @@ public class User {
         if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) return false;
         if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) return false;
         if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
         return role != null ? role.equals(user.role) : user.role == null;
     }
 
@@ -111,6 +118,7 @@ public class User {
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }

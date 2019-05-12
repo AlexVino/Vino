@@ -20,33 +20,24 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int carId;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "modelId")
-    private Model model;
+    @Column
+    private String VIN;
+    @Column
+    private int rrPrice;
     @Column
     private int price;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bodystyleId")
-    private Bodystyle bodystyle;
-    @Column
-    private int year;
-    @Column
-    private int mileage;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "transmissionId")
-    private Transmission transmission;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fuelTypeId")
-    private FuelType fuelType;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "colorId")
     private Color color;
     @Column
+    private int mileage;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "complectationId")
+    private Complectation complectation;
+    @Column
     private String description;
     @Column
     private String image;
-    @Column
-    private double engine;
 
     public int getCarId() {
         return carId;
@@ -54,14 +45,6 @@ public class Car {
 
     public void setCarId(int carId) {
         this.carId = carId;
-    }
-
-    public Model getModel() {
-        return model;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
     }
 
     public int getPrice() {
@@ -72,22 +55,6 @@ public class Car {
         this.price = price;
     }
 
-    public Bodystyle getBodystyle() {
-        return bodystyle;
-    }
-
-    public void setBodystyle(Bodystyle bodystyle) {
-        this.bodystyle = bodystyle;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     public int getMileage() {
         return mileage;
     }
@@ -96,28 +63,36 @@ public class Car {
         this.mileage = mileage;
     }
 
-    public Transmission getTransmission() {
-        return transmission;
-    }
-
-    public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
-    }
-
     public Color getColor() {
         return color;
     }
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public String getVIN() {
+        return VIN;
+    }
+
+    public void setVIN(String VIN) {
+        this.VIN = VIN;
+    }
+
+    public int getRrPrice() {
+        return rrPrice;
+    }
+
+    public void setRrPrice(int rrPrice) {
+        this.rrPrice = rrPrice;
+    }
+
+    public Complectation getComplectation() {
+        return complectation;
+    }
+
+    public void setComplectation(Complectation complectation) {
+        this.complectation = complectation;
     }
 
     public String getDescription() {
@@ -136,37 +111,24 @@ public class Car {
         this.image = image;
     }
 
-    public double getEngine() {
-        return engine;
-    }
-
-    public void setEngine(double engine) {
-        this.engine = engine;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Car)) return false;
         Car car = (Car) o;
         return carId == car.carId &&
+                rrPrice == car.rrPrice &&
                 price == car.price &&
-                year == car.year &&
                 mileage == car.mileage &&
-                Double.compare(car.engine, engine) == 0 &&
-                Objects.equals(model, car.model) &&
-                Objects.equals(bodystyle, car.bodystyle) &&
-                Objects.equals(transmission, car.transmission) &&
-                Objects.equals(fuelType, car.fuelType) &&
-                Objects.equals(color, car.color) &&
+                VIN.equals(car.VIN) &&
+                color.equals(car.color) &&
+                complectation.equals(car.complectation) &&
                 Objects.equals(description, car.description) &&
                 Objects.equals(image, car.image);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(carId, model, price, bodystyle, year, mileage, transmission, fuelType,
-                color, description, engine, image);
+        return Objects.hash(carId, VIN, rrPrice, price, color, mileage, complectation, description, image);
     }
 }

@@ -35,10 +35,10 @@ public class Transmission {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Transmission that = (Transmission) o;
+        Transmission transmission = (Transmission) o;
 
-        if (transmissionId != that.transmissionId) return false;
-        return transmissionName != null ? transmissionName.equals(that.transmissionName) : that.transmissionName == null;
+        if (transmissionId != transmission.transmissionId) return false;
+        return transmissionName != null ? transmissionName.equals(transmission.transmissionName) : transmission.transmissionName == null;
     }
 
     @Override
