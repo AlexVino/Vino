@@ -32,6 +32,11 @@ public class SignUpUserDto {
     @Pattern(regexp = "[\\d]+", flags = {UNICODE_CASE},message = "form.phone.pattern")
     private String phone;
 
+    @NotNull
+    @Size(min = 5, max = 255, message = "form.email.size")
+    @Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", flags = {UNICODE_CASE},message = "form.email.pattern")
+    private String email;
+
     private Role role = new Role(RoleEnum.ROLE_USER);
 
     public String getUsername() {
@@ -80,5 +85,13 @@ public class SignUpUserDto {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

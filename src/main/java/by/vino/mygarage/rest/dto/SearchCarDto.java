@@ -10,6 +10,7 @@ public class SearchCarDto {
     private String transmission;
     private String fuelType;
     private String color;
+    private String complectationName;
 
     public String getModel() {
         return model;
@@ -81,5 +82,13 @@ public class SearchCarDto {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getComplectationName() {
+        return complectationName;
+    }
+
+    public void setComplectationName(String complectationName) {
+        this.complectationName = complectationName;
     }
 }

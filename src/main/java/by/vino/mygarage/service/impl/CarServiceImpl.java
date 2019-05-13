@@ -7,12 +7,8 @@ import by.vino.mygarage.dao.api.FuelTypeRepository;
 import by.vino.mygarage.dao.api.ModelRepository;
 import by.vino.mygarage.dao.api.OrderRepository;
 import by.vino.mygarage.dao.api.TransmissionRepository;
-import by.vino.mygarage.dao.jpa.Bodystyle;
-import by.vino.mygarage.dao.jpa.Car;
-import by.vino.mygarage.dao.jpa.Color;
-import by.vino.mygarage.dao.jpa.FuelType;
-import by.vino.mygarage.dao.jpa.Model;
-import by.vino.mygarage.dao.jpa.Transmission;
+import by.vino.mygarage.dao.api.ComplectationRepository;
+import by.vino.mygarage.dao.jpa.*;
 import by.vino.mygarage.exception.ErrorCode;
 import by.vino.mygarage.exception.RestException;
 import by.vino.mygarage.rest.dto.BaseCarDto;
@@ -47,6 +43,8 @@ public class CarServiceImpl implements CarService {
     private MessageSource messageSource;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ComplectationRepository complectationRepository;
 
     @Override
     public BaseCarDto create(BaseCarDto dto, Locale locale) {
@@ -91,60 +89,60 @@ public class CarServiceImpl implements CarService {
         BaseCarDto dto = new BaseCarDto();
         dto.setCarId(car.getCarId());
         dto.setFullModel(String.format("%s %s",
-                car.getModel().getMake().getMakeName(),
-                car.getModel().getModelName()));
-        dto.setMake(car.getModel().getMake().getMakeName());
-        dto.setModel(car.getModel().getModelName());
+                car.getComplectation().getModel().getMake().getMakeName(),
+                car.getComplectation().getModel().getModelName()));
+        dto.setMake(car.getComplectation().getModel().getMake().getMakeName());
+        dto.setModel(car.getComplectation().getModel().getModelName());
         dto.setPrice(car.getPrice());
-        dto.setBodystyle(car.getBodystyle().getBodystyleName());
-        dto.setBodystyleLocal(messageSource.getMessage("search.bodystyle." + car.getBodystyle().getBodystyleName(), null, locale));
-        dto.setYear(car.getYear());
+        dto.setBodystyle(car.getComplectation().getBodystyle().getBodystyleName());
+        dto.setBodystyleLocal(messageSource.getMessage("search.bodystyle." + car.getComplectation().getBodystyle().getBodystyleName(), null, locale));
+        dto.setYear(car.getComplectation().getYear());
         dto.setMileage(car.getMileage());
-        dto.setTransmission(car.getTransmission().getTransmissionName());
-        dto.setTransmissionLocal(messageSource.getMessage("search.transmission." + car.getTransmission().getTransmissionName(), null, locale));
-        dto.setFuelType(car.getFuelType().getFuelTypeName());
-        dto.setFuelTypeLocal(messageSource.getMessage("search.fuel_type." + car.getFuelType().getFuelTypeName(), null, locale));
+        dto.setTransmission(car.getComplectation().getTransmission().getTransmissionName());
+        dto.setTransmissionLocal(messageSource.getMessage("search.transmission." + car.getComplectation().getTransmission().getTransmissionName(), null, locale));
+        dto.setFuelType(car.getComplectation().getFuelType().getFuelTypeName());
+        dto.setFuelTypeLocal(messageSource.getMessage("search.fuel_type." + car.getComplectation().getFuelType().getFuelTypeName(), null, locale));
         dto.setColor(car.getColor().getColorName());
         dto.setImage(car.getImage());
         dto.setDescription(car.getDescription());
-        dto.setEngine(car.getEngine());
+        dto.setEnginevolume(car.getComplectation().getEnginevolume());
+        dto.setVIN(car.getVIN());
+        dto.setRrPrice(car.getRrPrice());
+        dto.setComplectationName(car.getComplectation().getComplectationName());
+        dto.setDrivetype(car.getComplectation().getDrivetype().getDrivetypeName());
+        dto.setDrivetypeLocal(messageSource.getMessage("search.drivetype." + car.getComplectation().getDrivetype().getDrivetypeName(), null, locale));
+        dto.setHorsepower(car.getComplectation().getHorsepower());
+        dto.setAcceleration(car.getComplectation().getAcceleration());
+        dto.setCommonconsumption(car.getComplectation().getCommonconsumption());
+        dto.setCityconsumption(car.getComplectation().getCityconsumption());
+        dto.setRouteconsumption(car.getComplectation().getRouteconsumption());
+        dto.setLength(car.getComplectation().getLength());
+        dto.setWidth(car.getComplectation().getWidth());
+        dto.setMaxspeed(car.getComplectation().getMaxspeed());
+        dto.setComplectationId(car.getComplectation().getComplectationId());
         return dto;
     }
 
      private Car toEntity(BaseCarDto dto) {
-         Model model = modelRepository.findByModelNameIgnoreCaseAndMake_MakeNameIgnoreCase(dto.getModel(), dto.getMake());
-         if (model == null) {
-             throw new RestException(ErrorCode.MODEL_DOES_NOT_EXIST);
-         }
-         Bodystyle bodystyle = bodyStyleRepository.findByBodystyleNameIgnoreCase(dto.getBodystyle());
-         if (bodystyle == null) {
-             throw new RestException(ErrorCode.BODYSTYLE_DOES_NOT_EXIST);
-         }
-         Transmission transmission = transmissionRepository.findByTransmissionNameIgnoreCase(dto.getTransmission());
-         if (transmission == null) {
-             throw new RestException(ErrorCode.TRANSMISSION_DOES_NOT_EXIST);
-         }
-         FuelType fuelType = fuelTypeRepository.findByFuelTypeNameIgnoreCase(dto.getFuelType());
-         if (fuelType == null) {
-             throw new RestException(ErrorCode.FUELTYPE_DOES_NOT_EXIST);
-         }
+
          Color color = colorRepository.findByColorNameIgnoreCase(dto.getColor());
          if (color == null) {
              throw new RestException(ErrorCode.COLOR_DOES_NOT_EXIST);
          }
+         Complectation complectation = complectationRepository.findById(dto.getComplectationId()).orElse(null);
+         if (complectation == null) {
+             throw new RestException(ErrorCode.COMPLECTATION_DOES_NOT_EXIST);
+         }
          Car car = new Car();
          car.setCarId(dto.getCarId());
-         car.setModel(model);
+         car.setVIN(dto.getVIN());
+         car.setRrPrice(dto.getRrPrice());
          car.setPrice(dto.getPrice());
-         car.setBodystyle(bodystyle);
-         car.setYear(dto.getYear());
          car.setMileage(dto.getMileage());
-         car.setTransmission(transmission);
-         car.setFuelType(fuelType);
          car.setColor(color);
+         car.setComplectation(complectation);
          car.setImage(dto.getImage());
          car.setDescription(dto.getDescription());
-         car.setEngine(dto.getEngine());
          return car;
      }
 }

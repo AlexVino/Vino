@@ -58,7 +58,7 @@ public class Complectation {
     @Column
     private int maxspeed;
     @Column
-    private int complectationoptions;
+    private String complectationoptions;
 
     public int getComplectationId() {
         return complectationId;
@@ -196,6 +196,14 @@ public class Complectation {
         this.maxspeed = maxspeed;
     }
 
+    public String getComplectationoptions() {
+        return complectationoptions;
+    }
+
+    public void setComplectationoptions(String complectationoptions) {
+        this.complectationoptions = complectationoptions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -212,13 +220,13 @@ public class Complectation {
                 length == that.length &&
                 width == that.width &&
                 maxspeed == that.maxspeed &&
-                complectationoptions == that.complectationoptions &&
-                complectationName.equals(that.complectationName) &&
-                model.equals(that.model) &&
-                bodystyle.equals(that.bodystyle) &&
-                fuelType.equals(that.fuelType) &&
-                transmission.equals(that.transmission) &&
-                drivetype.equals(that.drivetype);
+                Objects.equals(complectationName, that.complectationName) &&
+                Objects.equals(model, that.model) &&
+                Objects.equals(bodystyle, that.bodystyle) &&
+                Objects.equals(fuelType, that.fuelType) &&
+                Objects.equals(transmission, that.transmission) &&
+                Objects.equals(drivetype, that.drivetype) &&
+                Objects.equals(complectationoptions, that.complectationoptions);
     }
 
     @Override

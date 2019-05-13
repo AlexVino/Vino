@@ -102,8 +102,8 @@ public class OrderServiceImpl implements OrderService {
         dto.setId(order.getOrderId());
         dto.setFullModel(
                 String.format("%s %s",
-                order.getCar().getModel().getMake().getMakeName(),
-                order.getCar().getModel().getModelName()));
+                order.getCar().getComplectation().getModel().getMake().getMakeName(),
+                order.getCar().getComplectation().getModel().getModelName()));
         dto.setPrice(order.getCar().getPrice());
         return dto;
     }
@@ -116,8 +116,8 @@ public class OrderServiceImpl implements OrderService {
         dto.setId(order.getOrderId());
         dto.setFullModel(
                 String.format("%s %s",
-                        order.getCar().getModel().getMake().getMakeName(),
-                        order.getCar().getModel().getModelName()));
+                        order.getCar().getComplectation().getModel().getMake().getMakeName(),
+                        order.getCar().getComplectation().getModel().getModelName()));
         dto.setPrice(order.getCar().getPrice());
         dto.setFirstname(order.getUser().getFirstname());
         dto.setLastname(order.getUser().getLastname());

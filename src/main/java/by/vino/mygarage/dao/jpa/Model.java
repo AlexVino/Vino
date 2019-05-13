@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="models")
 public class Model {
     @Column
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int modelId;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "makeId")

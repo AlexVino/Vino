@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="phones")
 public class Phone {
     @Column
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int phoneId;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "addressId")

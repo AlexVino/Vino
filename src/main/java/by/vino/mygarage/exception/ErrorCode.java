@@ -9,4 +9,5 @@ public class ErrorCode {
     public static final String FUELTYPE_DOES_NOT_EXIST = "error.fueltype-does-not-exist";
     public static final String COLOR_DOES_NOT_EXIST = "error.color-does-not-exist";
     public static final String USERNAME_EXISTED = "form.username.existed";
+    public static final String COMPLECTATION_DOES_NOT_EXIST = "form.complectation-does-not-exist";
 }

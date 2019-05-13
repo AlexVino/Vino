@@ -28,7 +28,7 @@ public interface CarRepository extends
 
     @Override
     default void customize(QuerydslBindings bindings, QCar root) {
-        bindings.bind(root.bodystyle.bodystyleName).all((path, value) -> Optional.of(path.in(value)));
+        bindings.bind(root.complectation.bodystyle.bodystyleName).all((path, value) -> Optional.of(path.in(value)));
         bindings.bind(root.color.colorName).all((path, value) -> Optional.of(path.in(value)));
         bindings.bind(root.mileage).first(NumberExpression::loe);
         bindings.bind(String.class).first(
@@ -37,7 +37,7 @@ public interface CarRepository extends
             Iterator<? extends Integer> iterator = value.iterator();
             return Optional.of(path.between(iterator.next(), iterator.next()));
         });
-        bindings.bind(root.year).all((path, value) -> {
+        bindings.bind(root.complectation.year).all((path, value) -> {
             Iterator<? extends Integer> iterator = value.iterator();
             int year = new GregorianCalendar().get(Calendar.YEAR);
             int delta = iterator.next();

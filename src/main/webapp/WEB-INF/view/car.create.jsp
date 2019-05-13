@@ -41,7 +41,7 @@
 
         <div class="row justify-content-between">
             <div class="col-md-8 col-xs-12">
-                <img id="myimage" src="/img/car-default.jpg" width="100%">
+                <img id="myimage" src="/img/car-default.jpg" style="max-height: 500px; max-width: 500px">
             </div>
 
             <div class="col-md-4 col-xs-12">
