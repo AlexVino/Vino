@@ -146,6 +146,34 @@ INSERT INTO `fueltypes` (`fuelTypeId`, `fuelTypeName`) VALUES (1,'petrol'),(2,'p
 UNLOCK TABLES;
 
 --
+-- Table structure for table `headlights`
+--
+
+DROP TABLE IF EXISTS `headlights`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `headlights` (
+  `headlightId` int(11) NOT NULL AUTO_INCREMENT,
+  `headlightName` varchar(255) NOT NULL,
+  PRIMARY KEY (`headlightId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `headlights`
+--
+
+LOCK TABLES `headlights` WRITE;
+/*!40000 ALTER TABLE `headlights` DISABLE KEYS */;
+INSERT INTO `headlights` (`headlightId`, `headlightName`)
+VALUES
+(1,'Xenon'),
+(2,'Laser'),
+(3,'LED');
+/*!40000 ALTER TABLE `headlights` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `makes`
 --
 
@@ -307,18 +335,36 @@ CREATE TABLE `complectations` (
 	`length` INT(11),
 	`width` INT(11),
 	`maxspeed` INT(11),
-	`complectationoptions` JSON,
+	`headlightId` INT(11),
+
+	`Electricheatingofthewindshield` Bool,
+	`Electricheatingofsidemirrors` Bool,
+	`Headlightwashersystem` Bool,
+	`Rainsensor` Bool,
+	`Foglight` Bool,
+	`Bluetooth` Bool,
+	`USB` Bool,
+	`AUX` Bool,
+	`Navigationsystem` Bool,
+	`Cruisecontrol` Bool,
+	`Parktronic` Bool,
+	`Climatecontrol` Bool,
+	`PowerWindows` Bool,
+	`steeringadjustment` Bool,
+
   PRIMARY KEY (`complectationId`),
   KEY `fk_complectations_bodystyles_idx` (`bodystyleId`),
   KEY `fk_complectations_colors_idx` (`drivetypeId`),
   KEY `fk_complectations_fueltypes_idx` (`fuelTypeId`),
   KEY `fk_complectations_models_idx` (`modelId`),
   KEY `fk_complectations_transmissions_idx` (`transmissionId`),
+  KEY `fk_complectations_headlights_idx` (`headlightId`),
   CONSTRAINT `fk_complectations_bodystyles` FOREIGN KEY (`bodystyleId`) REFERENCES `bodystyles` (`bodystyleId`),
   CONSTRAINT `fk_complectations_drivetypes` FOREIGN KEY (`drivetypeId`) REFERENCES `drivetypes` (`drivetypeId`),
   CONSTRAINT `fk_complectations_fueltypes` FOREIGN KEY (`fuelTypeId`) REFERENCES `fueltypes` (`fuelTypeId`),
   CONSTRAINT `fk_complectations_models` FOREIGN KEY (`modelId`) REFERENCES `models` (`modelId`),
-  CONSTRAINT `fk_complectations_transmissions` FOREIGN KEY (`transmissionId`) REFERENCES `transmissions` (`transmissionId`)
+  CONSTRAINT `fk_complectations_transmissions` FOREIGN KEY (`transmissionId`) REFERENCES `transmissions` (`transmissionId`),
+  CONSTRAINT `fk_complectations_headlights` FOREIGN KEY (`headlightId`) REFERENCES `headlights` (`headlightId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -345,17 +391,32 @@ INSERT INTO `complectations` (`complectationId`,
 	`length`,
 	`width`,
 	`maxspeed`,
-	`complectationoptions`) 
+	`headlightId`,
+
+	`Electricheatingofthewindshield`,
+	`Electricheatingofsidemirrors`,
+	`Headlightwashersystem`,
+	`Rainsensor`,
+	`Foglight`,
+	`Bluetooth`,
+	`USB`,
+	`AUX`,
+	`Navigationsystem`,
+	`Cruisecontrol`,
+	`Parktronic`,
+	`Climatecontrol` ,
+	`PowerWindows`,
+	`steeringadjustment`)
 VALUES 
-(1,'Basic',2,1,1,1,1,2018,1600,112,9.0,6.6,10.5,5.1,4333,1813,220,NULL),
-(2,'Drive',4,2,2,2,2,2011,2000,150,6.2,5.5,11.8,4.2,4222,1766,180,NULL),
-(3,'XXXXX',6,3,3,3,3,2012,1400,200,5.3,7.7,12.3,5.5,4111,1815,152,NULL),
-(4,'Life',7,4,4,1,1,2013,1500,102,11.2,8.8,14.7,6.0,4242,1788,166,NULL),
-(5,'Access',8,5,5,2,2,2013,2200,220,10.0,8.5,13.9,6.4,4343,1795,238,NULL),
-(6,'Style',9,6,1,2,3,2015,1800,110,9.8,7.6,12.8,4.2,4000,1800,146,NULL),
-(7,'Premium',23,7,2,3,1,2017,1900,168,7.8,9.9,12.0,5.1,4141,1759,166,NULL),
-(8,'Extreme',30,8,2,3,2,2017,2500,143,8.9,5.8,14.5,4.9,4500,1805,185,NULL),
-(9,'Play',17,5,4,1,3,2018,2000,209,5.5,7.9,15.1,6.2,4312,1784,199,NULL);
+(1,'Basic',2,1,1,1,1,2018,1600,112,9.0,6.6,10.5,5.1,4333,1813,220,1,   1,0,1,0,1,0,1,0,1,0,1,0,1,0),
+(2,'Drive',4,2,2,2,2,2011,2000,150,6.2,5.5,11.8,4.2,4222,1766,180,2,   0,1,0,1,0,1,0,1,0,1,0,1,0,1),
+(3,'XXXXX',6,3,3,3,3,2012,1400,200,5.3,7.7,12.3,5.5,4111,1815,152,3,   1,0,1,0,1,0,1,0,1,0,1,0,1,0),
+(4,'Life',7,4,4,1,1,2013,1500,102,11.2,8.8,14.7,6.0,4242,1788,166,1,   0,1,0,1,0,1,0,1,0,1,0,1,0,1),
+(5,'Access',8,5,5,2,2,2013,2200,220,10.0,8.5,13.9,6.4,4343,1795,238,2, 1,0,1,0,1,0,1,0,1,0,1,0,1,0),
+(6,'Style',9,6,1,2,3,2015,1800,110,9.8,7.6,12.8,4.2,4000,1800,146,3,   0,1,0,1,0,1,0,1,0,1,0,1,0,1),
+(7,'Premium',23,7,2,3,1,2017,1900,168,7.8,9.9,12.0,5.1,4141,1759,166,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0),
+(8,'Extreme',30,8,2,3,2,2017,2500,143,8.9,5.8,14.5,4.9,4500,1805,185,2,0,1,0,1,0,1,0,1,0,1,0,1,0,1),
+(9,'Play',17,5,4,1,3,2018,2000,209,5.5,7.9,15.1,6.2,4312,1784,199,3,   1,0,1,0,1,0,1,0,1,0,1,0,1,0);
 /*!40000 ALTER TABLE `complectations` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -106,7 +106,7 @@ public class CarServiceImpl implements CarService {
         dto.setImage(car.getImage());
         dto.setDescription(car.getDescription());
         dto.setEnginevolume(car.getComplectation().getEnginevolume());
-        dto.setVIN(car.getVIN());
+        dto.setVINnumber(car.getVINnumber());
         dto.setRrPrice(car.getRrPrice());
         dto.setComplectationName(car.getComplectation().getComplectationName());
         dto.setDrivetype(car.getComplectation().getDrivetype().getDrivetypeName());
@@ -120,6 +120,22 @@ public class CarServiceImpl implements CarService {
         dto.setWidth(car.getComplectation().getWidth());
         dto.setMaxspeed(car.getComplectation().getMaxspeed());
         dto.setComplectationId(car.getComplectation().getComplectationId());
+        dto.setHeadlight(car.getComplectation().getHeadlight().getHeadlightName());
+        dto.setHeadlightLocal(messageSource.getMessage("search.headlights." + car.getComplectation().getHeadlight().getHeadlightName(), null, locale));
+        dto.setElectricheatingofthewindshield(car.getComplectation().isElectricheatingofthewindshield());
+        dto.setElectricheatingofsidemirrors(car.getComplectation().isElectricheatingofsidemirrors());
+        dto.setHeadlightwashersystem(car.getComplectation().isHeadlightwashersystem());
+        dto.setRainsensor(car.getComplectation().isRainsensor());
+        dto.setFoglight(car.getComplectation().isFoglight());
+        dto.setBluetooth(car.getComplectation().isBluetooth());
+        dto.setAUX(car.getComplectation().isAUX());
+        dto.setUSB(car.getComplectation().isUSB());
+        dto.setNavigationsystem(car.getComplectation().isNavigationsystem());
+        dto.setCruisecontrol(car.getComplectation().isCruisecontrol());
+        dto.setParktronic(car.getComplectation().isParktronic());
+        dto.setClimatecontrol(car.getComplectation().isClimatecontrol());
+        dto.setPowerWindows(car.getComplectation().isPowerWindows());
+        dto.setSteeringadjustment(car.getComplectation().isSteeringadjustment());
         return dto;
     }
 
@@ -135,7 +151,7 @@ public class CarServiceImpl implements CarService {
          }
          Car car = new Car();
          car.setCarId(dto.getCarId());
-         car.setVIN(dto.getVIN());
+         car.setVINnumber(dto.getVINnumber());
          car.setRrPrice(dto.getRrPrice());
          car.setPrice(dto.getPrice());
          car.setMileage(dto.getMileage());

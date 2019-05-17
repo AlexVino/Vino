@@ -23,20 +23,27 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int carId;
+
     @Column
-    private String VIN;
+    private String VINnumber;
+
     @Column
     private int rrPrice;
+
     @Column
     private int price;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "colorId")
     private Color color;
+
     @Column
     private int mileage;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "complectationId")
     private Complectation complectation;
+
     @Column
     private String description;
     @Column

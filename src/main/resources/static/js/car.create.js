@@ -15,6 +15,26 @@ $(document).ready(function () {
         addIfNotEmpty(data, 'engine', $('#engine').val());
         addIfNotEmpty(data, 'description', $('#description').val());
         addIfNotEmpty(data, 'year', $('#year').val());
+
+        addIfNotEmpty(data, 'VINnumber', $('#VINnumber').val());
+        addIfNotEmpty(data, 'complectationName', $('#complectation').val());
+        addIfNotEmptyForTitle(data, 'headlight', $('#filter_headlights').find('li a.selected'));
+
+        addIfNotEmpty(data, 'Electricheatingofthewindshield', document.getElementById("myonoffswitchElectricheatingofthewindshield").checked);
+        addIfNotEmpty(data, 'Electricheatingofsidemirrors',   document.getElementById("myonoffswitchElectricheatingofsidemirrors").checked);
+        addIfNotEmpty(data, 'Headlightwashersystem',          document.getElementById("myonoffswitchHeadlightwashersystem").checked);
+        addIfNotEmpty(data, 'Rainsensor',                     document.getElementById("myonoffswitchRainsensor").checked);
+        addIfNotEmpty(data, 'Foglight',                       document.getElementById("myonoffswitchFoglight").checked);
+        addIfNotEmpty(data, 'Bluetooth',                      document.getElementById("myonoffswitchBluetooth").checked);
+        addIfNotEmpty(data, 'USB',                            document.getElementById("myonoffswitchUSB").checked);
+        addIfNotEmpty(data, 'AUX',                            document.getElementById("myonoffswitchAUX").checked);
+        addIfNotEmpty(data, 'Navigationsystem',               document.getElementById("myonoffswitchNavigationsystem").checked);
+        addIfNotEmpty(data, 'Cruisecontrol',                  document.getElementById("myonoffswitchCruisecontrol").checked);
+        addIfNotEmpty(data, 'Parktronic',                     document.getElementById("myonoffswitchParktronic").checked);
+        addIfNotEmpty(data, 'Climatecontrol',                 document.getElementById("myonoffswitchClimatecontrol").checked);
+        addIfNotEmpty(data, 'PowerWindows',                   document.getElementById("myonoffswitchPowerWindows").checked);
+        addIfNotEmpty(data, 'steeringadjustment',             document.getElementById("myonoffswitchsteeringadjustment").checked);
+
         data['image'] = $('#myimage').attr('src');
 
         // Отправляем запрос

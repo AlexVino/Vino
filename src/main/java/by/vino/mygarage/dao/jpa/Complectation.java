@@ -60,6 +60,50 @@ public class Complectation {
     private int width;
     @Column
     private int maxspeed;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "headlightId")
+    private Headlights headlight;
+
     @Column
-    private String complectationoptions;
+    private boolean Electricheatingofthewindshield;
+
+    @Column
+    private boolean Electricheatingofsidemirrors;
+
+    @Column
+    private boolean Headlightwashersystem;
+
+    @Column
+    private boolean Rainsensor;
+
+    @Column
+    private boolean Foglight;
+
+    @Column
+    private boolean Bluetooth;
+
+    @Column
+    private boolean USB;
+
+    @Column
+    private boolean AUX;
+
+    @Column
+    private boolean Navigationsystem;
+
+    @Column
+    private boolean Cruisecontrol;
+
+    @Column
+    private boolean Parktronic;
+
+    @Column
+    private boolean Climatecontrol;
+
+    @Column
+    private boolean PowerWindows;
+
+    @Column
+    private boolean steeringadjustment;
 }

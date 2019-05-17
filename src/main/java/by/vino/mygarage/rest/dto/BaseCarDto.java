@@ -54,22 +54,22 @@ public class BaseCarDto {
 
     private int complectationId;
 
-    @NotEmpty(message = "cars.VIN.empty")
-    @Size(min = 17, max = 17, message = "cars.VIN.size")
-    private String VIN;
+    //@NotEmpty(message = "cars.VINnumber.empty")
+    @Size(min = 17, max = 17, message = "cars.VINnumber.size")
+    private String VINnumber;
 
     @Min(value = 0, message = "cars.rrPrice.size")
     @Max(value = 1_000_000_000, message = "cars.rrPrice.size")
     private int rrPrice;
 
-    @NotEmpty(message = "cars.complectationName.empty")
+    //NotEmpty(message = "cars.complectationName.empty")
     @Size(min = 1, max = 30, message = "cars.complectationName.size")
     private String complectationName;
 
     private String drivetype;
     private String drivetypeLocal;
 
-    @NotNull(message = "cars.horsepower.null")
+    //@NotNull(message = "cars.horsepower.null")
     @Min(value = 0, message = "cars.horsepower.size")
     @Max(value = 100_000, message = "cars.horsepower.size")
     private int horsepower;
@@ -101,4 +101,22 @@ public class BaseCarDto {
     @Min(value = 0, message = "cars.maxspeed.size")
     @Max(value = 100_000, message = "cars.maxspeed.size")
     private int maxspeed;
+
+    private String headlight;
+    private String headlightLocal;
+
+    private boolean Electricheatingofthewindshield;
+    private boolean Electricheatingofsidemirrors;
+    private boolean Headlightwashersystem;
+    private boolean Rainsensor;
+    private boolean Foglight;
+    private boolean Bluetooth;
+    private boolean USB;
+    private boolean AUX;
+    private boolean Navigationsystem;
+    private boolean Cruisecontrol;
+    private boolean Parktronic;
+    private boolean Climatecontrol;
+    private boolean PowerWindows;
+    private boolean steeringadjustment;
 }
