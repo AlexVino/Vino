@@ -60,19 +60,19 @@ function search(page) {
         page = Math.round($('#result').children('div').length / size);
     }
     var data = {};
-    addIfNotEmpty(data, 'model.modelName', $('#filter_models').find('li a.selected').text());
-    addIfNotEmpty(data, 'model.make.makeName', $('#filter_makes').find('li a.selected').text());
-    addIfNotEmptyForTitle(data, 'transmission.transmissionName', $('#filter_transmission').find('li a.selected'));
-    addIfNotEmptyForTitle(data, 'fuelType.fuelTypeName', $('#filter_fueltype').find('li a.selected'));
+    addIfNotEmpty(data, 'complectation.model.modelName', $('#filter_models').find('li a.selected').text());
+    addIfNotEmpty(data, 'complectation.model.make.makeName', $('#filter_makes').find('li a.selected').text());
+    addIfNotEmptyForTitle(data, 'complectation.transmission.transmissionName', $('#filter_transmission').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'complectation.fuelType.fuelTypeName', $('#filter_fueltype').find('li a.selected'));
     addIfNotEmptyForTitle(data, 'mileage', $('#filter_mileage').find('li a.selected'));
-    addIfNotEmptyForTitle(data, 'year', $('#filter_year').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'complectation.year', $('#filter_year').find('li a.selected'));
     var min = addOrDefault($('#minprice').find('li a.selected').text(), 0);
     var max = addOrDefault($('#maxprice').find('li a.selected').text(), 1000000000);
 
     var bodies = $('.bodystyles').find('button.active');
     var bodyStyles = "";
     for (var i = 0; i < bodies.length; i++) {
-        bodyStyles += '&bodystyle.bodystyleName=' + bodies[i].title;
+        bodyStyles += '&complectation.bodystyle.bodystyleName=' + bodies[i].title;
     }
 
     var colorsButton = $('.colors').find('button.active');
@@ -85,7 +85,7 @@ function search(page) {
     data['size'] = size;
     $.ajax({
         type: "GET",
-        url: "/rest/cars?price=" + min + "&price=" + max + bodyStyles + colors,
+        url: "/rest/ads?price=" + min + "&price=" + max + bodyStyles + colors,
         data: data,
         contentType: "application/json",
         success: function (data) {
@@ -112,10 +112,10 @@ function showCars(cars, page) {
         $('#result').append(
         '<div class="col-lg-4 col-md-6 col-xs-12" align="center">' +
             '<div class="r">' +
-                '<a class="r__head dist" href="/cars/' + cars[i].carId + '">' +
+                '<a class="r__head dist" href="/ads/' + cars[i].carId + '">' +
                     '<p class="title">' + cars[i].fullModel + '</p>' +
                 '</a>' +
-                '<a class="image" href="/cars/' + cars[i].carId + '">' +
+                '<a class="image" href="/ads/' + cars[i].carId + '">' +
                     '<div class="ui-onvisible">' +
                     '<img class="image__photo" src="' + cars[i].image + '" alt="no image">' +
                     '</div>' +
@@ -144,7 +144,7 @@ function showCars(cars, page) {
                     '</li>' +
                 '</ul>' +
                 '<div class="r__cta">' +
-                '<a class="item button" href="/cars/' + cars[i].carId + '">' +
+                '<a class="item button" href="/ads/' + cars[i].carId + '">' +
                     '<span>' + $('#full-details').val() + '</span>' +
                 '</a>' +
             '</div>' +

@@ -125,9 +125,9 @@ public class NegativeTest {
         driver.findElement(By.id("year")).click();
         driver.findElement(By.id("year")).clear();
         driver.findElement(By.id("year")).sendKeys("${year}");
-        driver.findElement(By.id("engine")).click();
-        driver.findElement(By.id("engine")).clear();
-        driver.findElement(By.id("engine")).sendKeys("${engine}");
+        driver.findElement(By.id("enginevolume")).click();
+        driver.findElement(By.id("enginevolume")).clear();
+        driver.findElement(By.id("enginevolume")).sendKeys("${engine}");
         driver.findElement(By.id("description")).click();
         driver.findElement(By.id("description")).clear();
         driver.findElement(By.id("description")).sendKeys("${description}");

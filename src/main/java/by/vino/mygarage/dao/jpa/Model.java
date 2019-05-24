@@ -20,9 +20,11 @@ public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int modelId;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "makeId")
     private Make make;
+
     @Column
     private String modelName;
 }

@@ -6,8 +6,11 @@ import by.vino.mygarage.dao.api.ColorRepository;
 import by.vino.mygarage.dao.api.FuelTypeRepository;
 import by.vino.mygarage.dao.api.ModelRepository;
 import by.vino.mygarage.dao.api.OrderRepository;
+import by.vino.mygarage.dao.api.DriveTypeRepository;
 import by.vino.mygarage.dao.api.TransmissionRepository;
+import by.vino.mygarage.dao.api.HeadlightsRepository;
 import by.vino.mygarage.dao.api.ComplectationRepository;
+import by.vino.mygarage.dao.api.AdRepository;
 import by.vino.mygarage.dao.jpa.*;
 import by.vino.mygarage.exception.ErrorCode;
 import by.vino.mygarage.exception.RestException;
@@ -40,11 +43,17 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private ColorRepository colorRepository;
     @Autowired
+    private DriveTypeRepository driveTypeRepository;
+    @Autowired
+    private HeadlightsRepository headlightsRepository;
+    @Autowired
     private MessageSource messageSource;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
     private ComplectationRepository complectationRepository;
+    @Autowired
+    private AdRepository adRepository;
 
     @Override
     public BaseCarDto create(BaseCarDto dto, Locale locale) {
@@ -71,11 +80,25 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<BaseCarDto> getAll(Predicate predicate, Pageable pageable, Locale locale) {
-        return toDtoList(carRepository.findAll(predicate, pageable), locale);
+        //return toDtoList(carRepository.findAll(predicate, pageable), locale);
+        return toDtoList2(adRepository.findAll(predicate, pageable), locale);
     }
 
     private List<BaseCarDto> toDtoList(Iterable<Car> cars, Locale locale) {
         List<BaseCarDto> list = new ArrayList<>();
+        for (Car car : cars) {
+            list.add(toDto(car, locale));
+        }
+        return list;
+    }
+
+    private List<BaseCarDto> toDtoList2(Iterable<Ad> ads, Locale locale) {
+        List<BaseCarDto> list = new ArrayList<>();
+        List<Car> cars = new ArrayList<>();
+
+        for (Ad ad : ads) {
+            cars.add(ad.getCar());
+        }
         for (Car car : cars) {
             list.add(toDto(car, locale));
         }
@@ -106,11 +129,11 @@ public class CarServiceImpl implements CarService {
         dto.setImage(car.getImage());
         dto.setDescription(car.getDescription());
         dto.setEnginevolume(car.getComplectation().getEnginevolume());
-        dto.setVINnumber(car.getVINnumber());
+        dto.setVin(car.getVin());
         dto.setRrPrice(car.getRrPrice());
         dto.setComplectationName(car.getComplectation().getComplectationName());
         dto.setDrivetype(car.getComplectation().getDrivetype().getDrivetypeName());
-        dto.setDrivetypeLocal(messageSource.getMessage("search.drivetype." + car.getComplectation().getDrivetype().getDrivetypeName(), null, locale));
+        dto.setDrivetypeLocal(messageSource.getMessage("search.drivetype." + car.getComplectation().getDrivetype().getDrivetypeName().toLowerCase(), null, locale));
         dto.setHorsepower(car.getComplectation().getHorsepower());
         dto.setAcceleration(car.getComplectation().getAcceleration());
         dto.setCommonconsumption(car.getComplectation().getCommonconsumption());
@@ -121,15 +144,15 @@ public class CarServiceImpl implements CarService {
         dto.setMaxspeed(car.getComplectation().getMaxspeed());
         dto.setComplectationId(car.getComplectation().getComplectationId());
         dto.setHeadlight(car.getComplectation().getHeadlight().getHeadlightName());
-        dto.setHeadlightLocal(messageSource.getMessage("search.headlights." + car.getComplectation().getHeadlight().getHeadlightName(), null, locale));
+        dto.setHeadlightLocal(messageSource.getMessage("search.headlights." + car.getComplectation().getHeadlight().getHeadlightName().toLowerCase(), null, locale));
         dto.setElectricheatingofthewindshield(car.getComplectation().isElectricheatingofthewindshield());
         dto.setElectricheatingofsidemirrors(car.getComplectation().isElectricheatingofsidemirrors());
         dto.setHeadlightwashersystem(car.getComplectation().isHeadlightwashersystem());
         dto.setRainsensor(car.getComplectation().isRainsensor());
         dto.setFoglight(car.getComplectation().isFoglight());
         dto.setBluetooth(car.getComplectation().isBluetooth());
-        dto.setAUX(car.getComplectation().isAUX());
-        dto.setUSB(car.getComplectation().isUSB());
+        dto.setAux(car.getComplectation().isAux());
+        dto.setUsb(car.getComplectation().isUsb());
         dto.setNavigationsystem(car.getComplectation().isNavigationsystem());
         dto.setCruisecontrol(car.getComplectation().isCruisecontrol());
         dto.setParktronic(car.getComplectation().isParktronic());
@@ -145,18 +168,79 @@ public class CarServiceImpl implements CarService {
          if (color == null) {
              throw new RestException(ErrorCode.COLOR_DOES_NOT_EXIST);
          }
-         Complectation complectation = complectationRepository.findById(dto.getComplectationId()).orElse(null);
+
+         Model model = modelRepository.findByModelNameIgnoreCaseAndMake_MakeNameIgnoreCase(dto.getModel(), dto.getMake());
+         if (model == null) {
+             throw new RestException(ErrorCode.MODEL_DOES_NOT_EXIST);
+         }
+         Bodystyle bodystyle = bodyStyleRepository.findByBodystyleNameIgnoreCase(dto.getBodystyle());
+         if (bodystyle == null) {
+             throw new RestException(ErrorCode.BODYSTYLE_DOES_NOT_EXIST);
+         }
+         Transmission transmission = transmissionRepository.findByTransmissionNameIgnoreCase(dto.getTransmission());
+         if (transmission == null) {
+             throw new RestException(ErrorCode.TRANSMISSION_DOES_NOT_EXIST);
+         }
+         FuelType fuelType = fuelTypeRepository.findByFuelTypeNameIgnoreCase(dto.getFuelType());
+         if (fuelType == null) {
+             throw new RestException(ErrorCode.FUELTYPE_DOES_NOT_EXIST);
+         }
+
+         Drivetype drivetype = driveTypeRepository.findByDrivetypeNameIgnoreCase(dto.getDrivetype());
+         if (drivetype == null) {
+             throw new RestException(ErrorCode.DRIVETYPE_DOES_NOT_EXIST);
+         }
+
+         Headlights headlights = headlightsRepository.findByHeadlightNameIgnoreCase(dto.getHeadlight());
+         if (headlights == null) {
+             throw new RestException(ErrorCode.HEADLIGHTS_DOES_NOT_EXIST);
+         }
+         /*Complectation complectation = complectationRepository.findById(dto.getComplectationId()).orElse(null);
          if (complectation == null) {
              throw new RestException(ErrorCode.COMPLECTATION_DOES_NOT_EXIST);
-         }
+         }*/
+
+         Complectation complectation = new Complectation();
+         complectation.setAcceleration(dto.getAcceleration());
+         complectation.setAux(dto.isAux());
+         complectation.setBluetooth(dto.isBluetooth());
+         complectation.setBodystyle(bodystyle);
+         complectation.setCityconsumption(dto.getCityconsumption());
+         complectation.setClimatecontrol(dto.isClimatecontrol());
+         complectation.setCommonconsumption(dto.getCommonconsumption());
+         complectation.setComplectationName(dto.getComplectationName());
+         complectation.setCruisecontrol(dto.isCruisecontrol());
+         complectation.setDrivetype(drivetype);
+         complectation.setElectricheatingofsidemirrors(dto.isElectricheatingofsidemirrors());
+         complectation.setElectricheatingofthewindshield(dto.isElectricheatingofthewindshield());
+         complectation.setEnginevolume(dto.getEnginevolume());
+         complectation.setFoglight(dto.isFoglight());
+         complectation.setFuelType(fuelType);
+         complectation.setHeadlight(headlights);
+         complectation.setHeadlightwashersystem(dto.isHeadlightwashersystem());
+         complectation.setHorsepower(dto.getHorsepower());
+         complectation.setLength(dto.getLength());
+         complectation.setMaxspeed(dto.getMaxspeed());
+         complectation.setModel(model);
+         complectation.setNavigationsystem(dto.isNavigationsystem());
+         complectation.setParktronic(dto.isParktronic());
+         complectation.setPowerWindows(dto.isPowerWindows());
+         complectation.setRainsensor(dto.isRainsensor());
+         complectation.setRouteconsumption(dto.getRouteconsumption());
+         complectation.setSteeringadjustment(dto.isSteeringadjustment());
+         complectation.setTransmission(transmission);
+         complectation.setUsb(dto.isUsb());
+         complectation.setWidth(dto.getWidth());
+         complectation.setYear(dto.getYear());
+
          Car car = new Car();
          car.setCarId(dto.getCarId());
-         car.setVINnumber(dto.getVINnumber());
+         car.setVin(dto.getVin());
          car.setRrPrice(dto.getRrPrice());
          car.setPrice(dto.getPrice());
          car.setMileage(dto.getMileage());
          car.setColor(color);
-         car.setComplectation(complectation);
+         car.setComplectation(complectationRepository.save(complectation));
          car.setImage(dto.getImage());
          car.setDescription(dto.getDescription());
          return car;

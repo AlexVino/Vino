@@ -60,7 +60,7 @@ public class OrderControllerImpl {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping("/ads/{id}")
     public ResponseEntity<?> deleteByCarId(@PathVariable("id") int id) {
         orderService.removeByCarId(id);
         return ResponseEntity.ok(true);

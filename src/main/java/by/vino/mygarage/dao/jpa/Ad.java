@@ -15,15 +15,19 @@ public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int adId;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "carId")
     private Car car;
+
     @Column(name="dateAdd")
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dateAdd;
+
     @Column(name="dateDelete")
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dateDelete;

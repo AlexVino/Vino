@@ -25,10 +25,10 @@ public class Car {
     private int carId;
 
     @Column
-    private String VINnumber;
+    private String vin;
 
     @Column
-    private int rrPrice;
+    private Integer rrPrice;
 
     @Column
     private int price;

@@ -25,9 +25,9 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
-    <link rel="stylesheet" href="/css/main.min.css">
     <link rel="stylesheet" href="/css/error_block.css">
     <link rel="stylesheet" href="/css/main.min.car.add.css">
+    <link rel="stylesheet" href="/css/main.min.new.css">
 
 </head>
 
@@ -41,7 +41,7 @@
 
         <div class="row justify-content-between">
             <div class="col-md-8 col-xs-12">
-                <img id="myimage" src="${car.image}" width="100%">
+                <img id="myimage" src="${car.image}" style="max-height: 500px; max-width: 500px">
             </div>
 
             <div class="col-md-4 col-xs-12">
@@ -154,12 +154,29 @@
                                 <li><a title="black"><spring:message code="color.black"/></a></li>
                                 <li><a title="blue"><spring:message code="color.blue"/></a></li>
                                 <li><a title="green"><spring:message code="color.green"/></a></li>
-                                <li><a title="grey"><spring:message code="color.grey"/></a></li>
+                                <li><a title="gray"><spring:message code="color.gray"/></a></li>
                                 <li><a title="orange"><spring:message code="color.orange"/></a></li>
                                 <li><a title="pink"><spring:message code="color.pink"/></a></li>
                                 <li><a title="purple"><spring:message code="color.purple"/></a></li>
                                 <li><a title="red"><spring:message code="color.red"/></a></li>
                                 <li><a title="silver"><spring:message code="color.silver"/></a></li>
+                            </ul>
+                        </dd>
+                        <input type="hidden" name="first">
+                    </dl>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <dl class="dropy">
+                        <dt class="dropy__title"><span class="span_drivetype"><spring:message code="search.drivetype.any"/></span></dt>
+                        <dd class="dropy__content">
+                            <ul id="filter_drivetype">
+                                <li><a class="dropy__header"><spring:message code="search.drivetype.any"/></a></li>
+                                <li><a title="full"><spring:message code="search.drivetype.full"/></a></li>
+                                <li><a title="front"><spring:message code="search.drivetype.front"/></a></li>
+                                <li><a title="back"><spring:message code="search.drivetype.back"/></a></li>
                             </ul>
                         </dd>
                         <input type="hidden" name="first">
@@ -174,6 +191,14 @@
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label  class="active">
+                        <spring:message code="cars.complectation"/><span class="req">*</span>
+                    </label>
+                    <input type="text" maxlength="10" id="complectation" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
                         <spring:message code="main.price"/><span class="req">*</span>
                     </label>
                     <input type="text" id="price" maxlength="10" required autocomplete="off" />
@@ -182,7 +207,23 @@
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label  class="active">
-                        <spring:message code="cars.mileage"/><span class="req">*</span>
+                        <spring:message code="main.rrPrice"/>
+                    </label>
+                    <input type="text" id="rrPrice" maxlength="10" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.vin"/><span class="req">*</span>
+                    </label>
+                    <input type="text" maxlength="17" id="vin" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.mileage"/>
                     </label>
                     <input type="text" id="mileage" step="1" min="0" max="1000000000" maxlength="10" required autocomplete="off" />
                 </div>
@@ -198,26 +239,324 @@
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
                     <label  class="active">
-                        <spring:message code="cars.engine"/><span class="req">*</span>
+                        <spring:message code="cars.enginevolume"/><span class="req">*</span>
                     </label>
-                    <input type="text" maxlength="10" id="engine" required autocomplete="off" />
+                    <input type="text" maxlength="10" id="enginevolume" required autocomplete="off" />
                 </div>
             </div>
             <div class="col-md-4 col-xs-1">
                 <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.horsepower"/> <spring:message code="cars.hp"/><span class="req">*</span>
+                    </label>
+                    <input type="text" maxlength="10" id="horsepower" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.maxspeed"/> <spring:message code="cars.kmh"/>
+                    </label>
+                    <input type="text" maxlength="10" id="maxspeed" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.commonconsumption"/> <spring:message code="cars.litre"/>
+                    </label>
+                    <input type="text" maxlength="10" id="commonconsumption" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.cityconsumption"/> <spring:message code="cars.litre"/>
+                    </label>
+                    <input type="text" maxlength="10" id="cityconsumption" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.routeconsumption"/> <spring:message code="cars.litre"/>
+                    </label>
+                    <input type="text" maxlength="10" id="routeconsumption" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.acceleration"/> <spring:message code="cars.second"/>
+                    </label>
+                    <input type="text" maxlength="10" id="acceleration" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.length"/> <spring:message code="cars.mm"/>
+                    </label>
+                    <input type="text" maxlength="10" id="length" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-1">
+                <div class="field-wrap">
+                    <label  class="active">
+                        <spring:message code="cars.width"/> <spring:message code="cars.mm"/>
+                    </label>
+                    <input type="text" maxlength="10" id="width" required autocomplete="off"/>
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-1">
+                <div class="field-wrap">
                     <label class="active">
                         <spring:message code="cars.description"/><span class="req">*</span>
                     </label>
-                    <input type="text" id="description" maxlength="1000" required autocomplete="off" />
+                    <input type="text" aria-multiline="true" aria-rowcount="4" id="description" maxlength="1000" required autocomplete="off" />
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="options-checkboxes__group-head">
+            <div class="options-checkboxes__groupname"><spring:message code="search.visibility"/></div>
+            <div class="options-checkboxes__delimiter">
+                <div class="options-checkboxes__line"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <dl class="dropy">
+                        <dt class="dropy__title"><span class="span_headlights"><spring:message code="search.headlights.any"/></span></dt>
+                        <dd class="dropy__content">
+                            <ul id="filter_headlights">
+                                <li><a class="dropy__header"><spring:message code="search.headlights.any"/></a></li>
+                                <li><a title="xenon"><spring:message code="search.headlights.xenon"/></a></li>
+                                <li><a title="laser"><spring:message code="search.headlights.laser"/></a></li>
+                                <li><a title="led"><spring:message code="search.headlights.led"/></a></li>
+                            </ul>
+                        </dd>
+                        <input type="hidden" name="first">
+                    </dl>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.electricheatingofthewindshield"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchElectricheatingofthewindshield">
+                        <label class="onoffswitch-label" for="myonoffswitchElectricheatingofthewindshield"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.electricheatingofsidemirrors"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchElectricheatingofsidemirrors">
+                        <label class="onoffswitch-label" for="myonoffswitchElectricheatingofsidemirrors"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.headlightwashersystem"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchHeadlightwashersystem">
+                        <label class="onoffswitch-label" for="myonoffswitchHeadlightwashersystem"></label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.rainsensor"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchRainsensor">
+                        <label class="onoffswitch-label" for="myonoffswitchRainsensor"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.foglight"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchFoglight">
+                        <label class="onoffswitch-label" for="myonoffswitchFoglight"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="options-checkboxes__group-head">
+            <div class="options-checkboxes__groupname"><spring:message code="search.multimedia"/></div>
+            <div class="options-checkboxes__delimiter">
+                <div class="options-checkboxes__line"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.bluetooth"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchBluetooth">
+                        <label class="onoffswitch-label" for="myonoffswitchBluetooth"></label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.usb"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchUSB">
+                        <label class="onoffswitch-label" for="myonoffswitchUSB"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.aux"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchAUX">
+                        <label class="onoffswitch-label" for="myonoffswitchAUX"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.navigationsystem"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchNavigationsystem">
+                        <label class="onoffswitch-label" for="myonoffswitchNavigationsystem"></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="options-checkboxes__group-head">
+            <div class="options-checkboxes__groupname"><spring:message code="search.comfort"/></div>
+            <div class="options-checkboxes__delimiter">
+                <div class="options-checkboxes__line"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.cruisecontrol"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchCruisecontrol">
+                        <label class="onoffswitch-label" for="myonoffswitchCruisecontrol"></label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.parktronic"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchParktronic">
+                        <label class="onoffswitch-label" for="myonoffswitchParktronic"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.climatecontrol"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchClimatecontrol">
+                        <label class="onoffswitch-label" for="myonoffswitchClimatecontrol"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.powerWindows"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchPowerWindows">
+                        <label class="onoffswitch-label" for="myonoffswitchPowerWindows"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-1">
+                <div class="subdiv">
+                    <label style="display: flex">
+                        <spring:message code="search.steeringadjustment"/>
+                    </label>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchsteeringadjustment">
+                        <label class="onoffswitch-label" for="myonoffswitchsteeringadjustment"></label>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-4 col-xs-1" id="upload-button">
                 <button id="add" class="button upload"><spring:message code="cars.add"/></button>
             </div>
+
         </div>
+
+
     </div>
 </div>
+
+<div>
+    <h1 style="color: transparent; height: 100px">
+
+
+
+    </h1>
+</div>
+
 
 
 <div id="main-footer">

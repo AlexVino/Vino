@@ -33,7 +33,7 @@ public class BaseCarDto {
     @Max(value = 2100, message = "cars.year.max")
     private int year;
 
-    @NotNull(message = "cars.mileage.null")
+    //@NotNull(message = "cars.mileage.null")
     @Min(value = 0, message = "cars.mileage.size")
     @Max(value = 1_000_000_000, message = "cars.mileage.size")
     private int mileage;
@@ -47,29 +47,29 @@ public class BaseCarDto {
 
     @NotNull(message = "cars.enginevolume.null")
     @Min(value = 0, message = "cars.enginevolume.size")
-    @Max(value = 1000, message = "cars.enginevolume.size")
+    @Max(value = 100_000, message = "cars.enginevolume.size")
     private double enginevolume;
 
     private String image;
 
     private int complectationId;
 
-    //@NotEmpty(message = "cars.VINnumber.empty")
-    @Size(min = 17, max = 17, message = "cars.VINnumber.size")
-    private String VINnumber;
+    @NotEmpty(message = "cars.vin.empty")
+    @Size(min = 17, max = 17, message = "cars.vin.size")
+    private String vin;
 
     @Min(value = 0, message = "cars.rrPrice.size")
     @Max(value = 1_000_000_000, message = "cars.rrPrice.size")
-    private int rrPrice;
+    private Integer rrPrice;
 
-    //NotEmpty(message = "cars.complectationName.empty")
+    @NotEmpty(message = "cars.complectationName.empty")
     @Size(min = 1, max = 30, message = "cars.complectationName.size")
     private String complectationName;
 
     private String drivetype;
     private String drivetypeLocal;
 
-    //@NotNull(message = "cars.horsepower.null")
+    @NotNull(message = "cars.horsepower.null")
     @Min(value = 0, message = "cars.horsepower.size")
     @Max(value = 100_000, message = "cars.horsepower.size")
     private int horsepower;
@@ -105,18 +105,23 @@ public class BaseCarDto {
     private String headlight;
     private String headlightLocal;
 
-    private boolean Electricheatingofthewindshield;
-    private boolean Electricheatingofsidemirrors;
-    private boolean Headlightwashersystem;
-    private boolean Rainsensor;
-    private boolean Foglight;
-    private boolean Bluetooth;
-    private boolean USB;
-    private boolean AUX;
-    private boolean Navigationsystem;
-    private boolean Cruisecontrol;
-    private boolean Parktronic;
-    private boolean Climatecontrol;
-    private boolean PowerWindows;
+    private boolean electricheatingofthewindshield;
+    private boolean electricheatingofsidemirrors;
+    private boolean headlightwashersystem;
+    private boolean rainsensor;
+    private boolean foglight;
+    private boolean bluetooth;
+    private boolean usb;
+    private boolean aux;
+    private boolean navigationsystem;
+    private boolean cruisecontrol;
+    private boolean parktronic;
+    private boolean climatecontrol;
+    private boolean powerWindows;
     private boolean steeringadjustment;
+
+    private int adId;
+    private int userId;
+    private java.util.Date dateAdd;
+    private java.util.Date dateDelete;
 }

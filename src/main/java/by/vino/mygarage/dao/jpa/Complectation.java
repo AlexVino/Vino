@@ -23,27 +23,36 @@ public class Complectation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int complectationId;
+
     @Column
     private String complectationName;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "modelId")
     private Model model;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bodystyleId")
     private Bodystyle bodystyle;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fueltypeId")
     private FuelType fuelType;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "transmissionId")
     private Transmission transmission;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "drivetypeId")
     private Drivetype drivetype;
+
     @Column
     private int year;
+
     @Column
     private double enginevolume;
+
     @Column
     private int horsepower;
     @Column
@@ -66,43 +75,43 @@ public class Complectation {
     private Headlights headlight;
 
     @Column
-    private boolean Electricheatingofthewindshield;
+    private boolean electricheatingofthewindshield;
 
     @Column
-    private boolean Electricheatingofsidemirrors;
+    private boolean electricheatingofsidemirrors;
 
     @Column
-    private boolean Headlightwashersystem;
+    private boolean headlightwashersystem;
 
     @Column
-    private boolean Rainsensor;
+    private boolean rainsensor;
 
     @Column
-    private boolean Foglight;
+    private boolean foglight;
 
     @Column
-    private boolean Bluetooth;
+    private boolean bluetooth;
 
     @Column
-    private boolean USB;
+    private boolean usb;
 
     @Column
-    private boolean AUX;
+    private boolean aux;
 
     @Column
-    private boolean Navigationsystem;
+    private boolean navigationsystem;
 
     @Column
-    private boolean Cruisecontrol;
+    private boolean cruisecontrol;
 
     @Column
-    private boolean Parktronic;
+    private boolean parktronic;
 
     @Column
-    private boolean Climatecontrol;
+    private boolean climatecontrol;
 
     @Column
-    private boolean PowerWindows;
+    private boolean powerWindows;
 
     @Column
     private boolean steeringadjustment;

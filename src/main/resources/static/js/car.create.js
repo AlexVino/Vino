@@ -4,36 +4,46 @@ $(document).ready(function () {
     });
     $('#add').click(function () {
         var data = {};
-        addIfNotEmpty(data, 'model', $('#filter_models').find('li a.selected').text());
-        addIfNotEmpty(data, 'make', $('#filter_makes').find('li a.selected').text());
-        addIfNotEmptyForTitle(data, 'bodystyle', $('#filter_bodystyle').find('li a.selected'));
+        addIfNotEmpty(data,         'model',        $('#filter_models').find('li a.selected').text());
+        addIfNotEmpty(data,         'make',         $('#filter_makes').find('li a.selected').text());
+        addIfNotEmptyForTitle(data, 'bodystyle',    $('#filter_bodystyle').find('li a.selected'));
         addIfNotEmptyForTitle(data, 'transmission', $('#filter_transmission').find('li a.selected'));
-        addIfNotEmptyForTitle(data, 'fuelType', $('#filter_fueltype').find('li a.selected'));
-        addIfNotEmptyForTitle(data, 'color', $('#filter_color').find('li a.selected'));
-        addIfNotEmpty(data, 'price', $('#price').val());
-        addIfNotEmpty(data, 'mileage', $('#mileage').val());
-        addIfNotEmpty(data, 'engine', $('#engine').val());
-        addIfNotEmpty(data, 'description', $('#description').val());
-        addIfNotEmpty(data, 'year', $('#year').val());
+        addIfNotEmptyForTitle(data, 'fuelType',     $('#filter_fueltype').find('li a.selected'));
+        addIfNotEmptyForTitle(data, 'color',        $('#filter_color').find('li a.selected'));
+        addIfNotEmpty(data,         'price',        $('#price').val());
+        addIfNotEmpty(data,         'mileage',      $('#mileage').val());
+        addIfNotEmpty(data,         'enginevolume', $('#enginevolume').val());
+        addIfNotEmpty(data,         'description',  $('#description').val());
+        addIfNotEmpty(data,         'year',         $('#year').val());
 
-        addIfNotEmpty(data, 'VINnumber', $('#VINnumber').val());
-        addIfNotEmpty(data, 'complectationName', $('#complectation').val());
-        addIfNotEmptyForTitle(data, 'headlight', $('#filter_headlights').find('li a.selected'));
+        addIfNotEmpty(data,         'vin',          $('#vin').val());
+        addIfNotEmpty(data,    'complectationName', $('#complectation').val());
+        addIfNotEmptyForTitle(data, 'headlight',    $('#filter_headlights').find('li a.selected'));
+        addIfNotEmptyForTitle(data, 'drivetype',    $('#filter_drivetype').find('li a.selected'));
+        addIfNotEmpty(data,         'rrPrice',      $('#rrPrice').val());
+        addIfNotEmpty(data,         'horsepower',   $('#horsepower').val());
+        addIfNotEmpty(data,         'maxspeed',     $('#maxspeed').val());
+        addIfNotEmpty(data,    'commonconsumption', $('#commonconsumption').val());
+        addIfNotEmpty(data,      'cityconsumption', $('#cityconsumption').val());
+        addIfNotEmpty(data,     'routeconsumption', $('#routeconsumption').val());
+        addIfNotEmpty(data,         'acceleration', $('#acceleration').val());
+        addIfNotEmpty(data,         'length',       $('#length').val());
+        addIfNotEmpty(data,         'width',        $('#width').val());
 
-        addIfNotEmpty(data, 'Electricheatingofthewindshield', document.getElementById("myonoffswitchElectricheatingofthewindshield").checked);
-        addIfNotEmpty(data, 'Electricheatingofsidemirrors',   document.getElementById("myonoffswitchElectricheatingofsidemirrors").checked);
-        addIfNotEmpty(data, 'Headlightwashersystem',          document.getElementById("myonoffswitchHeadlightwashersystem").checked);
-        addIfNotEmpty(data, 'Rainsensor',                     document.getElementById("myonoffswitchRainsensor").checked);
-        addIfNotEmpty(data, 'Foglight',                       document.getElementById("myonoffswitchFoglight").checked);
-        addIfNotEmpty(data, 'Bluetooth',                      document.getElementById("myonoffswitchBluetooth").checked);
-        addIfNotEmpty(data, 'USB',                            document.getElementById("myonoffswitchUSB").checked);
-        addIfNotEmpty(data, 'AUX',                            document.getElementById("myonoffswitchAUX").checked);
-        addIfNotEmpty(data, 'Navigationsystem',               document.getElementById("myonoffswitchNavigationsystem").checked);
-        addIfNotEmpty(data, 'Cruisecontrol',                  document.getElementById("myonoffswitchCruisecontrol").checked);
-        addIfNotEmpty(data, 'Parktronic',                     document.getElementById("myonoffswitchParktronic").checked);
-        addIfNotEmpty(data, 'Climatecontrol',                 document.getElementById("myonoffswitchClimatecontrol").checked);
-        addIfNotEmpty(data, 'PowerWindows',                   document.getElementById("myonoffswitchPowerWindows").checked);
-        addIfNotEmpty(data, 'steeringadjustment',             document.getElementById("myonoffswitchsteeringadjustment").checked);
+        addIfNotEmpty(data,         'electricheatingofthewindshield', document.getElementById("myonoffswitchElectricheatingofthewindshield").checked);
+        addIfNotEmpty(data,         'electricheatingofsidemirrors',   document.getElementById("myonoffswitchElectricheatingofsidemirrors").checked);
+        addIfNotEmpty(data,         'headlightwashersystem',          document.getElementById("myonoffswitchHeadlightwashersystem").checked);
+        addIfNotEmpty(data,         'rainsensor',                     document.getElementById("myonoffswitchRainsensor").checked);
+        addIfNotEmpty(data,         'foglight',                       document.getElementById("myonoffswitchFoglight").checked);
+        addIfNotEmpty(data,         'bluetooth',                      document.getElementById("myonoffswitchBluetooth").checked);
+        addIfNotEmpty(data,         'usb',                            document.getElementById("myonoffswitchUSB").checked);
+        addIfNotEmpty(data,         'aux',                            document.getElementById("myonoffswitchAUX").checked);
+        addIfNotEmpty(data,         'navigationsystem',               document.getElementById("myonoffswitchNavigationsystem").checked);
+        addIfNotEmpty(data,         'cruisecontrol',                  document.getElementById("myonoffswitchCruisecontrol").checked);
+        addIfNotEmpty(data,         'parktronic',                     document.getElementById("myonoffswitchParktronic").checked);
+        addIfNotEmpty(data,         'climatecontrol',                 document.getElementById("myonoffswitchClimatecontrol").checked);
+        addIfNotEmpty(data,         'powerWindows',                   document.getElementById("myonoffswitchPowerWindows").checked);
+        addIfNotEmpty(data,         'steeringadjustment',             document.getElementById("myonoffswitchsteeringadjustment").checked);
 
         data['image'] = $('#myimage').attr('src');
 
@@ -42,11 +52,11 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/rest/cars",
+            url: "/rest/ads",
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (respond) {
-                window.location.href = "/cars/" + respond.carId;
+                window.location.href = "/ads/" + respond.carId;
             },
             error: function (e) {
                 throwMessage(e.responseJSON.message);

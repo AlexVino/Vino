@@ -51,7 +51,7 @@
                         </security:authorize>
 
                         <security:authorize access="hasRole('ROLE_ADMIN')">
-                            <div class="col-auto float-right"><a id="btn-add" href="/cars/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
+                            <div class="col-auto float-right"><a id="btn-add" href="/ads/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
                         </security:authorize>
                         
                         <!-- LANGUAGE BUTTON -->
@@ -320,6 +320,7 @@
                                             <li><a title="80000"><spring:message code="search.mileage.80000"/></a></li>
                                             <li><a title="90000"><spring:message code="search.mileage.90000"/></a></li>
                                             <li><a title="100000"><spring:message code="search.mileage.100000"/></a></li>
+                                            <li><a title="100001"><spring:message code="search.mileage.100001"/></a></li>
                                         </ul>
                                     </dd>
                                     <input type="hidden" name="first">
@@ -402,7 +403,7 @@
                         </div>
 
                         <div class="col-sm-auto m-multi">
-                            <button title="grey" class="m-multi__item _grey"><span class="label">grey</span></button>
+                            <button title="gray" class="m-multi__item _gray"><span class="label">gray</span></button>
                         </div>
 
                         <div class="col-sm-auto m-multi">

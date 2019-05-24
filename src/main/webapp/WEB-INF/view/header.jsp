@@ -19,7 +19,7 @@
                 </security:authorize>
 
                 <security:authorize access="hasRole('ROLE_ADMIN')">
-                    <div class="col-auto float-right"><a id="btn-add" href="/cars/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
+                    <div class="col-auto float-right"><a id="btn-add" href="/ads/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
                     <input type="hidden" id="username" value="<%= request.getUserPrincipal().getName()%>">
                 </security:authorize>
 
