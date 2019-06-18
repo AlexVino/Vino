@@ -91,7 +91,8 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public BaseCarDto get(int adId, Locale locale) {
-        return toDto(adRepository.findById(adId).orElse(null), locale);
+        BaseCarDto dto = toDto(adRepository.findById(adId).orElse(null), locale);
+        return dto;
         //return toDto(carRepository.findById(carId).orElse(null), locale);
     }
 
@@ -124,6 +125,12 @@ public class AdServiceImpl implements AdService {
             return null;
         }
         BaseCarDto dto = new BaseCarDto();
+
+        dto.setAdId(ad.getAdId());
+        dto.setDateAdd(ad.getDateAdd());
+        dto.setDateDelete(ad.getDateDelete());
+        dto.setUserId(ad.getUser().getUserId());
+
         dto.setCarId(ad.getCar().getCarId());
         dto.setFullModel(String.format("%s %s",
                 ad.getCar().getComplectation().getModel().getMake().getMakeName(),
@@ -145,6 +152,7 @@ public class AdServiceImpl implements AdService {
         dto.setEnginevolume(ad.getCar().getComplectation().getEnginevolume());
         dto.setVin(ad.getCar().getVin());
         dto.setRrPrice(ad.getCar().getRrPrice());
+
         dto.setComplectationName(ad.getCar().getComplectation().getComplectationName());
         dto.setDrivetype(ad.getCar().getComplectation().getDrivetype().getDrivetypeName());
         dto.setDrivetypeLocal(messageSource.getMessage("search.drivetype." + ad.getCar().getComplectation().getDrivetype().getDrivetypeName().toLowerCase(), null, locale));
@@ -214,7 +222,11 @@ public class AdServiceImpl implements AdService {
              throw new RestException(ErrorCode.COMPLECTATION_DOES_NOT_EXIST);
          }*/
 
-        Complectation complectation = new Complectation();
+        Complectation complectation = complectationRepository.findById(dto.getComplectationId()).orElse(null);
+        if (complectation == null) {
+            complectation = new Complectation();
+        }
+
         complectation.setAcceleration(dto.getAcceleration());
         complectation.setAux(dto.isAux());
         complectation.setBluetooth(dto.isBluetooth());
@@ -264,7 +276,10 @@ public class AdServiceImpl implements AdService {
         ad.setAdId(dto.getAdId());
         ad.setCar(carRepository.save(car));
         ad.setUser(user);
-        ad.setDateAdd(dto.getDateAdd());
+
+        java.util.Date date = new java.util.Date();
+
+        ad.setDateAdd(date);
         ad.setDateDelete(dto.getDateDelete());
 
         return ad;

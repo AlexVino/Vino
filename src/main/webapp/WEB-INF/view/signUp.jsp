@@ -25,7 +25,7 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
-    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/main.min.signup.css">
     <link rel="stylesheet" href="/css/error_block.css">
 
 </head>

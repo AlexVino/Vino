@@ -1,5 +1,6 @@
 package by.vino.mygarage.dao.jpa;
 
+import com.querydsl.core.annotations.QueryInit;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ public class Model {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "makeId")
+    @QueryInit("*.*")
     private Make make;
 
     @Column

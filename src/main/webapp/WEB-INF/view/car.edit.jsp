@@ -581,7 +581,9 @@
 <input type="hidden" id="cancel" value="<spring:message code="main.cancel"/>">
 <input type="hidden" id="order" value="<spring:message code="orders.order"/>">
 <input type="hidden" id="username" value="">
+<input type="hidden" id="adid" value="${car.adId}">
 <input type="hidden" id="carid" value="${car.carId}">
+<input type="hidden" id="complectationId" value="${car.complectationId}">
 
 <script src="/js/scripts.min.car.create.js"></script>
 <script src="/js/jquery-3.3.1.min.js"></script>

@@ -2,6 +2,8 @@ package by.vino.mygarage.service.api;
 
 import by.vino.mygarage.dao.jpa.User;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * Creates new user.
@@ -39,4 +41,11 @@ public interface UserService {
      * @return user
      * */
     User loadUserById(int id);
+
+    /**
+     * Loads users by role.
+     *
+     * @param role user roleId
+     * */
+    List<User> loadUsersByRole(int role);
 }

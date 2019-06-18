@@ -9,18 +9,20 @@ $(document).ready(function () {
         window.location.href = "/ads/" + window.location.href.match(/([^\/]*)\/*$/)[1] + "/edit";
     });
     $('#btn-delete').click(function () {
-        $.ajax({
-            type: "DELETE",
-            url: "/rest/ads/" + window.location.href.match(/([^\/]*)\/*$/)[1],
-            success: function (data) {
-                if (data !== "false") {
-                    window.location.href = "/";
+        if (confirm($('#confirmdeleting').val())) {
+            $.ajax({
+                type: "DELETE",
+                url: "/rest/ads/" + window.location.href.match(/([^\/]*)\/*$/)[1],
+                success: function (data) {
+                    if (data !== "false") {
+                        window.location.href = "/";
+                    }
+                },
+                error: function (e) {
+                    throwMessage(e.responseJSON.message);
                 }
-            },
-            error: function (e) {
-                throwMessage(e.responseJSON.message);
-            }
-        });
+            });
+        }
     });
 });
 

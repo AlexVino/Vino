@@ -29,6 +29,7 @@ function registerUser() {
     user["firstname"] = $("#firstname").val();
     user["lastname"] = $("#lastname").val();
     user["phone"] = $("#telephone").val();
+    user["email"] = $("#email").val();
 
     if ($("#new-password").val() != $("#confirm-password").val()) {
         throwMessage($('#error-password').val());

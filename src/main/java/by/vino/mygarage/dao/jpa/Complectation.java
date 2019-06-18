@@ -1,5 +1,6 @@
 package by.vino.mygarage.dao.jpa;
 
+import com.querydsl.core.annotations.QueryInit;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -29,6 +30,7 @@ public class Complectation {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "modelId")
+    @QueryInit("*.*")
     private Model model;
 
     @ManyToOne(fetch = FetchType.EAGER)

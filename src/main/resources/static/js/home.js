@@ -60,25 +60,37 @@ function search(page) {
         page = Math.round($('#result').children('div').length / size);
     }
     var data = {};
-    addIfNotEmpty(data, 'complectation.model.modelName', $('#filter_models').find('li a.selected').text());
-    addIfNotEmpty(data, 'complectation.model.make.makeName', $('#filter_makes').find('li a.selected').text());
-    addIfNotEmptyForTitle(data, 'complectation.transmission.transmissionName', $('#filter_transmission').find('li a.selected'));
-    addIfNotEmptyForTitle(data, 'complectation.fuelType.fuelTypeName', $('#filter_fueltype').find('li a.selected'));
-    addIfNotEmptyForTitle(data, 'mileage', $('#filter_mileage').find('li a.selected'));
-    addIfNotEmptyForTitle(data, 'complectation.year', $('#filter_year').find('li a.selected'));
+    addIfNotEmpty(data, 'car.complectation.model.modelName', $('#filter_models').find('li a.selected').text());
+    addIfNotEmpty(data, 'car.complectation.model.make.makeName', $('#filter_makes').find('li a.selected').text());
+    addIfNotEmptyForTitle(data, 'car.complectation.transmission.transmissionName', $('#filter_transmission').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'car.complectation.fuelType.fuelTypeName', $('#filter_fueltype').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'car.mileage', $('#filter_mileage').find('li a.selected'));
+    addIfNotEmptyForTitle(data, 'car.complectation.year', $('#filter_year').find('li a.selected'));
     var min = addOrDefault($('#minprice').find('li a.selected').text(), 0);
     var max = addOrDefault($('#maxprice').find('li a.selected').text(), 1000000000);
+
+    //var username = getUserName();
+    if ($('#username'))
+    {
+        if (document.getElementById("myonoffswitchOnlymy"))
+        {
+            if (document.getElementById("myonoffswitchOnlymy").checked)
+            {
+                addIfNotEmpty(data, 'user.username', $('#username').val());
+            }
+        }
+    }
 
     var bodies = $('.bodystyles').find('button.active');
     var bodyStyles = "";
     for (var i = 0; i < bodies.length; i++) {
-        bodyStyles += '&complectation.bodystyle.bodystyleName=' + bodies[i].title;
+        bodyStyles += '&car.complectation.bodystyle.bodystyleName=' + bodies[i].title;
     }
 
     var colorsButton = $('.colors').find('button.active');
     var colors = "";
     for (var i = 0; i < colorsButton.length; i++) {
-        colors += '&color.colorName=' + colorsButton[i].title;
+        colors += '&car.color.colorName=' + colorsButton[i].title;
     }
 
     data['page'] = page;
@@ -104,6 +116,24 @@ function search(page) {
     });
 }
 
+function getUserName() {
+    $.ajax({
+        type: "GET",
+        url: "/rest/users/username",
+        cache: false,
+        timeout: 600000,
+        dataType: "text",
+        success: function (data) {
+            if (data !== "false") {
+                return data;
+            }
+        },
+        error: function (e) {
+            throwMessage(e.responseJSON.message);
+        }
+    });
+}
+
 function showCars(cars, page) {
     if (page === 0) {
         $('#result').find('div').remove();
@@ -112,10 +142,10 @@ function showCars(cars, page) {
         $('#result').append(
         '<div class="col-lg-4 col-md-6 col-xs-12" align="center">' +
             '<div class="r">' +
-                '<a class="r__head dist" href="/ads/' + cars[i].carId + '">' +
+                '<a class="r__head dist" href="/ads/' + cars[i].adId + '">' +
                     '<p class="title">' + cars[i].fullModel + '</p>' +
                 '</a>' +
-                '<a class="image" href="/ads/' + cars[i].carId + '">' +
+                '<a class="image" href="/ads/' + cars[i].adId + '">' +
                     '<div class="ui-onvisible">' +
                     '<img class="image__photo" src="' + cars[i].image + '" alt="no image">' +
                     '</div>' +
@@ -144,7 +174,7 @@ function showCars(cars, page) {
                     '</li>' +
                 '</ul>' +
                 '<div class="r__cta">' +
-                '<a class="item button" href="/ads/' + cars[i].carId + '">' +
+                '<a class="item button" href="/ads/' + cars[i].adId + '">' +
                     '<span>' + $('#full-details').val() + '</span>' +
                 '</a>' +
             '</div>' +

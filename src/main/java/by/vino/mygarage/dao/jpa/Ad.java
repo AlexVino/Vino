@@ -1,5 +1,6 @@
 package by.vino.mygarage.dao.jpa;
 
+import com.querydsl.core.annotations.QueryInit;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Ad {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "carId")
+    @QueryInit("*.*")
     private Car car;
 
     @Column(name="dateAdd")

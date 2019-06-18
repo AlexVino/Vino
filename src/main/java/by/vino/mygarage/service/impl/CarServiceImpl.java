@@ -67,10 +67,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void remove(int carId) {
-        if (orderRepository.findByCar_CarId(carId) != null){
+        /*if (orderRepository.findByCar_CarId(carId) != null){
             throw new RestException(ErrorCode.CAR_ALREADY_ORDERED);
         }
-        carRepository.deleteById(carId);
+        carRepository.deleteById(carId);*/
     }
 
     @Override

@@ -1,7 +1,9 @@
 package by.vino.mygarage.service.impl;
 
+import by.vino.mygarage.dao.api.AdRepository;
 import by.vino.mygarage.dao.api.CarRepository;
 import by.vino.mygarage.dao.api.OrderRepository;
+import by.vino.mygarage.dao.jpa.Ad;
 import by.vino.mygarage.dao.jpa.Car;
 import by.vino.mygarage.dao.jpa.Order;
 import by.vino.mygarage.dao.jpa.User;
@@ -9,6 +11,7 @@ import by.vino.mygarage.exception.ErrorCode;
 import by.vino.mygarage.exception.RestException;
 import by.vino.mygarage.rest.dto.OrderDto;
 import by.vino.mygarage.rest.dto.OrderExtDto;
+import by.vino.mygarage.service.api.AdService;
 import by.vino.mygarage.service.api.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,18 +26,23 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private CarRepository carRepository;
+    @Autowired
+    private AdRepository adRepository;
+    @Autowired
+    private AdService adService;
 
     @Override
-    public Order create(int carId, User user) {
-        if (orderRepository.findByCar_CarId(carId) != null) {
+    public Order create(int adId, User user) {
+        if (orderRepository.findByAd_AdId(adId) != null) {
             throw new RestException(ErrorCode.CAR_ALREADY_ORDERED);
         }
-        Car car = carRepository.findById(carId).orElse(null);
-        if (car == null) {
-            throw new RestException(ErrorCode.CAR_DOES_NOT_EXIST);
+        //Car car = carRepository.findById(carId).orElse(null);
+        Ad ad = adRepository.findById(adId).orElse(null);
+        if (ad == null) {
+            throw new RestException(ErrorCode.AD_DOES_NOT_EXIST);
         }
         Order order = new Order();
-        order.setCar(car);
+        order.setAd(ad);
         order.setUser(user);
         return orderRepository.save(order);
     }
@@ -45,28 +53,36 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void removeByCarId(int carId) {
-        Order order = orderRepository.findByCar_CarId(carId);
+    public void removeByAdId(int adId) {
+        Order order = orderRepository.findByAd_AdId(adId);
         orderRepository.deleteById(order.getOrderId());
     }
 
     @Override
-    public void removeWithCar(int orderId) {
+    public void removeWithAd(int orderId) {
         Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
             orderRepository.deleteById(orderId);
-            carRepository.deleteById(order.getCar().getCarId());
+            //carRepository.deleteById(order.getCar().getCarId());
+            //adRepository.deleteById(order.getAd().getAdId());
+            adService.remove(order.getAd().getAdId());
         }
     }
 
     @Override
-    public OrderDto getByCarIdAndUsername(int carId, String username) {
-        return toDto(orderRepository.findByCar_CarIdAndUser_Username(carId, username));
+    public OrderDto getByAdIdAndUsername(int adId, String username) {
+        return toDto(orderRepository.findByAd_AdIdAndUser_Username(adId, username));
     }
 
     @Override
     public List<OrderDto> getAll(String username) {
         return toDtos(orderRepository.findAllByUser_Username(username));
+    }
+
+
+    @Override
+    public List<OrderExtDto> getAllDealers(String username) {
+        return toExtDtos(orderRepository.findAllByAd_User_Username(username));
     }
 
     @Override
@@ -102,9 +118,9 @@ public class OrderServiceImpl implements OrderService {
         dto.setId(order.getOrderId());
         dto.setFullModel(
                 String.format("%s %s",
-                order.getCar().getComplectation().getModel().getMake().getMakeName(),
-                order.getCar().getComplectation().getModel().getModelName()));
-        dto.setPrice(order.getCar().getPrice());
+                order.getAd().getCar().getComplectation().getModel().getMake().getMakeName(),
+                order.getAd().getCar().getComplectation().getModel().getModelName()));
+        dto.setPrice(order.getAd().getCar().getPrice());
         return dto;
     }
 
@@ -116,9 +132,9 @@ public class OrderServiceImpl implements OrderService {
         dto.setId(order.getOrderId());
         dto.setFullModel(
                 String.format("%s %s",
-                        order.getCar().getComplectation().getModel().getMake().getMakeName(),
-                        order.getCar().getComplectation().getModel().getModelName()));
-        dto.setPrice(order.getCar().getPrice());
+                        order.getAd().getCar().getComplectation().getModel().getMake().getMakeName(),
+                        order.getAd().getCar().getComplectation().getModel().getModelName()));
+        dto.setPrice(order.getAd().getCar().getPrice());
         dto.setFirstname(order.getUser().getFirstname());
         dto.setLastname(order.getUser().getLastname());
         dto.setPhone(order.getUser().getPhone());

@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="row justify-content-between">
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                    <security:authorize access="hasRole('ROLE_ADMIN') || hasRole('ROLE_DEALER')">
                         <div class="col">
                             <button id="btn-edit" class="button"><spring:message code="cars.edit"/></button>
                         </div>
@@ -233,6 +233,7 @@
 <input type="hidden" id="discount" value="<spring:message code="main.discount"/>">
 <input type="hidden" id="cancel" value="<spring:message code="main.cancel"/>">
 <input type="hidden" id="order" value="<spring:message code="orders.order"/>">
+<input type="hidden" id="adId" value="${car.adId}">
 <input type="hidden" id="carId" value="${car.carId}">
 
 <input type="hidden" id="headlights" value="<spring:message code="search.headlights.any"/>">
@@ -267,6 +268,7 @@
 <input type="hidden" id="powerWindows" value="<spring:message code="search.powerWindows"/>">
 <input type="hidden" id="steeringadjustment" value="<spring:message code="search.steeringadjustment"/>">
 
+<input type="hidden" id="confirmdeleting" value="<spring:message code="cars.confirmdeleting"/>">
 
 <script src="/js/scripts.min.js"></script>
 <script src="/js/car.js"></script>

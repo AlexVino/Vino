@@ -26,8 +26,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 
     <link rel="stylesheet" href="/css/main.block.min.css">
+    <!--<link rel="stylesheet" href="/css/main.min.new.css">-->
     <link rel="stylesheet" href="/css/error_block.css">
     <link rel="stylesheet" href="/css/main.min.css">
+    <!-- <link rel="stylesheet" href="/css/main.min.car.add.css">-->
 
 </head>
 <body class="ishome">
@@ -44,16 +46,23 @@
                         <security:authorize access="isAnonymous()">
                             <div class="col-auto float-right"><a href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
                         </security:authorize>
-                        <security:authorize access="isAuthenticated()">
-                            <div class="col-auto float-right"><a href="/logout" class="button b-sign"><spring:message code="main.log-out"/></a></div>
-                            <div class="col-auto float-right"><a href="?" class="button b-sign"><%= request.getUserPrincipal().getName()%></a></div>
-                            <div class="col-auto float-right"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
-                        </security:authorize>
 
-                        <security:authorize access="hasRole('ROLE_ADMIN')">
+
+                        <security:authorize access="hasRole('ROLE_USER') || hasRole('ROLE_DEALER')">
+                            <div class="col-auto float-right"><a href="/logout" class="button b-sign"><spring:message code="main.log-out"/></a></div>
+                            <div class="col-auto float-right"><a href="#" class="button b-sign"><%= request.getUserPrincipal().getName()%></a></div>
+                            <div class="col-auto float-right"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
                             <div class="col-auto float-right"><a id="btn-add" href="/ads/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
                         </security:authorize>
-                        
+
+
+                        <security:authorize access="hasRole('ROLE_ADMIN')">
+                            <div class="col-auto float-right"><a href="/logout" class="button b-sign"><spring:message code="main.log-out"/></a></div>
+                            <div class="col-auto float-right"><a href="#" class="button b-sign"><%= request.getUserPrincipal().getName()%></a></div>
+                            <div class="col-auto float-right"><a href="/dealers" class="button b-sign"><spring:message code="dealer.all"/></a></div>
+                            <div class="col-auto float-right"><a id="btn-add_dealer" href="/dealers/create" class="button b-sign"><spring:message code="dealer.add"/></a></div>
+                        </security:authorize>
+
                         <!-- LANGUAGE BUTTON -->
                         <div class="col-auto switch-button float-right">
                             <span class="switch-active"></span>
@@ -95,6 +104,18 @@
                         <div class="col-sm-3">
                             <p><strong><spring:message code="main.search"/></strong></p>
                         </div>
+
+                        <security:authorize access="isAuthenticated()">
+                            <div class="col-md-4 col-xs-1">
+                                    <label style="display: flex">
+                                        <spring:message code="search.onlymy"/>
+                                    </label>
+                                    <div class="onoffswitch">
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchOnlymy">
+                                        <label class="onoffswitch-label" for="myonoffswitchOnlymy"></label>
+                                    </div>
+                            </div>
+                        </security:authorize>
                     </div>
 
                     <div class="row justify-content-center no-gutters">
@@ -470,6 +491,9 @@
 
 <input type="hidden" id="full-details" value="<spring:message code="main.full-details"/>">
 <input type="hidden" id="mileage" value="<spring:message code="cars.mileage"/>">
+<security:authorize access="isAuthenticated()">
+    <input type="hidden" id="username" value="<%= request.getUserPrincipal().getName()%>">
+</security:authorize>
 
 <script src="/js/main_scripts_min.js"></script>
 <script src="/js/common.js"></script>

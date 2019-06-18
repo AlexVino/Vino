@@ -9,18 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/orders")
-public class OrderControllerImpl {
+@RequestMapping("/rest/dealers")
+public class DealerControllerImpl {
 
     @Autowired
     private OrderService orderService;
@@ -29,25 +24,21 @@ public class OrderControllerImpl {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{adId}")
     public ResponseEntity<?> create(@PathVariable("adId") int adId) {
         User user = userService.loadUserByUsername(securityHelper.getCurrentUser().getUsername());
         return ResponseEntity.ok(orderService.create(adId, user));
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_DEALER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping()
     public ResponseEntity<List<?>> getAll() {
-        UserDetails user = securityHelper.getCurrentUser();
-        if (securityHelper.isRoleAuthority(user, RoleEnum.ROLE_DEALER)) {
-            return ResponseEntity.ok(orderService.getAllDealers(user.getUsername()));
-        } else {
-            return ResponseEntity.ok(orderService.getAll(user.getUsername()));
-        }
+        //return ResponseEntity.ok(orderService.getAllDealers(user.getUsername()));
+        return ResponseEntity.ok(userService.loadUsersByRole(3));
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_DEALER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         UserDetails user = securityHelper.getCurrentUser();
@@ -59,7 +50,7 @@ public class OrderControllerImpl {
         return ResponseEntity.ok(true);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/ads/{id}")
     public ResponseEntity<?> deleteByAdId(@PathVariable("id") int id) {
         orderService.removeByAdId(id);

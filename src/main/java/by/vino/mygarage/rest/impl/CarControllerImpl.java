@@ -66,7 +66,7 @@ public class CarControllerImpl {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteCar(@PathVariable("id") int id) {
-        carService.remove(id);
+        //carService.remove(id);
         return ResponseEntity.ok(true);
     }
 }

@@ -6,6 +6,8 @@ import by.vino.mygarage.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -41,5 +43,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loadUserById(int id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     * */
+    @Override
+    public List<User> loadUsersByRole(int role) {
+        return userRepository.findAllByRole_RoleId(role);
     }
 }

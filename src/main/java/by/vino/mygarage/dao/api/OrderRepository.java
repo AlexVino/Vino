@@ -16,9 +16,10 @@ import java.util.List;
 public interface OrderRepository extends
         CrudRepository<Order, Integer>, QuerydslPredicateExecutor<Order>, QuerydslBinderCustomizer<QOrder> {
 
-    Order findByCar_CarIdAndUser_Username(int carId, String username);
-    Order findByCar_CarId(int carId);
+    Order findByAd_AdIdAndUser_Username(int adId, String username);
+    Order findByAd_AdId(int adId);
     List<Order> findAllByUser_Username(String username);
+    List<Order> findAllByAd_User_Username(String username);
 
     @Override
     default void customize(QuerydslBindings bindings, QOrder root) {

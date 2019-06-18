@@ -4,6 +4,9 @@ $(document).ready(function () {
     });
     $('#add').click(function () {
         var data = {};
+        addIfNotEmpty(data,         'adId',         $('#adid').val());
+        addIfNotEmpty(data,      'complectationId', $('#complectationId').val());
+
         addIfNotEmpty(data,         'carId',        $('#carid').val());
         addIfNotEmpty(data,         'model',        $('#filter_models').find('li a.selected').text());
         addIfNotEmpty(data,         'make',         $('#filter_makes').find('li a.selected').text());
@@ -53,11 +56,11 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "/rest/ads/" + $('#carid'),
+            url: "/rest/ads/" + $('#adid'),
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (respond) {
-                window.location.href = "/ads/" + respond.carId;
+                window.location.href = "/ads/" + respond.adId;
             },
             error: function (e) {
                 throwMessage(e.responseJSON.message);
@@ -76,7 +79,7 @@ function loadCar() {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/rest/ads/" + $('#carid').val(),
+        url: "/rest/ads/" + $('#adid').val(),
         success: function (respond) {
             showCar(respond);
         },

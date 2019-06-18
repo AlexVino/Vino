@@ -54,7 +54,7 @@ public class AdControllerImpl {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEALER') or hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_DEALER') || hasRole('ROLE_USER')")
     public ResponseEntity<?> addAd(@RequestBody @Valid BaseCarDto dto, Locale locale) {
         return ResponseEntity.ok(adService.create(dto, locale));
     }

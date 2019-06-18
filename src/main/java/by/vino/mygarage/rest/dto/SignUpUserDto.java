@@ -34,7 +34,7 @@ public class SignUpUserDto {
 
     @NotNull
     @Size(min = 5, max = 255, message = "form.email.size")
-    @Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", flags = {UNICODE_CASE},message = "form.email.pattern")
+    @Pattern(regexp="\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b", flags = {UNICODE_CASE},message = "form.email.pattern")
     private String email;
 
     private Role role = new Role(RoleEnum.ROLE_USER);

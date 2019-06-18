@@ -26,6 +26,6 @@ public class Order {
     @JoinColumn(name = "userId")
     private User user;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "carId")
-    private Car car;
+    @JoinColumn(name = "adId")
+    private Ad ad;
 }

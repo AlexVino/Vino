@@ -11,16 +11,21 @@
                     <input type="hidden" id="username" value="">
                     <div class="col-auto float-right"><a href="/signUp" class="button b-sign"><spring:message code="form.sign_in"/></a></div>
                 </security:authorize>
-                <security:authorize access="isAuthenticated()">
+
+                <security:authorize access="hasRole('ROLE_USER') || hasRole('ROLE_DEALER')">
                     <input type="hidden" id="username" value="<%= request.getUserPrincipal().getName()%>">
                     <div class="col-auto float-right"><a href="/logout" class="button b-sign"><spring:message code="main.log-out"/></a></div>
                     <div class="col-auto float-right"><a href="#" class="button b-sign"><%= request.getUserPrincipal().getName()%></a></div>
                     <div class="col-auto float-right"><a href="/orders" class="button b-sign"><spring:message code="orders.orders"/></a></div>
+                    <div class="col-auto float-right"><a id="btn-add" href="/ads/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
                 </security:authorize>
 
                 <security:authorize access="hasRole('ROLE_ADMIN')">
-                    <div class="col-auto float-right"><a id="btn-add" href="/ads/create" class="button b-sign"><spring:message code="cars.add"/></a></div>
                     <input type="hidden" id="username" value="<%= request.getUserPrincipal().getName()%>">
+                    <div class="col-auto float-right"><a href="/logout" class="button b-sign"><spring:message code="main.log-out"/></a></div>
+                    <div class="col-auto float-right"><a href="#" class="button b-sign"><%= request.getUserPrincipal().getName()%></a></div>
+                    <div class="col-auto float-right"><a href="/dealers" class="button b-sign"><spring:message code="dealer.all"/></a></div>
+                    <div class="col-auto float-right"><a id="btn-add_dealer" href="/dealers/create" class="button b-sign"><spring:message code="dealer.add"/></a></div>
                 </security:authorize>
 
 

@@ -15,13 +15,15 @@ public interface OrderService {
     Order create(int carId, User user);
 
     void remove(int orderId);
-    void removeByCarId(int carId);
+    void removeByAdId(int adId);
 
-    void removeWithCar(int orderId);
+    void removeWithAd(int orderId);
 
-    OrderDto getByCarIdAndUsername(int carId, String username);
+    OrderDto getByAdIdAndUsername(int adId, String username);
 
     List<OrderDto> getAll(String username);
 
     List<OrderExtDto> getAll();
+
+    List<OrderExtDto> getAllDealers(String username);
 }

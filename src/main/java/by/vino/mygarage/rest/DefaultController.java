@@ -1,9 +1,11 @@
 package by.vino.mygarage.rest;
 
 import by.vino.mygarage.dao.jpa.RoleEnum;
+import by.vino.mygarage.dao.jpa.User;
 import by.vino.mygarage.rest.dto.BaseCarDto;
 import by.vino.mygarage.service.api.AdService;
 import by.vino.mygarage.service.api.CarService;
+import by.vino.mygarage.service.api.UserService;
 import by.vino.mygarage.util.SecurityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +22,8 @@ public class DefaultController {
 
     @Autowired
     private AdService adService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private SecurityHelper securityHelper;
 
@@ -43,21 +47,12 @@ public class DefaultController {
         BaseCarDto ad = adService.get(id, locale);
         ModelAndView modelAndView;
         if (ad != null) {
-            modelAndView = new ModelAndView("/ad");
-            modelAndView.addObject("ad", ad);
+            modelAndView = new ModelAndView("/car");
+            modelAndView.addObject("car", ad);
         } else {
             modelAndView = new ModelAndView("/error/404");
         }
         return modelAndView;
-        /*BaseCarDto car = carService.get(id, locale);
-        ModelAndView modelAndView;
-        if (car != null) {
-            modelAndView = new ModelAndView("/car");
-            modelAndView.addObject("car", car);
-        } else {
-            modelAndView = new ModelAndView("/error/404");
-        }
-        return modelAndView;*/
     }
 
     @GetMapping("/orders")
@@ -66,17 +61,64 @@ public class DefaultController {
         if (user == null) {
             return "/signUp";
         }
-        if (securityHelper.isRoleAuthority(user, RoleEnum.ROLE_ADMIN)) {
+        if (securityHelper.isRoleAuthority(user, RoleEnum.ROLE_DEALER)){
             return "/adminorders";
         } else {
             return "/orders";
         }
     }
 
-    @GetMapping("/ads/create")
+    @GetMapping("/dealers")
+    public String dealers() {
+        UserDetails user = securityHelper.getCurrentUser();
+        if (user == null) {
+            return "/signUp";
+        }
+        if (securityHelper.isRoleAuthority(user, RoleEnum.ROLE_ADMIN)) {
+            return "/dealers";
+        }else {
+            return "/";
+        }
+    }
+
+    @GetMapping("/dealers/create")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String createDealer() {
+        return "/dealer.create";
+    }
+
+    @GetMapping("/dealers/{id}")
+    public ModelAndView dealer(@PathVariable("id") int id, Locale locale) {
+        User user = userService.loadUserById(id);
+        ModelAndView modelAndView;
+        if (user != null) {
+            modelAndView = new ModelAndView("/dealer");
+            modelAndView.addObject("user", user);
+        } else {
+            modelAndView = new ModelAndView("/error/404");
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/dealers/{id}/edit")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView editDealer(@PathVariable("id") int id, Locale locale) {
+        User user = userService.loadUserById(id);
+        ModelAndView modelAndView;
+        if (user != null) {
+            modelAndView = new ModelAndView("/dealer.edit");
+            modelAndView.addObject("user", user);
+        } else {
+            modelAndView = new ModelAndView("/error/404");
+        }
+        return modelAndView;
+    }
+
+
+    @GetMapping("/ads/create")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_USER') || hasRole('ROLE_DEALER')")
     public String createCar() {
-            return "/ad.create";
+            return "/car.create";
     }
 
     @GetMapping("/ads/{id}/edit")
@@ -85,8 +127,8 @@ public class DefaultController {
         BaseCarDto ad = adService.get(id, locale);
         ModelAndView modelAndView;
         if (ad != null) {
-            modelAndView = new ModelAndView("/ad.edit");
-            modelAndView.addObject("ad", ad);
+            modelAndView = new ModelAndView("/car.edit");
+            modelAndView.addObject("car", ad);
         } else {
             modelAndView = new ModelAndView("/error/404");
         }

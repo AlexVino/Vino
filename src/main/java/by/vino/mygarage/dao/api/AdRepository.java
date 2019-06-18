@@ -33,6 +33,8 @@ public interface AdRepository  extends
         bindings.bind(root.car.color.colorName).all((path, value) -> Optional.of(path.in(value)));
         //bindings.bind(root.mileage).first(NumberExpression::loe);
 
+
+
         bindings.bind(root.dateDelete).all((path, value) -> {
             //Iterator<? extends java.util.Date> iterator = value.iterator();
             //java.util.Date delta = iterator.next();
